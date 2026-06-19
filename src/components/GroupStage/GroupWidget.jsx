@@ -28,12 +28,12 @@ export default function GroupWidget({
         <div className="flex items-center gap-1.5">
           <div className="flex -space-x-1">
             {teamsList.map(code => (
-              <span key={code} className="text-[10px] transform scale-95 border border-slate-900 rounded-full" title={TEAMS[code]?.name}>
+              <span key={code} className="text-[20px] transform scale-95 border border-slate-900 rounded-full" title={TEAMS[code]?.name}>
                 {TEAMS[code]?.emoji}
               </span>
             ))}
           </div>
-          <span className="text-[8px] text-slate-500 font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity ml-1">
+          <span className="text-[8px] text-slate-500 font-bold uppercase tracking-wider hidden group-hover:block ml-1">
             Open ↗
           </span>
         </div>
