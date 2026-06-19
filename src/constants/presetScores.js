@@ -387,5 +387,5 @@ export const PRESET_SCORES = {
   // },
 
   // Knockouts Matchday 1 Presets
-  "KO-73": { score1: 2, score2: 1, status: "logged" }, // Match 73 predictive score
+  // "KO-73": { score1: 2, score2: 1, status: "logged" }, // Match 73 predictive score
 };
