@@ -243,14 +243,15 @@ export default function GroupWidget({
 
           {/* Card legend */}
           <div className="flex items-center justify-center gap-3 pt-1 border-t border-slate-900/50 mt-2">
-            <div className="flex items-center gap-1">
+            {/* IMPORTANT: Not tracking yellow cards for now */}
+            {/* <div className="flex items-center gap-1">
               <span className="w-2 h-3 rounded-[2px] bg-yellow-400 inline-block" />
               <span className="text-[7px] text-slate-500">Yellow (−1)</span>
             </div>
             <div className="flex items-center gap-1">
               <span className="w-2 h-3 rounded-[2px] bg-orange-400 inline-block" />
               <span className="text-[7px] text-slate-500">2nd Yellow (−3)</span>
-            </div>
+            </div> */}
             <div className="flex items-center gap-1">
               <span className="w-2 h-3 rounded-[2px] bg-red-500 inline-block" />
               <span className="text-[7px] text-slate-500">Red (−4)</span>
