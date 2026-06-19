@@ -117,76 +117,346 @@ export const PRESET_SCORES = {
   // },
 
   // Group D
-  "G-D-0": { score1: 4, score2: 1, locked: true },  // USA vs Paraguay
-  "G-D-1": { score1: 2, score2: 0, locked: true },  // Australia vs Türkiye
-  "G-D-2": { score1: 0, score2: 0, locked: false },  // Türkiye vs Paraguay
-  "G-D-3": { score1: 0, score2: 0, locked: false },  // USA vs Australia
-  // "G-D-4": { score1: 0, score2: 0, locked: true },  // USA vs Türkiye
-  // "G-D-5": { score1: 0, score2: 0, locked: true },  // Paraguay vs Australia
+  "G-D-0": { // USA vs Paraguay
+    score1: 4, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-D-1": { // Australia vs Türkiye
+    score1: 2, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-D-2": { // Türkiye vs Paraguay
+    score1: 0, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: false
+  },
+  "G-D-3": { // USA vs Australia
+    score1: 0, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: false
+  },
+  // "G-D-4": { // USA vs Türkiye
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-D-5": { // Paraguay vs Australia
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Group E
-  "G-E-0": { score1: 7, score2: 1, locked: true },  // Germany vs Curaçao
-  "G-E-1": { score1: 1, score2: 0, locked: true },  // Ivory Coast vs Ecuador
-  // "G-E-2": { score1: 0, score2: 0, locked: true },  // Ecuador vs Curaçao
-  // "G-E-3": { score1: 0, score2: 0, locked: true },  // Germany vs Ivory Coast
-  // "G-E-4": { score1: 0, score2: 0, locked: true },  // Germany vs Ecuador
-  // "G-E-5": { score1: 0, score2: 0, locked: true },  // Curaçao vs Ivory Coast
+  "G-E-0": { // Germany vs Curaçao
+    score1: 7, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-E-1": { // Ivory Coast vs Ecuador
+    score1: 1, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-E-2": { // Ecuador vs Curaçao
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-E-3": { // Germany vs Ivory Coast
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-E-4": { // Germany vs Ecuador
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-E-5": { // Curaçao vs Ivory Coast
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Group F
-  // "G-F-0": { score1: 0, score2: 0, locked: true },  // Netherlands vs Sweden
-  // "G-F-1": { score1: 0, score2: 0, locked: true },  // Japan vs Tunisia
-  "G-F-2": { score1: 1, score2: 5, locked: true },  // Tunisia vs Sweden
-  "G-F-3": { score1: 2, score2: 2, locked: true },  // Netherlands vs Japan
-  // "G-F-4": { score1: 0, score2: 0, locked: true },  // Netherlands vs Tunisia
-  // "G-F-5": { score1: 0, score2: 0, locked: true },  // Sweden vs Japan
+  // "G-F-0": { // Netherlands vs Sweden
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-F-1": { // Japan vs Tunisia
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  "G-F-2": { // Tunisia vs Sweden
+    score1: 1, score2: 5,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-F-3": { // Netherlands vs Japan
+    score1: 2, score2: 2,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-F-4": { // Netherlands vs Tunisia
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-F-5": { // Sweden vs Japan
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Group G
-  // "G-G-0": { score1: 0, score2: 0, locked: true },  // Belgium vs New Zealand
-  // "G-G-1": { score1: 0, score2: 0, locked: true },  // Egypt vs Iran
-  "G-G-2": { score1: 2, score2: 2, locked: true },  // Iran vs New Zealand
-  "G-G-3": { score1: 1, score2: 1, locked: true },  // Belgium vs Egypt
-  // "G-G-4": { score1: 0, score2: 0, locked: true },  // Belgium vs Iran
-  // "G-G-5": { score1: 0, score2: 0, locked: true },  // New Zealand vs Egypt
+  // "G-G-0": { // Belgium vs New Zealand
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-G-1": { // Egypt vs Iran
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  "G-G-2": { // Iran vs New Zealand
+    score1: 2, score2: 2,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-G-3": { // Belgium vs Egypt
+    score1: 1, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-G-4": { // Belgium vs Iran
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-G-5": { // New Zealand vs Egypt
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Group H
-  "G-H-0": { score1: 0, score2: 0, locked: true },  // Spain vs Cape Verde
-  "G-H-1": { score1: 1, score2: 1, locked: true },  // Saudi Arabia vs Uruguay
-  // "G-H-2": { score1: 0, score2: 0, locked: true },  // Uruguay vs Cape Verde
-  // "G-H-3": { score1: 0, score2: 0, locked: true },  // Spain vs Saudi Arabia
-  // "G-H-4": { score1: 0, score2: 0, locked: true },  // Spain vs Uruguay
-  // "G-H-5": { score1: 0, score2: 0, locked: true },  // Cape Verde vs Saudi Arabia
+  "G-H-0": { // Spain vs Cape Verde
+    score1: 0, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-H-1": { // Saudi Arabia vs Uruguay
+    score1: 1, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-H-2": { // Uruguay vs Cape Verde
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-H-3": { // Spain vs Saudi Arabia
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-H-4": { // Spain vs Uruguay
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-H-5": { // Cape Verde vs Saudi Arabia
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Group I
-  "G-I-0": { score1: 3, score2: 0, locked: true },  // France vs Senegal
-  "G-I-1": { score1: 1, score2: 4, locked: true },  // Iraq vs Norway
-  // "G-I-2": { score1: 0, score2: 0, locked: true },  // Norway vs Senegal
-  // "G-I-3": { score1: 0, score2: 0, locked: true },  // France vs Iraq
-  // "G-I-4": { score1: 0, score2: 0, locked: true },  // France vs Norway
-  // "G-I-5": { score1: 0, score2: 0, locked: true },  // Senegal vs Iraq
+  "G-I-0": { // France vs Senegal
+    score1: 3, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-I-1": { // Iraq vs Norway
+    score1: 1, score2: 4,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-I-2": { // Norway vs Senegal
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-I-3": { // France vs Iraq
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-I-4": { // France vs Norway
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-I-5": { // Senegal vs Iraq
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Group J
-  "G-J-0": { score1: 3, score2: 0, locked: true },  // Argentina vs Algeria
-  "G-J-1": { score1: 3, score2: 1, locked: true },  // Austria vs Jordan
-  // "G-J-2": { score1: 2, score2: 1, locked: true },  // Jordan vs Algeria
-  // "G-J-3": { score1: 0, score2: 0, locked: true },  // Argentina vs Austria
-  // "G-J-4": { score1: 0, score2: 0, locked: true },  // Argentina vs Jordan
-  // "G-J-5": { score1: 0, score2: 0, locked: true },  // Algeria vs Austria
+  "G-J-0": { // Argentina vs Algeria
+    score1: 3, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-J-1": { // Austria vs Jordan
+    score1: 3, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-J-2": { // Jordan vs Algeria
+  //   score1: 2, score2: 1,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-J-3": { // Argentina vs Austria
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-J-4": { // Argentina vs Jordan
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-J-5": { // Algeria vs Austria
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Group K
-  "G-K-0": { score1: 1, score2: 1, locked: true },  // Portugal vs DR Congo
-  "G-K-1": { score1: 1, score2: 3, locked: true },  // Uzbekistan vs Colombia
-  // "G-K-2": { score1: 2, score2: 1, locked: true },  // Colombia vs DR Congo
-  // "G-K-3": { score1: 0, score2: 0, locked: true },  // Portugal vs Uzbekistan
-  // "G-K-4": { score1: 0, score2: 0, locked: true },  // Portugal vs Colombia
-  // "G-K-5": { score1: 0, score2: 0, locked: true },  // DR Congo vs Uzbekistan
+  "G-K-0": { // Portugal vs DR Congo
+    score1: 1, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-K-1": { // Uzbekistan vs Colombia
+    score1: 1, score2: 3,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-K-2": { // Colombia vs DR Congo
+  //   score1: 2, score2: 1,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-K-3": { // Portugal vs Uzbekistan
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-K-4": { // Portugal vs Colombia
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-K-5": { // DR Congo vs Uzbekistan
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Group L
-  "G-L-0": { score1: 4, score2: 2, locked: true },  // England vs Croatia
-  "G-L-1": { score1: 1, score2: 0, locked: true },  // Ghana vs Panama
-  // "G-L-2": { score1: 0, score2: 0, locked: true },  // Panama vs Croatia
-  // "G-L-3": { score1: 0, score2: 0, locked: true },  // England vs Ghana
-  // "G-L-4": { score1: 0, score2: 0, locked: true },  // England vs Panama
-  // "G-L-5": { score1: 0, score2: 0, locked: true },  // Croatia vs Ghana
+  "G-L-0": { // England vs Croatia
+    score1: 4, score2: 2,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-L-1": { // Ghana vs Panama
+    score1: 1, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-L-2": { // Panama vs Croatia
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-L-3": { // England vs Ghana
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-L-4": { // England vs Panama
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-L-5": { // Croatia vs Ghana
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Knockouts Matchday 1 Presets
   // "KO-73": { score1: 2, score2: 1, locked: true }, // Match 73 predictive score
