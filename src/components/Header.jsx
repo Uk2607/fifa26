@@ -1,0 +1,38 @@
+import React from 'react';
+import { Trophy, Play, RefreshCw } from 'lucide-react';
+
+export default function Header({ onRandomize, onReset }) {
+  return (
+    <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-50 px-4 py-3.5 shadow-xl">
+      <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 p-2 rounded-xl shadow-lg shadow-emerald-500/10">
+            <Trophy className="w-6 h-6 text-slate-950 fill-current" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl md:text-2xl font-black uppercase tracking-tight bg-gradient-to-r from-emerald-300 via-amber-200 to-teal-300 bg-clip-text text-transparent">
+                FIFA 2026 WORLD CUP BOARD
+              </h1>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={onRandomize}
+            className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-slate-950 font-black px-4 py-1.5 rounded-lg text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-500/10 transition active:scale-95"
+          >
+            <Play className="w-3.5 h-3.5 fill-current" /> Auto-Fill Predictor
+          </button>
+          <button
+            onClick={onReset}
+            className="bg-slate-900 hover:bg-red-950/40 text-red-400 px-3 py-1.5 rounded-lg text-xs font-bold border border-red-900/20 transition active:scale-95 flex items-center gap-1.5"
+          >
+            <RefreshCw className="w-3 h-3" /> Reset
+          </button>
+        </div>
+      </div>
+    </header>
+  );
+}

@@ -1,0 +1,125 @@
+const PRESET_SCORES = {
+  // Group A
+  "G-A-0": { score1: 2, score2: 0, locked: true },  // Mexico vs South Africa
+  "G-A-1": { score1: 2, score2: 1, locked: true },  // South Korea vs Czechia
+  "G-A-2": { score1: 1, score2: 1, locked: true },  // Czechia vs South Africa
+  "G-A-3": { score1: 0, score2: 0, locked: false },  // Mexico vs South Korea
+  // "G-A-4": { score1: 0, score2: 0, locked: true },  // Mexico vs Czechia
+  // "G-A-5": { score1: 0, score2: 0, locked: true },  // South Africa vs South Korea
+
+  // Group B
+  "G-B-0": { score1: 1, score2: 1, locked: true },  // Canada vs Bosnia & Herzegovina
+  "G-B-1": { score1: 1, score2: 1, locked: true }, // Switzerland vs Qatar
+  // "G-B-2": { score1: 0, score2: 0, locked: true },  // Qatar vs Bosnia & Herzegovina
+  // "G-B-3": { score1: 0, score2: 0, locked: true },  // Canada vs Switzerland
+  "G-B-4": { score1: 6, score2: 0, locked: true },  // Canada vs Qatar
+  "G-B-5": { score1: 1, score2: 4, locked: true },  // Bosnia & Herzegovina vs Switzerland
+
+  // Group C
+  // "G-C-0": { score1: 0, score2: 0, locked: true },  // Brazil vs Haiti
+  // "G-C-1": { score1: 0, score2: 1, locked: true },  // Morocco vs Scotland
+  "G-C-2": { score1: 0, score2: 0, locked: true },  // Scotland vs Haiti
+  "G-C-3": { score1: 1, score2: 1, locked: true },  // Brazil vs Morocco
+  // "G-C-4": { score1: 0, score2: 0, locked: true },  // Brazil vs Scotland
+  // "G-C-5": { score1: 0, score2: 0, locked: true },  // Haiti vs Morocco
+
+  // Group D
+  "G-D-0": { score1: 4, score2: 1, locked: true },  // USA vs Paraguay
+  "G-D-1": { score1: 2, score2: 0, locked: true },  // Australia vs Türkiye
+  // "G-D-2": { score1: 0, score2: 0, locked: true },  // Türkiye vs Paraguay
+  // "G-D-3": { score1: 0, score2: 0, locked: true },  // USA vs Australia
+  // "G-D-4": { score1: 0, score2: 0, locked: true },  // USA vs Türkiye
+  // "G-D-5": { score1: 0, score2: 0, locked: true },  // Paraguay vs Australia
+
+  // Group E
+  "G-E-0": { score1: 7, score2: 1, locked: true },  // Germany vs Curaçao
+  "G-E-1": { score1: 1, score2: 0, locked: true },  // Ivory Coast vs Ecuador
+  // "G-E-2": { score1: 0, score2: 0, locked: true },  // Ecuador vs Curaçao
+  // "G-E-3": { score1: 0, score2: 0, locked: true },  // Germany vs Ivory Coast
+  // "G-E-4": { score1: 0, score2: 0, locked: true },  // Germany vs Ecuador
+  // "G-E-5": { score1: 0, score2: 0, locked: true },  // Curaçao vs Ivory Coast
+
+  // Group F
+  // "G-F-0": { score1: 0, score2: 0, locked: true },  // Netherlands vs Sweden
+  // "G-F-1": { score1: 0, score2: 0, locked: true },  // Japan vs Tunisia
+  "G-F-2": { score1: 1, score2: 5, locked: true },  // Tunisia vs Sweden
+  "G-F-3": { score1: 2, score2: 2, locked: true },  // Netherlands vs Japan
+  // "G-F-4": { score1: 0, score2: 0, locked: true },  // Netherlands vs Tunisia
+  // "G-F-5": { score1: 0, score2: 0, locked: true },  // Sweden vs Japan
+
+  // Group G
+  // "G-G-0": { score1: 0, score2: 0, locked: true },  // Belgium vs New Zealand
+  // "G-G-1": { score1: 0, score2: 0, locked: true },  // Egypt vs Iran
+  "G-G-2": { score1: 2, score2: 2, locked: true },  // Iran vs New Zealand
+  "G-G-3": { score1: 1, score2: 1, locked: true },  // Belgium vs Egypt
+  // "G-G-4": { score1: 0, score2: 0, locked: true },  // Belgium vs Iran
+  // "G-G-5": { score1: 0, score2: 0, locked: true },  // New Zealand vs Egypt
+
+  // Group H
+  "G-H-0": { score1: 0, score2: 0, locked: true },  // Spain vs Cape Verde
+  "G-H-1": { score1: 1, score2: 1, locked: true },  // Saudi Arabia vs Uruguay
+  // "G-H-2": { score1: 0, score2: 0, locked: true },  // Uruguay vs Cape Verde
+  // "G-H-3": { score1: 0, score2: 0, locked: true },  // Spain vs Saudi Arabia
+  // "G-H-4": { score1: 0, score2: 0, locked: true },  // Spain vs Uruguay
+  // "G-H-5": { score1: 0, score2: 0, locked: true },  // Cape Verde vs Saudi Arabia
+
+  // Group I
+  "G-I-0": { score1: 3, score2: 0, locked: true },  // France vs Senegal
+  "G-I-1": { score1: 1, score2: 4, locked: true },  // Iraq vs Norway
+  // "G-I-2": { score1: 0, score2: 0, locked: true },  // Norway vs Senegal
+  // "G-I-3": { score1: 0, score2: 0, locked: true },  // France vs Iraq
+  // "G-I-4": { score1: 0, score2: 0, locked: true },  // France vs Norway
+  // "G-I-5": { score1: 0, score2: 0, locked: true },  // Senegal vs Iraq
+
+  // Group J
+  "G-J-0": { score1: 3, score2: 0, locked: true },  // Argentina vs Algeria
+  "G-J-1": { score1: 3, score2: 1, locked: true },  // Austria vs Jordan
+  // "G-J-2": { score1: 2, score2: 1, locked: true },  // Jordan vs Algeria
+  // "G-J-3": { score1: 0, score2: 0, locked: true },  // Argentina vs Austria
+  // "G-J-4": { score1: 0, score2: 0, locked: true },  // Argentina vs Jordan
+  // "G-J-5": { score1: 0, score2: 0, locked: true },  // Algeria vs Austria
+
+  // Group K
+  "G-K-0": { score1: 1, score2: 1, locked: true },  // Portugal vs DR Congo
+  "G-K-1": { score1: 1, score2: 3, locked: true },  // Uzbekistan vs Colombia
+  // "G-K-2": { score1: 2, score2: 1, locked: true },  // Colombia vs DR Congo
+  // "G-K-3": { score1: 0, score2: 0, locked: true },  // Portugal vs Uzbekistan
+  // "G-K-4": { score1: 0, score2: 0, locked: true },  // Portugal vs Colombia
+  // "G-K-5": { score1: 0, score2: 0, locked: true },  // DR Congo vs Uzbekistan
+
+  // Group L
+  "G-L-0": { score1: 4, score2: 2, locked: true },  // England vs Croatia
+  "G-L-1": { score1: 1, score2: 0, locked: true },  // Ghana vs Panama
+  // "G-L-2": { score1: 0, score2: 0, locked: true },  // Panama vs Croatia
+  // "G-L-3": { score1: 0, score2: 0, locked: true },  // England vs Ghana
+  // "G-L-4": { score1: 0, score2: 0, locked: true },  // England vs Panama
+  // "G-L-5": { score1: 0, score2: 0, locked: true },  // Croatia vs Ghana
+
+  // Knockouts Matchday 1 Presets
+  // "KO-73": { score1: 2, score2: 1, locked: true }, // Match 73 predictive score
+};
+
+
+{
+      73: { t1: auto["A"]?.[1] || "2A", t2: auto["B"]?.[1] || "2B" },
+      74: { t1: auto["C"]?.[0] || "1C", t2: auto["F"]?.[1] || "2F" },
+
+      75: { t1: auto["E"]?.[0] || "1E", t2: getThird("A") || getThird("B") || getThird("C") || getThird("D") || getThird("F") || "3ABCDF" },
+      76: { t1: auto["F"]?.[0] || "1F", t2: auto["C"]?.[1] || "2C" },
+      77: { t1: auto["E"]?.[1] || "2E", t2: auto["I"]?.[1] || "2I" },
+
+      78: { t1: auto["I"]?.[0] || "1I", t2: getThird("C") || getThird("D") || getThird("F") || getThird("G") || getThird("H") || "3CDFGH" },
+      79: { t1: auto["A"]?.[0] || "1A", t2: getThird("C") || getThird("E") || getThird("F") || getThird("H") || getThird("I") || "3CEHFI" },
+      80: { t1: auto["L"]?.[0] || "1L", t2: getThird("E") || getThird("H") || getThird("I") || getThird("J") || getThird("K") || "3EHIJK" },
+
+      81: { t1: auto["G"]?.[0] || "1G", t2: getThird("A") || getThird("E") || getThird("H") || getThird("I") || getThird("J") || "3AEHIJ" },
+      82: { t1: auto["D"]?.[0] || "1D", t2: getThird("B") || getThird("E") || getThird("F") || getThird("I") || getThird("J") || "3BEFIJ" },
+
+      83: { t1: auto["H"]?.[0] || "1H", t2: auto["J"]?.[1] || "2J" },
+      84: { t1: auto["K"]?.[1] || "2K", t2: auto["L"]?.[1] || "2L" },
+      85: { t1: auto["B"]?.[0] || "1B", t2: getThird("E") || getThird("F") || getThird("G") || getThird("I") || getThird("J") || "3EFGIJ" },
+      86: { t1: auto["D"]?.[1] || "2D", t2: auto["G"]?.[1] || "2G" },
+
+      87: { t1: auto["J"]?.[0] || "1J", t2: auto["H"]?.[1] || "2H" },
+      88: { t1: auto["K"]?.[0] || "1K", t2: getThird("D") || getThird("E") || getThird("I") || getThird("J") || getThird("L") || "3DEIJL" }
+    };

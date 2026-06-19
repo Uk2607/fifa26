@@ -1,0 +1,23 @@
+For the FIFA World Cup, the tiebreaker criteria differ slightly depending on whether you are breaking a tie between teams inside the same group or comparing the best third-place teams across different groups.
+
+1. Tiebreakers for the Best Third-Place Table
+
+Because third-place teams from different groups do not play against each other, head-to-head results cannot be used. If third-place teams are tied on points and overall goal difference, the ranking is decided by the following criteria in this exact order:
+- Higher number of points obtained in all group matches.  
+- Superior goal difference in all group matches.  
+- Most goals scored in all group matches.  
+- Highest team conduct score (Fair Play) based on yellow and red cards received in all group matches:  
+-- Yellow card: –1 point  
+-- Indirect red card (second yellow): –3 points
+-- Direct red card: –4 points
+-- Yellow card and direct red card: –5 points
+(The team with fewer negative disciplinary points finishes higher).
+- FIFA World Ranking (the higher-ranked team advances).  
+
+
+2. Tiebreakers Within a Specific Group
+If you are looking at the standard group points table where teams did play each other, the tiebreaker rules prioritize head-to-head records before looking at overall stats. If teams are tied on points, the sequence is:  
+Step 1: Head-to-Head Criteria (Between Tied Teams)
+- Most points obtained in the group matches played between the teams concerned.  
+- Superior goal difference resulting from the group matches played between the teams concerned.  
+- Most goals scored in the group matches played between the teams concerned
