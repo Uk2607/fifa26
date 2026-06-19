@@ -58,3 +58,10 @@ Replace the content with:
 ```bash
 npm run dev
 ```
+
+## Github pages deployments steps and file changes
+- 
+- 
+- 
+- 
+- ```npm run deploy

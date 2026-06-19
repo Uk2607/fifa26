@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Uk2607.github.com/fifa26/",
+  "homepage": "https://Uk2607.github.io/fifa26/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
