@@ -23,11 +23,10 @@ function CardInput({ color, label, value, field, matchId, onScoreChange, disable
         value={value || 0}
         disabled={disabled}
         onChange={(e) => onScoreChange(matchId, field, e.target.value)}
-        className={`w-4 h-4 rounded text-center text-[7px] font-bold outline-none transition-all ${
-          disabled
-            ? 'bg-slate-900 text-slate-600 cursor-not-allowed border border-slate-800'
-            : 'bg-slate-800/60 text-slate-300 border border-slate-700/60 focus:border-slate-500 focus:ring-1 focus:ring-slate-500'
-        }`}
+        className={`w-4 h-4 rounded text-center text-[7px] font-bold outline-none transition-all ${disabled
+          ? 'bg-slate-900 text-slate-600 cursor-not-allowed border border-slate-800'
+          : 'bg-slate-800/60 text-slate-300 border border-slate-700/60 focus:border-slate-500 focus:ring-1 focus:ring-slate-500'
+          }`}
       />
     </label>
   );
@@ -105,9 +104,8 @@ export default function GroupWidget({
                 return (
                   <tr key={team.code} className="border-b border-slate-900/50 last:border-0 hover:bg-slate-800/10 transition-all">
                     <td className="py-1 flex items-center gap-1 font-medium pl-0.5">
-                      <span className={`w-1 h-2 rounded-full flex-shrink-0 ${
-                        isFirstOrSecond ? 'bg-emerald-500' : isBestThird ? 'bg-blue-400' : 'bg-slate-800'
-                      }`} />
+                      <span className={`w-1 h-2 rounded-full flex-shrink-0 ${isFirstOrSecond ? 'bg-emerald-500' : isBestThird ? 'bg-blue-400' : 'bg-slate-800'
+                        }`} />
                       <span className="text-[11px]">{TEAMS[team.code]?.emoji}</span>
                       <span className="text-slate-200 font-bold truncate max-w-[70px] text-[9px]">{TEAMS[team.code]?.name}</span>
                     </td>
@@ -120,9 +118,8 @@ export default function GroupWidget({
                     <td className={`py-1 text-center font-bold ${team.gd >= 0 ? 'text-slate-300' : 'text-red-400'}`}>
                       {team.gd >= 0 ? `+${team.gd}` : team.gd}
                     </td>
-                    <td className={`py-1 text-center font-bold text-[9px] ${
-                      team.fairPlay < 0 ? 'text-amber-400' : 'text-slate-500'
-                    }`}>
+                    <td className={`py-1 text-center font-bold text-[9px] ${team.fairPlay < 0 ? 'text-amber-400' : 'text-slate-500'
+                      }`}>
                       {team.fairPlay || 0}
                     </td>
                     <td className={`py-1 text-center font-black ${highlightClass}`}>
@@ -149,101 +146,99 @@ export default function GroupWidget({
               .map((match, idx) => ({ match, idx, matchNum: GROUP_MATCH_NUMBERS[`G-${groupName}-${idx}`] || 0 }))
               .sort((a, b) => a.matchNum - b.matchNum)
               .map(({ match, idx, matchNum }) => {
-              const id = `G-${groupName}-${idx}`;
-              const state = matches[id] || {
-                score1: '', score2: '', locked: false,
-                yellow1: 0, yellow2: 0,
-                secondYellow1: 0, secondYellow2: 0,
-                red1: 0, red2: 0,
-              };
-              const t1Code = teamsList[match.t1];
-              const t2Code = teamsList[match.t2];
-              const isLocked = PRESET_SCORES[id]?.locked;
+                const id = `G-${groupName}-${idx}`;
+                const state = matches[id] || {
+                  score1: '', score2: '', locked: false,
+                  yellow1: 0, yellow2: 0,
+                  secondYellow1: 0, secondYellow2: 0,
+                  red1: 0, red2: 0,
+                };
+                const t1Code = teamsList[match.t1];
+                const t2Code = teamsList[match.t2];
+                const isLocked = PRESET_SCORES[id]?.locked;
 
-              return (
-                <div key={id} className="space-y-0.5">
-                  {/* Score row */}
-                  <div
-                    className={`flex items-center justify-between p-1.5 rounded-t border ${
-                      isLocked ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-950 border-slate-900/60'
-                    }`}
-                  >
-                    <div className="text-[8px] text-slate-500 font-bold uppercase w-10" title={`Match ${matchNum}`}>
-                      {matchNum > 0 ? `M${matchNum}` : '—'}
-                    </div>
+                return (
+                  <div key={id} className="space-y-0.5">
+                    {/* Score row */}
+                    <div
+                      className={`flex items-center justify-between p-1.5 rounded-t border ${isLocked ? 'bg-slate-950/60 border-slate-800' : 'bg-slate-950 border-slate-900/60'
+                        }`}
+                    >
+                      <div className="text-[8px] text-slate-500 font-bold uppercase w-10" title={`Match ${matchNum}`}>
+                        {matchNum > 0 ? `M${matchNum}` : '—'}
+                      </div>
 
-                    <div className="flex items-center gap-1 flex-grow justify-end pr-1.5 max-w-[95px] truncate">
-                      <span className="text-[10px] truncate text-slate-300 text-right font-medium">{TEAMS[t1Code]?.name}</span>
-                      <span className="text-xs">{TEAMS[t1Code]?.emoji}</span>
-                    </div>
+                      <div className="flex items-center gap-1 flex-grow justify-end pr-1.5 max-w-[95px] truncate">
+                        <span className="text-[10px] truncate text-slate-300 text-right font-medium">{TEAMS[t1Code]?.name}</span>
+                        <span className="text-xs">{TEAMS[t1Code]?.emoji}</span>
+                      </div>
 
-                    <div className="flex items-center gap-1 flex-shrink-0">
-                      <input
-                        type="text"
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        placeholder="-"
-                        value={state.score1}
-                        disabled={isLocked}
-                        onChange={(e) => onScoreChange(id, 'score1', e.target.value)}
-                        className={`w-6 h-6 rounded text-center text-xs font-black outline-none transition-all ${
-                          isLocked
+                      <div className="flex items-center gap-1 flex-shrink-0">
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          placeholder="-"
+                          value={state.score1}
+                          disabled={isLocked}
+                          onChange={(e) => onScoreChange(id, 'score1', e.target.value)}
+                          className={`w-6 h-6 rounded text-center text-xs font-black outline-none transition-all ${isLocked
                             ? 'bg-slate-850 text-slate-500 cursor-not-allowed border border-slate-800'
                             : 'bg-slate-800 text-white border border-slate-700 focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400'
-                        }`}
-                      />
-                      <span className="text-slate-600 font-black text-[10px]">:</span>
-                      <input
-                        type="text"
-                        inputMode="numeric"
-                        pattern="[0-9]*"
-                        placeholder="-"
-                        value={state.score2}
-                        disabled={isLocked}
-                        onChange={(e) => onScoreChange(id, 'score2', e.target.value)}
-                        className={`w-6 h-6 rounded text-center text-xs font-black outline-none transition-all ${
-                          isLocked
+                            }`}
+                        />
+                        <span className="text-slate-600 font-black text-[10px]">:</span>
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          pattern="[0-9]*"
+                          placeholder="-"
+                          value={state.score2}
+                          disabled={isLocked}
+                          onChange={(e) => onScoreChange(id, 'score2', e.target.value)}
+                          className={`w-6 h-6 rounded text-center text-xs font-black outline-none transition-all ${isLocked
                             ? 'bg-slate-850 text-slate-500 cursor-not-allowed border border-slate-800'
                             : 'bg-slate-800 text-white border border-slate-700 focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400'
-                        }`}
-                      />
+                            }`}
+                        />
+                      </div>
+
+                      <div className="flex items-center gap-1 flex-grow pl-1.5 max-w-[95px] truncate">
+                        <span className="text-xs">{TEAMS[t2Code]?.emoji}</span>
+                        <span className="text-[10px] truncate text-slate-300 font-medium">{TEAMS[t2Code]?.name}</span>
+                      </div>
+
+                      <div className="w-3 text-center">
+                        {isLocked && <Lock className="w-2.5 h-2.5 text-amber-500 mx-auto" />}
+                      </div>
                     </div>
 
-                    <div className="flex items-center gap-1 flex-grow pl-1.5 max-w-[95px] truncate">
-                      <span className="text-xs">{TEAMS[t2Code]?.emoji}</span>
-                      <span className="text-[10px] truncate text-slate-300 font-medium">{TEAMS[t2Code]?.name}</span>
-                    </div>
+                    {/* Card inputs row */}
+                    <div className={`flex items-center justify-center gap-3 px-2 py-1 rounded-b border border-t-0 ${isLocked ? 'bg-slate-950/40 border-slate-800' : 'bg-slate-950/80 border-slate-900/60'
+                      }`}>
+                      {/* Team 1 cards */}
+                      <div className="flex items-center gap-0.5 text-[7px] text-slate-500">
+                        <span className="text-[8px] mr-0.5 opacity-60">{TEAMS[t1Code]?.emoji}</span>
+                        {/* IMPORTANT: Not tracking yellow cards for now */}
+                        {/* <CardInput color="#facc15" label="Yellow Cards" value={state.yellow1} field="yellow1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
+                        <CardInput color="#f97316" label="2nd Yellow → Red" value={state.secondYellow1} field="secondYellow1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} /> */}
+                        <CardInput color="#ef4444" label="Direct Red Card" value={state.red1} field="red1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
+                      </div>
 
-                    <div className="w-3 text-center">
-                      {isLocked && <Lock className="w-2.5 h-2.5 text-amber-500 mx-auto" />}
+                      <span className="text-slate-800 text-[8px]">│</span>
+
+                      {/* Team 2 cards */}
+                      <div className="flex items-center gap-0.5 text-[7px] text-slate-500">
+                        {/* IMPORTANT: Not tracking yellow cards for now */}
+                        {/* <CardInput color="#facc15" label="Yellow Cards" value={state.yellow2} field="yellow2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
+                        <CardInput color="#f97316" label="2nd Yellow → Red" value={state.secondYellow2} field="secondYellow2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} /> */}
+                        <CardInput color="#ef4444" label="Direct Red Card" value={state.red2} field="red2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
+                        <span className="text-[8px] ml-0.5 opacity-60">{TEAMS[t2Code]?.emoji}</span>
+                      </div>
                     </div>
                   </div>
-
-                  {/* Card inputs row */}
-                  <div className={`flex items-center justify-center gap-3 px-2 py-1 rounded-b border border-t-0 ${
-                    isLocked ? 'bg-slate-950/40 border-slate-800' : 'bg-slate-950/80 border-slate-900/60'
-                  }`}>
-                    {/* Team 1 cards */}
-                    <div className="flex items-center gap-0.5 text-[7px] text-slate-500">
-                      <span className="text-[8px] mr-0.5 opacity-60">{TEAMS[t1Code]?.emoji}</span>
-                      <CardInput color="#facc15" label="Yellow Cards" value={state.yellow1} field="yellow1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
-                      <CardInput color="#f97316" label="2nd Yellow → Red" value={state.secondYellow1} field="secondYellow1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
-                      <CardInput color="#ef4444" label="Direct Red Card" value={state.red1} field="red1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
-                    </div>
-
-                    <span className="text-slate-800 text-[8px]">│</span>
-
-                    {/* Team 2 cards */}
-                    <div className="flex items-center gap-0.5 text-[7px] text-slate-500">
-                      <CardInput color="#facc15" label="Yellow Cards" value={state.yellow2} field="yellow2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
-                      <CardInput color="#f97316" label="2nd Yellow → Red" value={state.secondYellow2} field="secondYellow2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
-                      <CardInput color="#ef4444" label="Direct Red Card" value={state.red2} field="red2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
-                      <span className="text-[8px] ml-0.5 opacity-60">{TEAMS[t2Code]?.emoji}</span>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
 
           {/* Card legend */}
