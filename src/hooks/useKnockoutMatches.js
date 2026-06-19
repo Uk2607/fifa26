@@ -25,7 +25,7 @@ export function useKnockoutMatches() {
 
   const handleKoScoreChange = (matchId, field, val) => {
     const koId = `KO-${matchId}`;
-    if (PRESET_SCORES[koId]?.status === 'logged') return;
+    if (PRESET_SCORES[koId]?.status === 'locked') return;
     setKoMatches(prev => ({
       ...prev,
       [koId]: {
@@ -44,7 +44,7 @@ export function useKnockoutMatches() {
       const copy = { ...prev };
       for (let mId = 73; mId <= 104; mId++) {
         const id = `KO-${mId}`;
-        if (PRESET_SCORES[id]?.status !== 'logged') {
+        if (PRESET_SCORES[id]?.status !== 'locked') {
           const s1 = Math.floor(Math.random() * 4);
           let s2 = Math.floor(Math.random() * 4);
           let p1 = '';

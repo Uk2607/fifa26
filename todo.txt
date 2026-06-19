@@ -19,6 +19,10 @@ Expected Behavior Check
 - Toggle set to UPCOMING: Points table ignores the match. (Matches Played count does not increase).
 - Toggle switched to OPEN: Points table instantly updates to include the match data.
 
+Suggestion: For three way slider to lock the result, only if the the default value is not 'locked'. For other two status we can do toggle the three way slider.
+Instead of a simple binary toggle, the Group Pop-up will feature a Three-Way Slider / Segmented Control (Upcoming ↔ Open ↔ Locked).
+- If the default status is LOCKED: The slider is disabled/frozen. The user cannot accidentally toggle it back to Open or Upcoming.
+- If the default status is UPCOMING or OPEN: The user can freely toggle back and forth between these three states.
 ----------------------------------------------------------------------------------------------------
 
 Additional minor bug:

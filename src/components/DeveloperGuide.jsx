@@ -16,11 +16,11 @@ export default function DeveloperGuide({ show, onClose }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
           <div>
             <p className="mb-2 leading-relaxed">
-              🔒 <strong className="text-white">Presetting official matches:</strong> Input completed results directly in the top-level <code className="text-emerald-400 font-mono">PRESET_SCORES</code> constant. When <code className="text-emerald-400 font-mono">status: 'logged'</code> is provided, users cannot modify results on the web interface.
+              🔒 <strong className="text-white">Presetting official matches:</strong> Input completed results directly in the top-level <code className="text-emerald-400 font-mono">PRESET_SCORES</code> constant. When <code className="text-emerald-400 font-mono">status: 'locked'</code> is provided, users cannot modify results on the web interface.
             </p>
             <pre className="bg-slate-950 p-2.5 rounded font-mono text-[10px] text-slate-400 overflow-x-auto">
-              {`"G-A-0": { score1: 2, score2: 0, status: 'logged' }, // Mexico vs South Africa Logged
-"KO-75": { score1: 3, score2: 1, status: 'logged' },  // R32 Match 75 (1E vs 3ABCDF) Logged`}
+              {`"G-A-0": { score1: 2, score2: 0, status: 'locked' }, // Mexico vs South Africa Locked
+"KO-75": { score1: 3, score2: 1, status: 'locked' },  // R32 Match 75 (1E vs 3ABCDF) Locked`}
             </pre>
           </div>
           <div>

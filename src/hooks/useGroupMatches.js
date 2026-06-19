@@ -41,7 +41,7 @@ export function useGroupMatches() {
 
   // Generic handler — works for score fields AND card fields
   const handleGroupScoreChange = (matchId, field, val) => {
-    if (PRESET_SCORES[matchId]?.status === 'logged') return;
+    if (PRESET_SCORES[matchId]?.status === 'locked') return;
     setGroupMatches(prev => ({
       ...prev,
       [matchId]: {
@@ -59,7 +59,7 @@ export function useGroupMatches() {
     setGroupMatches(prev => {
       const copy = { ...prev };
       Object.keys(copy).forEach(id => {
-        if (PRESET_SCORES[id]?.status !== 'logged') {
+        if (PRESET_SCORES[id]?.status !== 'locked') {
           copy[id] = {
             score1: Math.floor(Math.random() * 4),
             score2: Math.floor(Math.random() * 3),

@@ -99,16 +99,16 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                 };
                 const t1Code = teamsList[match.t1];
                 const t2Code = teamsList[match.t2];
-                const isLogged = state.status === 'logged';
+                const isLocked = state.status === 'locked';
                 const isOpen = state.status === 'open';
 
-                // Border/bg color coding: amber for logged, emerald for open, default for upcoming
-                const borderColor = isLogged
+                // Border/bg color coding: amber for locked, emerald for open, default for upcoming
+                const borderColor = isLocked
                   ? 'border-amber-500/30'
                   : isOpen
                     ? 'border-emerald-500/30'
                     : 'border-slate-800/60';
-                const bgColor = isLogged
+                const bgColor = isLocked
                   ? 'bg-amber-950/10'
                   : isOpen
                     ? 'bg-emerald-950/10'
@@ -118,7 +118,7 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                   <div key={id} className="relative">
                     {/* Match number label — positioned top-left, outside flow */}
                     <div className="absolute -top-1 left-2 z-10">
-                      <span className={`text-[7px] font-bold uppercase px-1 py-px rounded ${isLogged ? 'bg-amber-500/20 text-amber-400' : isOpen ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-500'
+                      <span className={`text-[7px] font-bold uppercase px-1 py-px rounded ${isLocked ? 'bg-amber-500/20 text-amber-400' : isOpen ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-500'
                         }`}>
                         {matchNum > 0 ? `M${matchNum}` : '—'}
                       </span>
@@ -140,9 +140,9 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                           pattern="[0-9]*"
                           placeholder="-"
                           value={state.score1}
-                          disabled={isLogged}
+                          disabled={isLocked}
                           onChange={(e) => onScoreChange(id, 'score1', e.target.value)}
-                          className={`w-7 h-7 rounded-md text-center text-xs font-black outline-none transition-all ${isLogged
+                          className={`w-7 h-7 rounded-md text-center text-xs font-black outline-none transition-all ${isLocked
                             ? 'bg-slate-850 text-slate-500 cursor-not-allowed border border-slate-800'
                             : 'bg-slate-800 text-white border border-slate-700 focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400'
                             }`}
@@ -154,9 +154,9 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                           pattern="[0-9]*"
                           placeholder="-"
                           value={state.score2}
-                          disabled={isLogged}
+                          disabled={isLocked}
                           onChange={(e) => onScoreChange(id, 'score2', e.target.value)}
-                          className={`w-7 h-7 rounded-md text-center text-xs font-black outline-none transition-all ${isLogged
+                          className={`w-7 h-7 rounded-md text-center text-xs font-black outline-none transition-all ${isLocked
                             ? 'bg-slate-850 text-slate-500 cursor-not-allowed border border-slate-800'
                             : 'bg-slate-800 text-white border border-slate-700 focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400'
                             }`}
@@ -171,16 +171,16 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                     </div>
 
                     {/* Card inputs row */}
-                    <div className={`flex items-center justify-center gap-4 px-2 py-1.5 rounded-b-lg border border-t-0 ${borderColor} ${isLogged ? 'bg-amber-950/5' : isOpen ? 'bg-emerald-950/5' : 'bg-slate-950/80'
+                    <div className={`flex items-center justify-center gap-4 px-2 py-1.5 rounded-b-lg border border-t-0 ${borderColor} ${isLocked ? 'bg-amber-950/5' : isOpen ? 'bg-emerald-950/5' : 'bg-slate-950/80'
                       }`}>
                       <div className="flex items-center gap-1 text-[7px] text-slate-500">
-                        <CardInput color="#ef4444" label="Direct Red Card" value={state.red1} field="red1" matchId={id} onScoreChange={onScoreChange} disabled={isLogged} />
+                        <CardInput color="#ef4444" label="Direct Red Card" value={state.red1} field="red1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
                       </div>
 
                       <span className="text-slate-800 text-[8px]">│</span>
 
                       <div className="flex items-center gap-1 text-[7px] text-slate-500">
-                        <CardInput color="#ef4444" label="Direct Red Card" value={state.red2} field="red2" matchId={id} onScoreChange={onScoreChange} disabled={isLogged} reversed />
+                        <CardInput color="#ef4444" label="Direct Red Card" value={state.red2} field="red2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} reversed />
                       </div>
                     </div>
                   </div>
@@ -196,7 +196,7 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
             </div>
             <div className="flex items-center gap-1">
               <span className="w-3 h-2 rounded-sm border border-amber-500/40 bg-amber-950/20 inline-block" />
-              <span className="text-[8px] text-slate-500">Logged</span>
+              <span className="text-[8px] text-slate-500">Locked</span>
             </div>
             <div className="flex items-center gap-1">
               <span className="w-3 h-2 rounded-sm border border-emerald-500/40 bg-emerald-950/20 inline-block" />
