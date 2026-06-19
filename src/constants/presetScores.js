@@ -1,30 +1,120 @@
 /* ================================================================================
-⚽ DEVELOPER CONFIGURATION: PRESET & LOCKED SCORES (Matches 73 to 104)
+DEVELOPER CONFIGURATION: PRESET & LOCKED SCORES (Matches 1 to 104)
 ================================================================================ */
 export const PRESET_SCORES = {
   // Group A
-  "G-A-0": { score1: 2, score2: 0, locked: true },  // Mexico vs South Africa
-  "G-A-1": { score1: 2, score2: 1, locked: true },  // South Korea vs Czechia
-  "G-A-2": { score1: 1, score2: 1, locked: true },  // Czechia vs South Africa
-  "G-A-3": { score1: 1, score2: 0, locked: true },  // Mexico vs South Korea
-  // "G-A-4": { score1: 0, score2: 0, locked: true },  // Mexico vs Czechia
-  // "G-A-5": { score1: 0, score2: 0, locked: true },  // South Africa vs South Korea
+  "G-A-0": { // Mexico vs South Africa
+    score1: 2, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-A-1": { // South Korea vs Czechia
+    score1: 2, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-A-2": { // Czechia vs South Africa
+    score1: 1, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-A-3": { // Mexico vs South Korea
+    score1: 1, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-A-4": { // Mexico vs Czechia
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-A-5": { // South Africa vs South Korea
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Group B
-  "G-B-0": { score1: 1, score2: 1, locked: true },  // Canada vs Bosnia & Herzegovina
-  "G-B-1": { score1: 1, score2: 1, locked: true }, // Switzerland vs Qatar
-  // "G-B-2": { score1: 0, score2: 0, locked: true },  // Qatar vs Bosnia & Herzegovina
-  // "G-B-3": { score1: 0, score2: 0, locked: true },  // Canada vs Switzerland
-  "G-B-4": { score1: 6, score2: 0, locked: true },  // Canada vs Qatar
-  "G-B-5": { score1: 1, score2: 4, locked: true },  // Bosnia & Herzegovina vs Switzerland
+  "G-B-0": { // Canada vs Bosnia & Herzegovina
+    score1: 1, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-B-1": { // Switzerland vs Qatar
+    score1: 1, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-B-2": { // Qatar vs Bosnia & Herzegovina
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-B-3": { // Canada vs Switzerland
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  "G-B-4": { // Canada vs Qatar
+    score1: 6, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-B-5": { // Bosnia & Herzegovina vs Switzerland
+    score1: 1, score2: 4,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
 
   // Group C
-  "G-C-0": { score1: 0, score2: 0, locked: false },  // Brazil vs Haiti
-  "G-C-1": { score1: 0, score2: 0, locked: false },  // Morocco vs Scotland
-  "G-C-2": { score1: 0, score2: 0, locked: true },  // Scotland vs Haiti
-  "G-C-3": { score1: 1, score2: 1, locked: true },  // Brazil vs Morocco
-  // "G-C-4": { score1: 0, score2: 0, locked: true },  // Brazil vs Scotland
-  // "G-C-5": { score1: 0, score2: 0, locked: true },  // Haiti vs Morocco
+  "G-C-0": { // Brazil vs Haiti
+    score1: 0, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: false
+  },
+  "G-C-1": { // Morocco vs Scotland
+    score1: 0, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: false
+  },
+  "G-C-2": { // Scotland vs Haiti
+    score1: 0, score2: 0,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  "G-C-3": { // Brazil vs Morocco
+    score1: 1, score2: 1,
+    yellow1: 0, yellow2: 0,
+    secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, locked: true
+  },
+  // "G-C-4": { // Brazil vs Scotland
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
+  // "G-C-5": { // Haiti vs Morocco
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0,
+  //   secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, locked: true
+  // },
 
   // Group D
   "G-D-0": { score1: 4, score2: 1, locked: true },  // USA vs Paraguay

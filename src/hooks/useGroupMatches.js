@@ -2,19 +2,34 @@ import { useState } from 'react';
 import { GROUPS_CONFIG, GROUP_MATCH_PAIRINGS } from '../constants/groups';
 import { PRESET_SCORES } from '../constants/presetScores';
 
+// ================================================================================
+// 🎮 GROUP MATCHES STATE — scores + disciplinary card tracking
+// ================================================================================
 function initGroupMatches() {
   const initial = {};
   Object.keys(GROUPS_CONFIG).forEach(gName => {
     GROUP_MATCH_PAIRINGS.forEach((m, idx) => {
       const id = `G-${gName}-${idx}`;
-      if (PRESET_SCORES[id]) {
+      const preset = PRESET_SCORES[id];
+      if (preset) {
         initial[id] = {
-          score1: PRESET_SCORES[id].score1,
-          score2: PRESET_SCORES[id].score2,
-          locked: PRESET_SCORES[id].locked
+          score1: preset.score1,
+          score2: preset.score2,
+          locked: preset.locked,
+          yellow1: preset.yellow1 || 0,
+          yellow2: preset.yellow2 || 0,
+          secondYellow1: preset.secondYellow1 || 0,
+          secondYellow2: preset.secondYellow2 || 0,
+          red1: preset.red1 || 0,
+          red2: preset.red2 || 0,
         };
       } else {
-        initial[id] = { score1: '', score2: '', locked: false };
+        initial[id] = {
+          score1: '', score2: '', locked: false,
+          yellow1: 0, yellow2: 0,
+          secondYellow1: 0, secondYellow2: 0,
+          red1: 0, red2: 0,
+        };
       }
     });
   });
@@ -24,13 +39,14 @@ function initGroupMatches() {
 export function useGroupMatches() {
   const [groupMatches, setGroupMatches] = useState(initGroupMatches);
 
-  const handleGroupScoreChange = (matchId, side, val) => {
+  // Generic handler — works for score fields AND card fields
+  const handleGroupScoreChange = (matchId, field, val) => {
     if (PRESET_SCORES[matchId]?.locked) return;
     setGroupMatches(prev => ({
       ...prev,
       [matchId]: {
         ...prev[matchId],
-        [side]: val === '' ? '' : parseInt(val, 10) || 0
+        [field]: val === '' ? '' : parseInt(val, 10) || 0
       }
     }));
   };
@@ -47,7 +63,13 @@ export function useGroupMatches() {
           copy[id] = {
             score1: Math.floor(Math.random() * 4),
             score2: Math.floor(Math.random() * 3),
-            locked: false
+            locked: false,
+            yellow1: Math.floor(Math.random() * 4),
+            yellow2: Math.floor(Math.random() * 4),
+            secondYellow1: Math.random() < 0.2 ? 1 : 0,
+            secondYellow2: Math.random() < 0.2 ? 1 : 0,
+            red1: Math.random() < 0.1 ? 1 : 0,
+            red2: Math.random() < 0.1 ? 1 : 0,
           };
         }
       });

@@ -26,17 +26,26 @@ export default function BestThirdsPanel({ bestThirdsRanking }) {
                   }`}
               >
                 <div className="flex items-center gap-2 truncate">
-                  <span className={`text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center ${isQualified ? 'bg-emerald-500 text-slate-950' : 'bg-slate-800 text-slate-400'
-                    }`}>
+                  <span className={`text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center ${
+                    isQualified ? 'bg-emerald-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+                  }`}>
                     {idx + 1}
                   </span>
                   <span className="text-sm leading-none">{TEAMS[t.code]?.emoji}</span>
                   <span className="font-bold text-xs text-slate-300">{TEAMS[t.code]?.name}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold text-slate-400">{t.pts} pts / GD {t.gd}</span>
-                  <span className={`text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-wider ${isQualified ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-slate-900 text-slate-500'
-                    }`}>
+                  <span className="text-[10px] font-bold text-slate-400">
+                    {t.pts}pts · GD{t.gd >= 0 ? '+' : ''}{t.gd}
+                    {t.fairPlay !== 0 && (
+                      <span className="text-amber-400/80"> · FP{t.fairPlay}</span>
+                    )}
+                  </span>
+                  <span className={`text-[8px] px-1.5 py-0.5 rounded font-black uppercase tracking-wider ${
+                    isQualified
+                      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                      : 'bg-slate-900 text-slate-500'
+                  }`}>
                     {isQualified ? 'IN' : 'OUT'}
                   </span>
                 </div>
