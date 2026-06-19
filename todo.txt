@@ -1,0 +1,26 @@
+Updated Business Logic
+To fix the points table leakage, we need to introduce a strict conditional check based on the match state.
+- UPCOMING State: The match acts as a placeholder. It must be completely ignored by the points table calculator. Total matches played, wins, losses, draws, and points remain unchanged.
+- OPEN State (or Live/Completed): The match is active or concluded. Its data contributes normally to the team statistics and points table.
+
+UI / UX Requirements (Group Pop-up Toggle)
+To allow users to switch states easily, implement a toggle directly inside the Group Pop-up.
+Behavioral Flow:
+- User clicks on a specific match inside the group view to open the Group Pop-up.
+- Inside the pop-up, a prominent Status Toggle Switch (or Radio/Dropdown) is displayed.
+- Toggle Options:
+-- Upcoming (Default for future matches)
+-- Open (Ready for scoring/active)
+- On Click / Change:
+-- Update the status property of that specific match in the state.
+-- Trigger a re-calculation of the points table (calculatePointsTable).
+
+Expected Behavior Check
+- Toggle set to UPCOMING: Points table ignores the match. (Matches Played count does not increase).
+- Toggle switched to OPEN: Points table instantly updates to include the match data.
+
+----------------------------------------------------------------------------------------------------
+
+Additional minor bug:
+- Also for BEST 3RD-PLACE RANK table highlight the top 8 teams even if they have 0 points, since we have tie breaker in palce it won't be any issue.
+- Also bring back the option to fill out yellow and double yellow card in UI

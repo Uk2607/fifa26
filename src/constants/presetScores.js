@@ -26,12 +26,12 @@ export const PRESET_SCORES = {
   // "G-A-4": { // Mexico vs Czechia
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-A-5": { // South Africa vs South Korea
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Group B
@@ -48,12 +48,12 @@ export const PRESET_SCORES = {
   // "G-B-2": { // Qatar vs Bosnia & Herzegovina
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-B-3": { // Canada vs Switzerland
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   "G-B-4": { // Canada vs Qatar
     score1: 6, score2: 0,
@@ -67,14 +67,14 @@ export const PRESET_SCORES = {
   },
 
   // Group C
-  "G-C-0": { // Brazil vs Haiti
-    score1: 0, score2: 0,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
-  },
+  // "G-C-0": { // Brazil vs Haiti
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, status: "upcoming"
+  // },
   "G-C-1": { // Morocco vs Scotland
-    score1: 0, score2: 0,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    score1: 1, score2: 0,
+    yellow1: 1, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "G-C-2": { // Scotland vs Haiti
@@ -90,12 +90,12 @@ export const PRESET_SCORES = {
   // "G-C-4": { // Brazil vs Scotland
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-C-5": { // Haiti vs Morocco
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Group D
@@ -109,11 +109,11 @@ export const PRESET_SCORES = {
     yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "logged"
   },
-  "G-D-2": { // Türkiye vs Paraguay
-    score1: 0, score2: 0,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
-  },
+  // "G-D-2": { // Türkiye vs Paraguay
+  //   score1: 0, score2: 0,
+  //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+  //   red1: 0, red2: 0, status: "upcoming"
+  // },
   "G-D-3": { // USA vs Australia
     score1: 2, score2: 0,
     yellow1: 3, yellow2: 4, secondYellow1: 0, secondYellow2: 0,
@@ -122,12 +122,12 @@ export const PRESET_SCORES = {
   // "G-D-4": { // USA vs Türkiye
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-D-5": { // Paraguay vs Australia
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Group E
@@ -144,34 +144,34 @@ export const PRESET_SCORES = {
   // "G-E-2": { // Ecuador vs Curaçao
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-E-3": { // Germany vs Ivory Coast
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-E-4": { // Germany vs Ecuador
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-E-5": { // Curaçao vs Ivory Coast
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Group F
   // "G-F-0": { // Netherlands vs Sweden
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-F-1": { // Japan vs Tunisia
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   "G-F-2": { // Tunisia vs Sweden
     score1: 1, score2: 5,
@@ -186,24 +186,24 @@ export const PRESET_SCORES = {
   // "G-F-4": { // Netherlands vs Tunisia
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-F-5": { // Sweden vs Japan
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Group G
   // "G-G-0": { // Belgium vs New Zealand
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-G-1": { // Egypt vs Iran
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   "G-G-2": { // Iran vs New Zealand
     score1: 2, score2: 2,
@@ -218,12 +218,12 @@ export const PRESET_SCORES = {
   // "G-G-4": { // Belgium vs Iran
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-G-5": { // New Zealand vs Egypt
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Group H
@@ -240,22 +240,22 @@ export const PRESET_SCORES = {
   // "G-H-2": { // Uruguay vs Cape Verde
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-H-3": { // Spain vs Saudi Arabia
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-H-4": { // Spain vs Uruguay
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-H-5": { // Cape Verde vs Saudi Arabia
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Group I
@@ -272,22 +272,22 @@ export const PRESET_SCORES = {
   // "G-I-2": { // Norway vs Senegal
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-I-3": { // France vs Iraq
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-I-4": { // France vs Norway
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-I-5": { // Senegal vs Iraq
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Group J
@@ -304,22 +304,22 @@ export const PRESET_SCORES = {
   // "G-J-2": { // Jordan vs Algeria
   //   score1: 2, score2: 1,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-J-3": { // Argentina vs Austria
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-J-4": { // Argentina vs Jordan
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-J-5": { // Algeria vs Austria
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Group K
@@ -336,22 +336,22 @@ export const PRESET_SCORES = {
   // "G-K-2": { // Colombia vs DR Congo
   //   score1: 2, score2: 1,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-K-3": { // Portugal vs Uzbekistan
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-K-4": { // Portugal vs Colombia
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-K-5": { // DR Congo vs Uzbekistan
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Group L
@@ -368,22 +368,22 @@ export const PRESET_SCORES = {
   // "G-L-2": { // Panama vs Croatia
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-L-3": { // England vs Ghana
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-L-4": { // England vs Panama
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
   // "G-L-5": { // Croatia vs Ghana
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "logged"
+  //   red1: 0, red2: 0, status: "upcoming"
   // },
 
   // Knockouts Matchday 1 Presets
