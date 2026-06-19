@@ -11,10 +11,10 @@ function initKoMatches() {
         score2: PRESET_SCORES[id].score2,
         penalty1: PRESET_SCORES[id].penalty1 || '',
         penalty2: PRESET_SCORES[id].penalty2 || '',
-        locked: PRESET_SCORES[id].locked
+        status: PRESET_SCORES[id].status || 'upcoming'
       };
     } else {
-      initial[id] = { score1: '', score2: '', penalty1: '', penalty2: '', locked: false };
+      initial[id] = { score1: '', score2: '', penalty1: '', penalty2: '', status: 'upcoming' };
     }
   }
   return initial;
@@ -25,7 +25,7 @@ export function useKnockoutMatches() {
 
   const handleKoScoreChange = (matchId, field, val) => {
     const koId = `KO-${matchId}`;
-    if (PRESET_SCORES[koId]?.locked) return;
+    if (PRESET_SCORES[koId]?.status === 'logged') return;
     setKoMatches(prev => ({
       ...prev,
       [koId]: {
@@ -44,7 +44,7 @@ export function useKnockoutMatches() {
       const copy = { ...prev };
       for (let mId = 73; mId <= 104; mId++) {
         const id = `KO-${mId}`;
-        if (!PRESET_SCORES[id]?.locked) {
+        if (PRESET_SCORES[id]?.status !== 'logged') {
           const s1 = Math.floor(Math.random() * 4);
           let s2 = Math.floor(Math.random() * 4);
           let p1 = '';
@@ -59,7 +59,7 @@ export function useKnockoutMatches() {
             score2: s2,
             penalty1: p1,
             penalty2: p2,
-            locked: false
+            status: copy[id].status
           };
         }
       }

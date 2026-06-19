@@ -64,7 +64,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
   const penalty1 = matchState?.penalty1 ?? '';
   const penalty2 = matchState?.penalty2 ?? '';
 
-  const isLocked = PRESET_SCORES[`KO-${matchId}`]?.locked;
+  const isLocked = PRESET_SCORES[`KO-${matchId}`]?.status === 'logged';
   const isDraw = score1 !== '' && score2 !== '' && score1 === score2;
 
   let winner = null;

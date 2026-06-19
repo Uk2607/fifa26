@@ -8,12 +8,14 @@ import Header from './components/Header';
 import ChampionBanner from './components/ChampionBanner';
 import DeveloperGuide from './components/DeveloperGuide';
 import GroupWidget from './components/GroupStage/GroupWidget';
+import GroupMatchModal from './components/GroupStage/GroupMatchModal';
 import BestThirdsPanel from './components/GroupStage/BestThirdsPanel';
+import OpenMatchesPanel from './components/GroupStage/OpenMatchesPanel';
 import KnockoutBracket from './components/Knockout/KnockoutBracket';
 import Footer from './components/Footer';
 
 export default function App() {
-  const [expandedGroup, setExpandedGroup] = useState(null);
+  const [modalGroup, setModalGroup] = useState(null);
   const [showDeveloperGuide, setShowDeveloperGuide] = useState(false);
 
   // State hooks
@@ -47,6 +49,16 @@ export default function App() {
 
       <DeveloperGuide show={showDeveloperGuide} onClose={() => setShowDeveloperGuide(false)} />
 
+      {/* GROUP MATCH MODAL (popup) */}
+      {modalGroup && (
+        <GroupMatchModal
+          groupName={modalGroup}
+          matches={groupMatches}
+          onScoreChange={handleGroupScoreChange}
+          onClose={() => setModalGroup(null)}
+        />
+      )}
+
       {/* MAIN CONTAINER */}
       <main className="flex-grow px-4 py-6 max-w-[1920px] mx-auto w-full flex flex-col gap-8">
 
@@ -74,15 +86,20 @@ export default function App() {
                   standings={groupStandings[gName]}
                   matches={groupMatches}
                   onScoreChange={handleGroupScoreChange}
-                  isExpanded={expandedGroup === gName}
-                  onToggle={() => setExpandedGroup(expandedGroup === gName ? null : gName)}
+                  onToggle={() => setModalGroup(gName)}
                   bestThirdsQualified={qualificationState.thirds}
                 />
               ))}
             </div>
 
-            {/* Best 3rd-Place Panel */}
-            <BestThirdsPanel bestThirdsRanking={qualificationState.bestThirdsRanking} />
+            {/* Right Sidebar: Best 3rd-Place Panel + Open Matches */}
+            <div className="lg:col-span-1 space-y-6">
+              <BestThirdsPanel bestThirdsRanking={qualificationState.bestThirdsRanking} />
+              <OpenMatchesPanel
+                groupMatches={groupMatches}
+                onScoreChange={handleGroupScoreChange}
+              />
+            </div>
           </div>
         </section>
 

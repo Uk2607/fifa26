@@ -15,7 +15,7 @@ function initGroupMatches() {
         initial[id] = {
           score1: preset.score1,
           score2: preset.score2,
-          locked: preset.locked,
+          status: preset.status || 'upcoming',
           yellow1: preset.yellow1 || 0,
           yellow2: preset.yellow2 || 0,
           secondYellow1: preset.secondYellow1 || 0,
@@ -25,7 +25,7 @@ function initGroupMatches() {
         };
       } else {
         initial[id] = {
-          score1: '', score2: '', locked: false,
+          score1: '', score2: '', status: 'upcoming',
           yellow1: 0, yellow2: 0,
           secondYellow1: 0, secondYellow2: 0,
           red1: 0, red2: 0,
@@ -41,7 +41,7 @@ export function useGroupMatches() {
 
   // Generic handler — works for score fields AND card fields
   const handleGroupScoreChange = (matchId, field, val) => {
-    if (PRESET_SCORES[matchId]?.locked) return;
+    if (PRESET_SCORES[matchId]?.status === 'logged') return;
     setGroupMatches(prev => ({
       ...prev,
       [matchId]: {
@@ -59,11 +59,11 @@ export function useGroupMatches() {
     setGroupMatches(prev => {
       const copy = { ...prev };
       Object.keys(copy).forEach(id => {
-        if (!PRESET_SCORES[id]?.locked) {
+        if (PRESET_SCORES[id]?.status !== 'logged') {
           copy[id] = {
             score1: Math.floor(Math.random() * 4),
             score2: Math.floor(Math.random() * 3),
-            locked: false,
+            status: copy[id].status,
             yellow1: Math.floor(Math.random() * 4),
             yellow2: Math.floor(Math.random() * 4),
             secondYellow1: Math.random() < 0.2 ? 1 : 0,
