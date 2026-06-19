@@ -118,15 +118,14 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                   <div key={id} className="relative">
                     {/* Match number label — positioned top-left, outside flow */}
                     <div className="absolute -top-1 left-2 z-10">
-                      <span className={`text-[7px] font-bold uppercase px-1 py-px rounded ${
-                        isLogged ? 'bg-amber-500/20 text-amber-400' : isOpen ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-500'
-                      }`}>
+                      <span className={`text-[7px] font-bold uppercase px-1 py-px rounded ${isLogged ? 'bg-amber-500/20 text-amber-400' : isOpen ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-500'
+                        }`}>
                         {matchNum > 0 ? `M${matchNum}` : '—'}
                       </span>
                     </div>
 
                     {/* Score row */}
-                    <div className={`flex items-center justify-center px-3 pt-3 pb-2 rounded-t-lg border ${borderColor} ${bgColor}`}>
+                    <div className={`flex items-center justify-center px-3 pt-3 pb-1 rounded-t-lg border border-b-0 ${borderColor} ${bgColor}`}>
                       {/* Team 1 — right aligned, fixed width */}
                       <div className="flex items-center gap-1.5 justify-end w-[140px]">
                         <span className="text-[10px] truncate text-slate-300 text-right font-medium">{TEAMS[t1Code]?.name}</span>
@@ -172,11 +171,9 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                     </div>
 
                     {/* Card inputs row */}
-                    <div className={`flex items-center justify-center gap-4 px-2 py-1.5 rounded-b-lg border border-t-0 ${borderColor} ${
-                      isLogged ? 'bg-amber-950/5' : isOpen ? 'bg-emerald-950/5' : 'bg-slate-950/80'
-                    }`}>
+                    <div className={`flex items-center justify-center gap-4 px-2 py-1.5 rounded-b-lg border border-t-0 ${borderColor} ${isLogged ? 'bg-amber-950/5' : isOpen ? 'bg-emerald-950/5' : 'bg-slate-950/80'
+                      }`}>
                       <div className="flex items-center gap-1 text-[7px] text-slate-500">
-                        <span className="text-[9px] mr-0.5 opacity-60">{TEAMS[t1Code]?.emoji}</span>
                         <CardInput color="#ef4444" label="Direct Red Card" value={state.red1} field="red1" matchId={id} onScoreChange={onScoreChange} disabled={isLogged} />
                       </div>
 
@@ -184,7 +181,6 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
 
                       <div className="flex items-center gap-1 text-[7px] text-slate-500">
                         <CardInput color="#ef4444" label="Direct Red Card" value={state.red2} field="red2" matchId={id} onScoreChange={onScoreChange} disabled={isLogged} reversed />
-                        <span className="text-[9px] ml-0.5 opacity-60">{TEAMS[t2Code]?.emoji}</span>
                       </div>
                     </div>
                   </div>

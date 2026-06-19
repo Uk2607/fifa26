@@ -109,7 +109,7 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
             </div>
 
             {/* Score row */}
-            <div className="flex items-center justify-center px-2 pt-2.5 pb-1.5 rounded-t border bg-emerald-950/10 border-emerald-500/20">
+            <div className="flex items-center justify-center px-2 pt-2.5 pb-1.5 rounded-t border border-b-0 bg-emerald-950/10 border-emerald-500/20">
               {/* Team 1 — right aligned, fixed width */}
               <div className="flex items-center gap-0.5 justify-end flex-1 min-w-0">
                 <span className="text-[8px] truncate text-slate-300 text-right font-medium">{TEAMS[t1Code]?.name}</span>
@@ -149,13 +149,11 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
             {/* Card inputs row */}
             <div className="flex items-center justify-center gap-2 px-1.5 py-0.5 rounded-b border border-t-0 bg-emerald-950/5 border-emerald-500/20">
               <div className="flex items-center gap-0.5 text-[7px] text-slate-500">
-                <span className="text-[7px] mr-0.5 opacity-60">{TEAMS[t1Code]?.emoji}</span>
                 <CardInput color="#ef4444" label="Direct Red Card" value={state.red1} field="red1" matchId={id} onScoreChange={onScoreChange} disabled={false} />
               </div>
               <span className="text-slate-800 text-[7px]">│</span>
               <div className="flex items-center gap-0.5 text-[7px] text-slate-500">
                 <CardInput color="#ef4444" label="Direct Red Card" value={state.red2} field="red2" matchId={id} onScoreChange={onScoreChange} disabled={false} reversed />
-                <span className="text-[7px] ml-0.5 opacity-60">{TEAMS[t2Code]?.emoji}</span>
               </div>
             </div>
           </div>
