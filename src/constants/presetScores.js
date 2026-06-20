@@ -111,8 +111,8 @@ export const PRESET_SCORES = {
   },
   "G-D-2": { // Türkiye vs Paraguay
     score1: 0, score2: 1,
-    yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 1, status: "open"
+    yellow1: 2, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 1, status: "locked"
   },
   "G-D-3": { // USA vs Australia
     score1: 2, score2: 0,
@@ -144,12 +144,12 @@ export const PRESET_SCORES = {
   // "G-E-2": { // Ecuador vs Curaçao
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "upcoming"
+  //   red1: 0, red2: 0, status: "open"
   // },
   // "G-E-3": { // Germany vs Ivory Coast
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "upcoming"
+  //   red1: 0, red2: 0, status: "open"
   // },
   // "G-E-4": { // Germany vs Ecuador
   //   score1: 0, score2: 0,
@@ -166,12 +166,12 @@ export const PRESET_SCORES = {
   // "G-F-0": { // Netherlands vs Sweden
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "upcoming"
+  //   red1: 0, red2: 0, status: "open"
   // },
   // "G-F-1": { // Japan vs Tunisia
   //   score1: 0, score2: 0,
   //   yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-  //   red1: 0, red2: 0, status: "upcoming"
+  //   red1: 0, red2: 0, status: "open"
   // },
   "G-F-2": { // Tunisia vs Sweden
     score1: 1, score2: 5,
