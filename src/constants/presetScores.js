@@ -110,9 +110,9 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-D-2": { // Türkiye vs Paraguay
-    score1: 0, score2: 0,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 0, score2: 1,
+    yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 1, status: "open"
   },
   "G-D-3": { // USA vs Australia
     score1: 2, score2: 0,
