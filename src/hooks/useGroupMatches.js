@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { GROUPS_CONFIG, GROUP_MATCH_PAIRINGS } from '../constants/groups';
 import { PRESET_SCORES } from '../constants/presetScores';
 
@@ -38,7 +38,19 @@ function initGroupMatches() {
 }
 
 export function useGroupMatches() {
-  const [groupMatches, setGroupMatches] = useState(initGroupMatches);
+  const [groupMatches, setGroupMatches] = useState(() => {
+    try {
+      const saved = localStorage.getItem('fifa2026_groupMatches');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error('Failed to load group matches from local storage', e);
+    }
+    return initGroupMatches();
+  });
+
+  useEffect(() => {
+    localStorage.setItem('fifa2026_groupMatches', JSON.stringify(groupMatches));
+  }, [groupMatches]);
 
   // Generic handler — works for score fields AND card fields
   const handleGroupScoreChange = (matchId, field, val) => {

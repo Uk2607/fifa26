@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PRESET_SCORES } from '../constants/presetScores';
 
 function initKoMatches() {
@@ -23,7 +23,19 @@ function initKoMatches() {
 }
 
 export function useKnockoutMatches() {
-  const [koMatches, setKoMatches] = useState(initKoMatches);
+  const [koMatches, setKoMatches] = useState(() => {
+    try {
+      const saved = localStorage.getItem('fifa2026_koMatches');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error('Failed to load knockout matches from local storage', e);
+    }
+    return initKoMatches();
+  });
+
+  useEffect(() => {
+    localStorage.setItem('fifa2026_koMatches', JSON.stringify(koMatches));
+  }, [koMatches]);
 
   const handleKoScoreChange = (matchId, field, val) => {
     const koId = `KO-${matchId}`;
