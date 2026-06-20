@@ -27,4 +27,4 @@ Instead of a simple binary toggle, the Group Pop-up will feature a Three-Way Sli
 
 Additional minor bug:
 - Also for BEST 3RD-PLACE RANK table highlight the top 8 teams even if they have 0 points, since we have tie breaker in palce it won't be any issue.
-- Also bring back the option to fill out yellow and double yellow card in UI
+- Also bring back the option to fill out yellow and secondyellow card in UI
