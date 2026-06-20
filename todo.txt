@@ -23,6 +23,11 @@ Suggestion: For three way slider to lock the result, only if the the default val
 Instead of a simple binary toggle, the Group Pop-up will feature a Three-Way Slider / Segmented Control (Upcoming ↔ Open ↔ Locked).
 - If the default status is LOCKED: The slider is disabled/frozen. The user cannot accidentally toggle it back to Open or Upcoming.
 - If the default status is UPCOMING or OPEN: The user can freely toggle back and forth between these three states.
+
+By default value of 'upcoming' and 'open' matches should be empty not 0.
+----------------------------------------------------------------------------------------------------
+
+Need to add a i symbol for group stage ranking so that user know the tie breaker rules and understand it properly, do not place it next to each group. Instead palce it at group header next to 'TOP 2 ADVANCE + BEST 8 THIRDS'
 ----------------------------------------------------------------------------------------------------
 
 Additional minor bug:

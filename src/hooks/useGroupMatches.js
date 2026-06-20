@@ -46,7 +46,7 @@ export function useGroupMatches() {
       ...prev,
       [matchId]: {
         ...prev[matchId],
-        [field]: val === '' ? '' : parseInt(val, 10) || 0
+        [field]: field === 'status' ? val : (val === '' ? '' : parseInt(val, 10) || 0)
       }
     }));
   };

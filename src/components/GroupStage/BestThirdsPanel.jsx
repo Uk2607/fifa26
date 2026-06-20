@@ -15,7 +15,7 @@ export default function BestThirdsPanel({ bestThirdsRanking }) {
 
       <div className="space-y-1">
         {bestThirdsRanking.map((t, idx) => {
-          const isQualified = idx < 8 && t.pts > 0;
+          const isQualified = idx < 8;
           return (
             <div
               key={t.code}

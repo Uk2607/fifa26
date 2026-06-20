@@ -26,7 +26,7 @@ function computeH2H(tiedCodes, groupName, teamsList, groupMatches) {
     const t2Code = teamsList[pairing.t2];
 
     // Only include matches where BOTH teams are in the tied subset
-    if (match && match.score1 !== '' && match.score2 !== '' &&
+    if (match && match.status !== 'upcoming' && match.score1 !== '' && match.score2 !== '' &&
         tiedSet.has(t1Code) && tiedSet.has(t2Code)) {
       const s1 = Number(match.score1);
       const s2 = Number(match.score2);
@@ -130,7 +130,7 @@ export function useStandings(groupMatches) {
         const id = `G-${gName}-${idx}`;
         const match = groupMatches[id];
 
-        if (match && match.score1 !== '' && match.score2 !== '') {
+        if (match && match.status !== 'upcoming' && match.score1 !== '' && match.score2 !== '') {
           const s1 = Number(match.score1);
           const s2 = Number(match.score2);
           const stats1 = standings[gName].find(t => t.code === teamsList[pairing.t1]);
