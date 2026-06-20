@@ -55,11 +55,11 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
       >
         {/* Modal */}
         <div
-          className="bg-slate-900/95 backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl shadow-black/40 w-full max-w-[480px] overflow-hidden"
+          className="bg-slate-900/95 backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl shadow-black/40 w-full max-w-[480px] max-h-[95vh] flex flex-col overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
+          <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
             <div className="flex items-center gap-2.5">
               <div className="w-7 h-7 bg-emerald-500/10 rounded-lg flex items-center justify-center text-sm font-black text-emerald-400 border border-emerald-500/20">
                 {groupName}
@@ -87,7 +87,7 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
           </div>
 
           {/* Fixtures */}
-          <div className="p-3 space-y-2">
+          <div className="p-3 space-y-2 overflow-y-auto min-h-0">
             {GROUP_MATCH_PAIRINGS
               .map((match, idx) => ({ match, idx, matchNum: GROUP_MATCH_NUMBERS[`G-${groupName}-${idx}`] || 0 }))
               .sort((a, b) => a.matchNum - b.matchNum)
@@ -127,7 +127,7 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                     </div>
 
                     {/* Score row */}
-                    <div className={`flex items-center justify-center px-3 pt-3 pb-1 rounded-t-lg border border-b-0 ${borderColor} ${bgColor}`}>
+                    <div className={`flex items-center justify-center px-3 pt-2 pb-1 rounded-t-lg border border-b-0 ${borderColor} ${bgColor}`}>
                       {/* Team 1 — right aligned, fixed width */}
                       <div className="flex items-center gap-1.5 justify-end w-[140px]">
                         <span className="text-[10px] truncate text-slate-300 text-right font-medium">{TEAMS[t1Code]?.name}</span>
@@ -173,7 +173,7 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                     </div>
 
                     {/* Status Toggle Row */}
-                    <div className={`flex items-center justify-center border-x ${borderColor} ${bgColor} pb-2`}>
+                    <div className={`flex items-center justify-center border-x ${borderColor} ${bgColor} pb-1`}>
                       <div className="flex items-center bg-slate-900/80 rounded-full border border-slate-800/80 p-0.5">
                         {['upcoming', 'open', 'locked'].map(s => {
                           const isSelected = state.status === s;
@@ -198,7 +198,7 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                     </div>
 
                     {/* Card inputs row */}
-                    <div className={`flex flex-col items-center justify-center gap-1.5 px-2 py-1.5 rounded-b-lg border border-t-0 ${borderColor} ${isLocked ? 'bg-amber-950/5' : isOpen ? 'bg-emerald-950/5' : 'bg-slate-950/80'}`}>
+                    <div className={`flex flex-col items-center justify-center gap-1 px-2 py-1 rounded-b-lg border border-t-0 ${borderColor} ${isLocked ? 'bg-amber-950/5' : isOpen ? 'bg-emerald-950/5' : 'bg-slate-950/80'}`}>
                       <div className="flex items-center justify-between w-full">
                         {/* Team 1 Cards */}
                         <div className="flex items-center gap-2">
@@ -223,7 +223,7 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
           </div>
 
           {/* Footer legend */}
-          <div className="flex items-center justify-center gap-4 px-4 py-2.5 border-t border-slate-800/60 bg-slate-950/40 flex-wrap">
+          <div className="flex-shrink-0 flex items-center justify-center gap-4 px-4 py-2 border-t border-slate-800/60 bg-slate-950/40 flex-wrap">
             <div className="flex items-center gap-1">
               <span className="w-2.5 h-3.5 rounded-[2px] bg-yellow-500 inline-block" />
               <span className="text-[8px] text-slate-500">Yellow (−1)</span>
