@@ -147,9 +147,9 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "open"
   },
   "G-E-3": { // Germany vs Ivory Coast
-    score1: 0, score2: 0,
+    score1: 2, score2: 1,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, status: "locked"
   },
   "G-E-4": { // Germany vs Ecuador
     score1: 0, score2: 0,
@@ -164,9 +164,9 @@ export const PRESET_SCORES = {
 
   // Group F
   "G-F-0": { // Netherlands vs Sweden
-    score1: 0, score2: 0,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 5, score2: 1,
+    yellow1: 0, yellow2: 3, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-F-1": { // Japan vs Tunisia
     score1: 0, score2: 0,
