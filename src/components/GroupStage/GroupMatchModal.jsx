@@ -2,6 +2,7 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 import { GROUPS_CONFIG, GROUP_MATCH_PAIRINGS, GROUP_MATCH_NUMBERS } from '../../constants/groups';
+import { PRESET_SCORES } from '../../constants/presetScores';
 
 // ── Tiny card input ──────────────────────────────────────────────────────────
 function CardInput({ color, label, value, field, matchId, onScoreChange, disabled, reversed }) {
@@ -20,7 +21,8 @@ function CardInput({ color, label, value, field, matchId, onScoreChange, disable
       type="text"
       inputMode="numeric"
       pattern="[0-9]*"
-      value={value || 0}
+      placeholder="0"
+      value={value === 0 ? '' : value}
       disabled={disabled}
       onChange={(e) => onScoreChange(matchId, field, e.target.value)}
       className={`w-5 h-5 rounded text-center text-[8px] font-bold outline-none transition-all ${disabled
@@ -170,17 +172,49 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                       </div>
                     </div>
 
-                    {/* Card inputs row */}
-                    <div className={`flex items-center justify-center gap-4 px-2 py-1.5 rounded-b-lg border border-t-0 ${borderColor} ${isLocked ? 'bg-amber-950/5' : isOpen ? 'bg-emerald-950/5' : 'bg-slate-950/80'
-                      }`}>
-                      <div className="flex items-center gap-1 text-[7px] text-slate-500">
-                        <CardInput color="#ef4444" label="Direct Red Card" value={state.red1} field="red1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
+                    {/* Status Toggle Row */}
+                    <div className={`flex items-center justify-center border-x ${borderColor} ${bgColor} pb-2`}>
+                      <div className="flex items-center bg-slate-900/80 rounded-full border border-slate-800/80 p-0.5">
+                        {['upcoming', 'open', 'locked'].map(s => {
+                          const isSelected = state.status === s;
+                          const isPresetLocked = PRESET_SCORES[id]?.status === 'locked';
+                          const isDisabled = isPresetLocked && s !== 'locked';
+                          return (
+                            <button
+                              key={s}
+                              disabled={isDisabled}
+                              onClick={() => onScoreChange(id, 'status', s)}
+                              className={`px-2.5 py-0.5 text-[8px] font-bold rounded-full uppercase transition-all ${
+                                isSelected 
+                                  ? (s === 'locked' ? 'bg-amber-500/20 text-amber-400' : s === 'open' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-300')
+                                  : 'text-slate-500 hover:text-slate-400'
+                              } ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                            >
+                              {s}
+                            </button>
+                          );
+                        })}
                       </div>
+                    </div>
 
-                      <span className="text-slate-800 text-[8px]">│</span>
+                    {/* Card inputs row */}
+                    <div className={`flex flex-col items-center justify-center gap-1.5 px-2 py-1.5 rounded-b-lg border border-t-0 ${borderColor} ${isLocked ? 'bg-amber-950/5' : isOpen ? 'bg-emerald-950/5' : 'bg-slate-950/80'}`}>
+                      <div className="flex items-center justify-between w-full">
+                        {/* Team 1 Cards */}
+                        <div className="flex items-center gap-2">
+                          <CardInput color="#eab308" label="Yellow Card" value={state.yellow1} field="yellow1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
+                          <CardInput color="#f59e0b" label="Second Yellow" value={state.secondYellow1} field="secondYellow1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
+                          <CardInput color="#ef4444" label="Direct Red" value={state.red1} field="red1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
+                        </div>
+                        
+                        <span className="text-slate-800 text-[8px]">│</span>
 
-                      <div className="flex items-center gap-1 text-[7px] text-slate-500">
-                        <CardInput color="#ef4444" label="Direct Red Card" value={state.red2} field="red2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} reversed />
+                        {/* Team 2 Cards */}
+                        <div className="flex items-center gap-2">
+                          <CardInput color="#ef4444" label="Direct Red" value={state.red2} field="red2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} reversed />
+                          <CardInput color="#f59e0b" label="Second Yellow" value={state.secondYellow2} field="secondYellow2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} reversed />
+                          <CardInput color="#eab308" label="Yellow Card" value={state.yellow2} field="yellow2" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} reversed />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -189,12 +223,20 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
           </div>
 
           {/* Footer legend */}
-          <div className="flex items-center justify-center gap-5 px-4 py-2.5 border-t border-slate-800/60 bg-slate-950/40">
+          <div className="flex items-center justify-center gap-4 px-4 py-2.5 border-t border-slate-800/60 bg-slate-950/40 flex-wrap">
             <div className="flex items-center gap-1">
-              <span className="w-2.5 h-3.5 rounded-[2px] bg-red-500 inline-block" />
-              <span className="text-[8px] text-slate-500">Red (−4 FP)</span>
+              <span className="w-2.5 h-3.5 rounded-[2px] bg-yellow-500 inline-block" />
+              <span className="text-[8px] text-slate-500">Yellow (−1)</span>
             </div>
             <div className="flex items-center gap-1">
+              <span className="w-2.5 h-3.5 rounded-[2px] bg-amber-500 inline-block" />
+              <span className="text-[8px] text-slate-500">2nd Yellow (−3)</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <span className="w-2.5 h-3.5 rounded-[2px] bg-red-500 inline-block" />
+              <span className="text-[8px] text-slate-500">Red (−4)</span>
+            </div>
+            <div className="flex items-center gap-1 ml-4">
               <span className="w-3 h-2 rounded-sm border border-amber-500/40 bg-amber-950/20 inline-block" />
               <span className="text-[8px] text-slate-500">Locked</span>
             </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Info } from 'lucide-react';
 import { GROUPS_CONFIG } from './constants/groups';
 import { useGroupMatches } from './hooks/useGroupMatches';
 import { useKnockoutMatches } from './hooks/useKnockoutMatches';
@@ -17,6 +18,7 @@ import Footer from './components/Footer';
 export default function App() {
   const [modalGroup, setModalGroup] = useState(null);
   const [showDeveloperGuide, setShowDeveloperGuide] = useState(false);
+  const [showTiebreaker, setShowTiebreaker] = useState(false);
 
   // State hooks
   const { groupMatches, handleGroupScoreChange, resetGroupMatches, randomizeGroupMatches } = useGroupMatches();
@@ -70,8 +72,40 @@ export default function App() {
                 2026 World Cup Group Stages
               </h2>
             </div>
-            <div className="text-[10px] bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg text-slate-400 font-semibold uppercase">
-              Top 2 Advance + Best 8 Thirds
+            <div className="flex items-center gap-2">
+              <div className="text-[10px] bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg text-slate-400 font-semibold uppercase">
+                Top 2 Advance + Best 8 Thirds
+              </div>
+              
+              <div className="relative">
+                <button
+                  onClick={(e) => { e.stopPropagation(); setShowTiebreaker(prev => !prev); }}
+                  onMouseEnter={() => setShowTiebreaker(true)}
+                  onMouseLeave={() => setShowTiebreaker(false)}
+                  className="w-5 h-5 rounded-full flex items-center justify-center bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 hover:border-slate-500 transition-all cursor-help"
+                  title="Ranking criteria"
+                >
+                  <Info className="w-3.5 h-3.5 text-slate-400" />
+                </button>
+                {showTiebreaker && (
+                  <div
+                    className="absolute right-0 top-8 z-50 w-64 bg-slate-900 border border-slate-700 rounded-lg shadow-xl shadow-black/50 p-3 text-left"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <p className="text-[9px] font-black text-emerald-400 uppercase tracking-wider mb-2">Ranking Criteria (in order)</p>
+                    <ol className="text-[9px] text-slate-300 space-y-1 list-decimal list-inside">
+                      <li>Points <span className="text-slate-500">(3W, 1D, 0L)</span></li>
+                      <li>Head-to-head points</li>
+                      <li>Head-to-head goal difference</li>
+                      <li>Head-to-head goals scored</li>
+                      <li>Overall goal difference</li>
+                      <li>Overall goals scored</li>
+                      <li>Fair Play score <span className="text-slate-500">(YC −1, 2Y −3, RC −4)</span></li>
+                      <li>FIFA ranking <span className="text-slate-500">(alphabetical fallback)</span></li>
+                    </ol>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 

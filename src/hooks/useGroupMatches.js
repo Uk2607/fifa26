@@ -12,9 +12,10 @@ function initGroupMatches() {
       const id = `G-${gName}-${idx}`;
       const preset = PRESET_SCORES[id];
       if (preset) {
+        const isNotLocked = preset.status === 'upcoming' || preset.status === 'open';
         initial[id] = {
-          score1: preset.score1,
-          score2: preset.score2,
+          score1: (isNotLocked && preset.score1 === 0) ? '' : preset.score1,
+          score2: (isNotLocked && preset.score2 === 0) ? '' : preset.score2,
           status: preset.status || 'upcoming',
           yellow1: preset.yellow1 || 0,
           yellow2: preset.yellow2 || 0,

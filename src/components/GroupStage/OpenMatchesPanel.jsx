@@ -20,7 +20,8 @@ function CardInput({ color, label, value, field, matchId, onScoreChange, disable
       type="text"
       inputMode="numeric"
       pattern="[0-9]*"
-      value={value || 0}
+      placeholder="0"
+      value={value === 0 ? '' : value}
       disabled={disabled}
       onChange={(e) => onScoreChange(matchId, field, e.target.value)}
       className={`w-4 h-4 rounded text-center text-[7px] font-bold outline-none transition-all ${disabled
@@ -147,13 +148,17 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
             </div>
 
             {/* Card inputs row */}
-            <div className="flex items-center justify-center gap-2 px-1.5 py-0.5 rounded-b border border-t-0 bg-emerald-950/5 border-emerald-500/20">
-              <div className="flex items-center gap-0.5 text-[7px] text-slate-500">
+            <div className="flex items-center justify-center gap-2 px-1.5 py-1 rounded-b border border-t-0 bg-emerald-950/5 border-emerald-500/20">
+              <div className="flex items-center gap-1 text-[7px] text-slate-500">
+                <CardInput color="#eab308" label="Yellow Card" value={state.yellow1} field="yellow1" matchId={id} onScoreChange={onScoreChange} disabled={false} />
+                <CardInput color="#f59e0b" label="Second Yellow" value={state.secondYellow1} field="secondYellow1" matchId={id} onScoreChange={onScoreChange} disabled={false} />
                 <CardInput color="#ef4444" label="Direct Red Card" value={state.red1} field="red1" matchId={id} onScoreChange={onScoreChange} disabled={false} />
               </div>
-              <span className="text-slate-800 text-[7px]">│</span>
-              <div className="flex items-center gap-0.5 text-[7px] text-slate-500">
+              <span className="text-slate-800 text-[7px] mx-1">│</span>
+              <div className="flex items-center gap-1 text-[7px] text-slate-500">
                 <CardInput color="#ef4444" label="Direct Red Card" value={state.red2} field="red2" matchId={id} onScoreChange={onScoreChange} disabled={false} reversed />
+                <CardInput color="#f59e0b" label="Second Yellow" value={state.secondYellow2} field="secondYellow2" matchId={id} onScoreChange={onScoreChange} disabled={false} reversed />
+                <CardInput color="#eab308" label="Yellow Card" value={state.yellow2} field="yellow2" matchId={id} onScoreChange={onScoreChange} disabled={false} reversed />
               </div>
             </div>
           </div>
@@ -161,10 +166,18 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center justify-center gap-2 pt-1.5 border-t border-slate-900/50 mt-2">
-        <div className="flex items-center gap-0.5">
+      <div className="flex items-center justify-center gap-3 pt-2 border-t border-slate-900/50 mt-2 flex-wrap">
+        <div className="flex items-center gap-1">
+          <span className="w-2 h-3 rounded-[2px] bg-yellow-500 inline-block" />
+          <span className="text-[7px] text-slate-500">Yellow (−1)</span>
+        </div>
+        <div className="flex items-center gap-1">
+          <span className="w-2 h-3 rounded-[2px] bg-amber-500 inline-block" />
+          <span className="text-[7px] text-slate-500">2nd Y (−3)</span>
+        </div>
+        <div className="flex items-center gap-1">
           <span className="w-2 h-3 rounded-[2px] bg-red-500 inline-block" />
-          <span className="text-[7px] text-slate-500">Red (−4 FP)</span>
+          <span className="text-[7px] text-slate-500">Red (−4)</span>
         </div>
       </div>
     </div>

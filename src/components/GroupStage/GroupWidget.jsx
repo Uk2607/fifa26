@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Info } from 'lucide-react';
+import React from 'react';
 import { TEAMS } from '../../constants/teams';
 
 // ================================================================================
@@ -12,8 +11,6 @@ export default function GroupWidget({
   onToggle,
   bestThirdsQualified
 }) {
-  const [showTiebreaker, setShowTiebreaker] = useState(false);
-
   return (
     <div
       className="rounded-xl border transition-all duration-300 overflow-hidden border-slate-800/80 hover:border-slate-700 bg-slate-900/30 hover:bg-slate-900/50 cursor-pointer group"
@@ -27,36 +24,6 @@ export default function GroupWidget({
             {groupName}
           </div>
           <span className="font-extrabold text-slate-200 text-xs tracking-wider uppercase">Group {groupName}</span>
-          {/* ⓘ Tiebreaker Info Icon */}
-          <div className="relative">
-            <button
-              onClick={(e) => { e.stopPropagation(); setShowTiebreaker(prev => !prev); }}
-              onMouseEnter={() => setShowTiebreaker(true)}
-              onMouseLeave={() => setShowTiebreaker(false)}
-              className="w-4 h-4 rounded-full flex items-center justify-center bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 hover:border-slate-500 transition-all"
-              title="Ranking criteria"
-            >
-              <Info className="w-2.5 h-2.5 text-slate-400" />
-            </button>
-            {showTiebreaker && (
-              <div
-                className="absolute left-1/2 -translate-x-1/2 top-6 z-50 w-56 bg-slate-900 border border-slate-700 rounded-lg shadow-xl shadow-black/50 p-2.5 text-left"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <p className="text-[8px] font-black text-emerald-400 uppercase tracking-wider mb-1.5">Ranking Criteria (in order)</p>
-                <ol className="text-[8px] text-slate-300 space-y-0.5 list-decimal list-inside">
-                  <li>Points <span className="text-slate-500">(3W, 1D, 0L)</span></li>
-                  <li>Head-to-head points</li>
-                  <li>Head-to-head goal difference</li>
-                  <li>Head-to-head goals scored</li>
-                  <li>Overall goal difference</li>
-                  <li>Overall goals scored</li>
-                  <li>Fair Play score <span className="text-slate-500">(YC −1, 2Y −3, RC −4)</span></li>
-                  <li>FIFA ranking <span className="text-slate-500">(alphabetical fallback)</span></li>
-                </ol>
-              </div>
-            )}
-          </div>
         </div>
         <div className="flex items-center gap-1.5">
           <div className="flex -space-x-1">

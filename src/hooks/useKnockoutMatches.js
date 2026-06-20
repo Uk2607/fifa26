@@ -6,12 +6,14 @@ function initKoMatches() {
   for (let mId = 73; mId <= 104; mId++) {
     const id = `KO-${mId}`;
     if (PRESET_SCORES[id]) {
+      const preset = PRESET_SCORES[id];
+      const isNotLocked = preset.status === 'upcoming' || preset.status === 'open';
       initial[id] = {
-        score1: PRESET_SCORES[id].score1,
-        score2: PRESET_SCORES[id].score2,
-        penalty1: PRESET_SCORES[id].penalty1 || '',
-        penalty2: PRESET_SCORES[id].penalty2 || '',
-        status: PRESET_SCORES[id].status || 'upcoming'
+        score1: (isNotLocked && preset.score1 === 0) ? '' : preset.score1,
+        score2: (isNotLocked && preset.score2 === 0) ? '' : preset.score2,
+        penalty1: preset.penalty1 || '',
+        penalty2: preset.penalty2 || '',
+        status: preset.status || 'upcoming'
       };
     } else {
       initial[id] = { score1: '', score2: '', penalty1: '', penalty2: '', status: 'upcoming' };
@@ -30,7 +32,7 @@ export function useKnockoutMatches() {
       ...prev,
       [koId]: {
         ...prev[koId],
-        [field]: val === '' ? '' : parseInt(val, 10) || 0
+        [field]: field === 'status' ? val : (val === '' ? '' : parseInt(val, 10) || 0)
       }
     }));
   };
