@@ -78,7 +78,7 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-C-2": { // Scotland vs Haiti
-    score1: 0, score2: 0,
+    score1: 1, score2: 0,
     yellow1: 3, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "locked"
   },
@@ -260,7 +260,7 @@ export const PRESET_SCORES = {
 
   // Group I
   "G-I-0": { // France vs Senegal
-    score1: 3, score2: 0,
+    score1: 3, score2: 1,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "locked"
   },
