@@ -31,6 +31,7 @@ export default function BestThirdsPanel({ bestThirdsRanking }) {
                 </span>
                 <span className="text-[10px] leading-none">{TEAMS[t.code]?.emoji}</span>
                 <span className="font-bold text-[9px] text-slate-300">{TEAMS[t.code]?.name}</span>
+                <span className="text-[8px] text-slate-400">({t.groupName})</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="text-[8px] font-bold text-slate-400">
@@ -40,8 +41,8 @@ export default function BestThirdsPanel({ bestThirdsRanking }) {
                   )}
                 </span>
                 <span className={`text-[7px] px-1 py-0.5 rounded font-black uppercase tracking-wider ${isQualified
-                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                    : 'bg-slate-900 text-slate-500'
+                  ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                  : 'bg-slate-900 text-slate-500'
                   }`}>
                   {isQualified ? 'IN' : 'OUT'}
                 </span>
