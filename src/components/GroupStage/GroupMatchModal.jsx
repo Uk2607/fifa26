@@ -64,10 +64,10 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
         >
           {/* Card */}
           <div
-            className={`relative w-full h-full md:h-auto flex flex-col md:flex-row md:items-center gap-4 transition-transform duration-700 [transform-style:preserve-3d] ${isFlipped ? 'max-md:[transform:rotateY(180deg)]' : ''}`}
+            className="relative w-full h-full md:h-auto flex flex-col md:flex-row md:items-center justify-center gap-4"
           >
             {/* ── FRONT FACE: FIXTURES (Left on Desktop) ── */}
-            <div className={`w-full md:w-[480px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col p-[1px] bg-gradient-to-br from-emerald-500/40 via-slate-800/40 to-blue-500/40 rounded-2xl shadow-2xl transition-opacity duration-500 ${isFlipped ? 'max-md:opacity-0 max-md:pointer-events-none' : ''}`}>
+            <div className={`w-full md:w-[480px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex-col p-[1px] bg-gradient-to-br from-emerald-500/40 via-slate-800/40 to-slate-700/40 rounded-2xl shadow-2xl ${isFlipped ? 'hidden md:flex' : 'flex'}`}>
               <div className="flex-1 flex flex-col min-h-0 bg-slate-900/95 backdrop-blur-xl rounded-[15px] overflow-hidden">
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
@@ -268,32 +268,31 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                   </div>
                 </div>
               </div>
-              </div>
             </div>
 
             {/* ── BACK FACE: TABLE (Right on Desktop) ── */}
-            <div className={`w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col p-[1px] bg-gradient-to-br from-blue-500/40 via-indigo-800/40 to-sky-500/40 rounded-2xl shadow-2xl max-md:absolute max-md:inset-0 max-md:[transform:rotateY(180deg)] transition-opacity duration-500 ${!isFlipped ? 'max-md:opacity-0 max-md:pointer-events-none' : ''}`}>
-              <div className="flex-1 flex flex-col min-h-0 bg-blue-900/60 backdrop-blur-xl rounded-[15px] overflow-hidden">
+            <div className={`w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl ${!isFlipped ? 'hidden md:flex' : 'flex'}`}>
+              <div className="flex-1 flex flex-col min-h-0 bg-slate-900/95 backdrop-blur-xl rounded-[15px] overflow-hidden">
                 {/* Header */}
-                <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-blue-700/40 bg-blue-900/40">
-                  <h3 className="text-sm font-black uppercase text-blue-200 tracking-wider">Live Table</h3>
-                  <button onClick={onClose} className="md:hidden ml-1 w-7 h-7 rounded-lg bg-blue-900/60 hover:bg-blue-800/60 border border-blue-700/40 flex items-center justify-center transition-all hover:border-blue-600">
-                    <X className="w-3.5 h-3.5 text-blue-400" />
+                <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
+                  <h3 className="text-sm font-black uppercase text-slate-200 tracking-wider">Live Table</h3>
+                  <button onClick={onClose} className="md:hidden ml-1 w-7 h-7 rounded-lg bg-slate-800/60 hover:bg-slate-700/60 border border-slate-700/40 flex items-center justify-center transition-all hover:border-slate-600">
+                    <X className="w-3.5 h-3.5 text-slate-400" />
                   </button>
                 </div>
 
               {/* Mobile Tabs */}
-              <div className="md:hidden flex border-b border-blue-700/40 flex-shrink-0">
+              <div className="md:hidden flex border-b border-slate-800/60 flex-shrink-0">
                 <button className="flex-1 py-2 text-xs font-bold text-slate-400 hover:text-slate-300 transition-colors" onClick={() => setIsFlipped(false)}>Fixtures</button>
-                <button className="flex-1 py-2 text-xs font-bold text-blue-400 bg-blue-900/30 border-b-2 border-blue-500">Live Table</button>
+                <button className="flex-1 py-2 text-xs font-bold text-emerald-400 bg-emerald-950/20 border-b-2 border-emerald-500">Live Table</button>
               </div>
 
               {/* Table List */}
               <div className="flex-1 p-4 overflow-y-auto overscroll-contain min-h-0">
-                <div className="overflow-x-auto rounded-lg border border-blue-700/30 bg-blue-500/10">
+                <div className="overflow-x-auto rounded-lg border border-slate-800 bg-slate-950/40">
                   <table className="w-full text-xs text-left min-w-[320px]">
                     <thead>
-                      <tr className="bg-blue-900/40 text-blue-300 border-b border-blue-800/50">
+                      <tr className="bg-slate-900/60 text-slate-400 border-b border-slate-800">
                         <th className="py-2 pl-3 font-semibold uppercase text-[10px]">Team</th>
                         <th className="py-2 text-center font-semibold text-[10px]" title="Played">P</th>
                         <th className="py-2 text-center font-semibold text-[10px]" title="Won">W</th>
@@ -315,44 +314,44 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                         return (
                           <tr
                             key={team.code}
-                            className={`border-b border-blue-800/30 last:border-0 transition-all ${isFirstOrSecond ? 'bg-emerald-900/20 hover:bg-emerald-900/30' : isBestThird ? 'bg-blue-800/30 hover:bg-blue-800/40' : 'hover:bg-blue-800/20'}`}
+                            className={`border-b border-slate-800/60 last:border-0 transition-all ${isFirstOrSecond ? 'bg-emerald-900/20 hover:bg-emerald-900/30' : isBestThird ? 'bg-blue-900/20 hover:bg-blue-900/30' : 'hover:bg-slate-800/30'}`}
                           >
                             <td className="py-2.5 flex items-center gap-2 font-medium pl-3">
                               <span
-                                className={`w-1.5 h-3 rounded-full flex-shrink-0 ${isFirstOrSecond ? "bg-emerald-500" : isBestThird ? "bg-blue-400" : "bg-blue-800"}`}
+                                className={`w-1.5 h-3 rounded-full flex-shrink-0 ${isFirstOrSecond ? "bg-emerald-500" : isBestThird ? "bg-blue-400" : "bg-slate-700"}`}
                               />
                               <span className={`text-sm ${isFirstOrSecond ? 'drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]' : isBestThird ? 'drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : ''}`}>
                                 {TEAMS[team.code]?.emoji}
                               </span>
-                              <span className={`font-bold truncate max-w-[100px] text-[11px] ${isFirstOrSecond ? 'text-emerald-50' : isBestThird ? 'text-blue-50' : 'text-blue-100'}`}>
+                              <span className={`font-bold truncate max-w-[100px] text-[11px] ${isFirstOrSecond ? 'text-emerald-400' : isBestThird ? 'text-blue-400' : 'text-slate-300'}`}>
                                 {TEAMS[team.code]?.name}
                               </span>
                             </td>
-                            <td className="py-2.5 text-center font-bold text-blue-300/70">
+                            <td className="py-2.5 text-center font-bold text-slate-400">
                               {team.played}
                             </td>
-                            <td className="py-2.5 text-center font-bold text-blue-300/70">
+                            <td className="py-2.5 text-center font-bold text-slate-400">
                               {team.won}
                             </td>
-                            <td className="py-2.5 text-center font-bold text-blue-300/70">
+                            <td className="py-2.5 text-center font-bold text-slate-400">
                               {team.drawn}
                             </td>
-                            <td className="py-2.5 text-center font-bold text-blue-300/70">
+                            <td className="py-2.5 text-center font-bold text-slate-400">
                               {team.lost}
                             </td>
-                            <td className="py-2.5 text-center font-bold text-blue-200">
+                            <td className="py-2.5 text-center font-bold text-slate-300">
                               {team.gf}
                             </td>
-                            <td className="py-2.5 text-center font-bold text-blue-200">
+                            <td className="py-2.5 text-center font-bold text-slate-300">
                               {team.ga}
                             </td>
                             <td
-                              className={`py-2.5 text-center font-bold ${team.gd >= 0 ? "text-blue-200" : "text-red-400"}`}
+                              className={`py-2.5 text-center font-bold ${team.gd >= 0 ? "text-slate-300" : "text-red-400"}`}
                             >
                               {team.gd >= 0 ? `+${team.gd}` : team.gd}
                             </td>
                             <td
-                              className={`py-2.5 text-center font-bold text-[10px] ${team.fairPlay < 0 ? "text-amber-400" : "text-blue-400/50"}`}
+                              className={`py-2.5 text-center font-bold text-[10px] ${team.fairPlay < 0 ? "text-amber-400" : "text-slate-500"}`}
                             >
                               {team.fairPlay || 0}
                             </td>
@@ -370,7 +369,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                 </div>
 
                 {/* Qualification Legend */}
-                <div className="mt-4 flex flex-wrap gap-3 items-center justify-center text-[10px] font-medium text-blue-300/70 bg-blue-900/20 p-2 rounded-lg border border-blue-800/50">
+                <div className="mt-4 flex flex-wrap gap-3 items-center justify-center text-[10px] font-medium text-slate-400 bg-slate-900/40 p-2 rounded-lg border border-slate-800/60">
                   <div className="flex items-center gap-1.5">
                     <span className="w-1.5 h-3 bg-emerald-500 rounded-full" />
                     <span>Top 2 Advance</span>
@@ -381,6 +380,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                   </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
