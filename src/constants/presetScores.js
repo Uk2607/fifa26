@@ -169,9 +169,9 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-F-1": { // Japan vs Tunisia
-    score1: 2, score2: 0,
+    score1: 4, score2: 0,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, status: "locked"
   },
   "G-F-2": { // Tunisia vs Sweden
     score1: 1, score2: 5,
@@ -218,12 +218,12 @@ export const PRESET_SCORES = {
   "G-G-4": { // Belgium vs Iran
     score1: 0, score2: 0,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-G-5": { // New Zealand vs Egypt
     score1: 0, score2: 0,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
 
   // Group H
@@ -240,12 +240,12 @@ export const PRESET_SCORES = {
   "G-H-2": { // Uruguay vs Cape Verde
     score1: 0, score2: 0,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-H-3": { // Spain vs Saudi Arabia
     score1: 0, score2: 0,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-H-4": { // Spain vs Uruguay
     score1: 0, score2: 0,
