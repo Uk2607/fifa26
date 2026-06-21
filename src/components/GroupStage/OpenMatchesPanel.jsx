@@ -69,29 +69,38 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
 
   if (openMatches.length === 0) {
     return (
-      <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-3">
-        <div className="flex items-center gap-1.5 border-b border-slate-800 pb-2 mb-2">
-          <Zap className="w-3.5 h-3.5 text-emerald-400" />
-          <div>
-            <h3 className="text-[10px] font-black uppercase text-slate-200 tracking-wider">Open Matches</h3>
+      <div className="p-[1px] bg-gradient-to-br from-slate-800/60 via-slate-800/20 to-slate-800/60 rounded-xl shadow-lg">
+        <div className="bg-slate-900/80 rounded-[11px] p-3">
+          <div className="flex items-center gap-1.5 border-b border-slate-800 pb-2 mb-2">
+            <Zap className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <h3 className="text-[10px] font-black uppercase text-slate-200 tracking-wider">Open Matches</h3>
+            </div>
             <p className="text-[8px] text-slate-500">Quick access predictions</p>
           </div>
+          <p className="text-[9px] text-slate-500 text-center py-3">No open matches available right now.</p>
         </div>
-        <p className="text-[9px] text-slate-500 text-center py-3">No open matches available right now.</p>
       </div>
     );
   }
 
   return (
-    <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-3">
-      <div className="flex items-center gap-1.5 border-b border-slate-800 pb-2 mb-2">
-        <div className="relative">
-          <Zap className="w-3.5 h-3.5 text-emerald-400" />
-          <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping" />
-          <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-emerald-400 rounded-full" />
-        </div>
-        <div>
-          <h3 className="text-[10px] font-black uppercase text-slate-200 tracking-wider">Open Matches</h3>
+    <div className="p-[1px] bg-gradient-to-br from-emerald-500/40 via-slate-800/40 to-blue-500/40 rounded-xl shadow-lg">
+      <div className="bg-slate-900/80 rounded-[11px] p-3">
+        <div className="flex items-center gap-1.5 border-b border-slate-800 pb-2 mb-2">
+          <div className="relative">
+            <Zap className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping" />
+            <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-emerald-400 rounded-full" />
+          </div>
+          <div className="mb-4">
+            <div className="flex items-center gap-2">
+              <h3 className="text-[10px] font-black uppercase text-slate-200 tracking-wider">Open Matches</h3>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+            </div>
           <p className="text-[8px] text-slate-500">Quick access — {openMatches.length} match{openMatches.length !== 1 ? 'es' : ''} available</p>
         </div>
       </div>
@@ -179,6 +188,7 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
           <span className="w-2 h-3 rounded-[2px] bg-red-500 inline-block" />
           <span className="text-[7px] text-slate-500">Red (−4)</span>
         </div>
+      </div>
       </div>
     </div>
   );

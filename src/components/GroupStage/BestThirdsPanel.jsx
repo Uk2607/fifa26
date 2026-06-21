@@ -4,8 +4,9 @@ import { TEAMS } from '../../constants/teams';
 
 export default function BestThirdsPanel({ bestThirdsRanking }) {
   return (
-    <div className="bg-slate-900/50 rounded-xl border border-slate-800 p-3">
-      <div className="flex items-center gap-1.5 border-b border-slate-800 pb-2 mb-2">
+    <div className="p-[1px] bg-gradient-to-br from-amber-500/30 via-slate-800/40 to-slate-800/40 rounded-xl shadow-lg">
+      <div className="bg-slate-900/80 rounded-[11px] p-3">
+        <div className="flex items-center gap-1.5 border-b border-slate-800 pb-2 mb-2">
         <Award className="w-3.5 h-3.5 text-amber-400" />
         <div>
           <h3 className="text-[10px] font-black uppercase text-slate-200 tracking-wider">Best 3rd-Place Rank</h3>
@@ -50,6 +51,7 @@ export default function BestThirdsPanel({ bestThirdsRanking }) {
             </div>
           );
         })}
+        </div>
       </div>
     </div>
   );

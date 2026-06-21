@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Trophy } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 import KnockoutMatchCard from './KnockoutMatchCard';
@@ -25,9 +25,10 @@ const RIGHT_QF = [99, 100];
 const RIGHT_SF = [102];
 
 // ================================================================================
+// ================================================================================
 // MATCH COLUMN — renders N matches evenly distributed vertically
 // ================================================================================
-function MatchColumn({ matches, getSeeding, koMatches, onScoreChange }) {
+function MatchColumn({ matches, getSeeding, koMatches, onScoreChange, hoveredTeamCode, onTeamHover, highlightedPath }) {
   return (
     <div style={{ width: MATCH_COL_WIDTH, display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
       {matches.map(matchId => {
@@ -43,6 +44,9 @@ function MatchColumn({ matches, getSeeding, koMatches, onScoreChange }) {
               team2={seeding?.t2}
               matchState={koMatches[`KO-${matchId}`]}
               onScoreChange={onScoreChange}
+              hoveredTeamCode={hoveredTeamCode}
+              onTeamHover={onTeamHover}
+              isPathHighlighted={highlightedPath ? highlightedPath.has(matchId) : false}
             />
           </div>
         );
@@ -150,6 +154,8 @@ export default function KnockoutBracket({
   onScoreChange,
   tournamentChampion
 }) {
+  const [hoveredTeamCode, setHoveredTeamCode] = useState(null);
+
   // Unified seeding lookup across all rounds
   const getSeeding = (matchId) => {
     const id = Number(matchId);
@@ -160,6 +166,75 @@ export default function KnockoutBracket({
     if (id >= 103 && id <= 104) return finalsSeeding[id];
     return null;
   };
+
+  // Calculate projected path for hovered team
+  const highlightedPath = useMemo(() => {
+    const path = new Set();
+    if (!hoveredTeamCode) return path;
+
+    const getMatchSeeding = (matchId) => {
+      const id = Number(matchId);
+      if (id >= 73 && id <= 88) return r32MatchesSeeding[id];
+      if (id >= 89 && id <= 96) return roundOf16Seeding[id];
+      if (id >= 97 && id <= 100) return quarterFinalsSeeding[id];
+      if (id >= 101 && id <= 102) return semiFinalsSeeding[id];
+      if (id >= 103 && id <= 104) return finalsSeeding[id];
+      return null;
+    };
+
+    let currentMatchId = null;
+    for (let id = 73; id <= 88; id++) {
+      const seeding = r32MatchesSeeding[id];
+      if (seeding?.t1 === hoveredTeamCode || seeding?.t2 === hoveredTeamCode) {
+        currentMatchId = id;
+        break;
+      }
+    }
+
+    if (!currentMatchId) return path;
+
+    while (currentMatchId) {
+      path.add(currentMatchId);
+
+      const matchState = koMatches[`KO-${currentMatchId}`];
+      if (matchState && matchState.score1 !== '' && matchState.score2 !== '') {
+        const s1 = Number(matchState.score1);
+        const s2 = Number(matchState.score2);
+        const p1 = matchState.penalty1 !== undefined && matchState.penalty1 !== '' ? Number(matchState.penalty1) : null;
+        const p2 = matchState.penalty2 !== undefined && matchState.penalty2 !== '' ? Number(matchState.penalty2) : null;
+
+        const seeding = getMatchSeeding(currentMatchId);
+        const isT1 = seeding?.t1 === hoveredTeamCode;
+        const isT2 = seeding?.t2 === hoveredTeamCode;
+
+        let won = false;
+        if (isT1) {
+          if (s1 > s2) won = true;
+          else if (s1 === s2 && p1 !== null && p2 !== null && p1 > p2) won = true;
+        } else if (isT2) {
+          if (s2 > s1) won = true;
+          else if (s1 === s2 && p1 !== null && p2 !== null && p2 > p1) won = true;
+        }
+
+        if (!won) {
+          if (currentMatchId === 101 || currentMatchId === 102) {
+            path.add(103);
+          }
+          break;
+        }
+      }
+
+      let nextId = null;
+      if (currentMatchId >= 73 && currentMatchId <= 88) nextId = Math.floor((currentMatchId - 73) / 2) + 89;
+      else if (currentMatchId >= 89 && currentMatchId <= 96) nextId = Math.floor((currentMatchId - 89) / 2) + 97;
+      else if (currentMatchId >= 97 && currentMatchId <= 100) nextId = Math.floor((currentMatchId - 97) / 2) + 101;
+      else if (currentMatchId === 101 || currentMatchId === 102) nextId = 104;
+      
+      currentMatchId = nextId;
+    }
+
+    return path;
+  }, [hoveredTeamCode, r32MatchesSeeding, roundOf16Seeding, quarterFinalsSeeding, semiFinalsSeeding, finalsSeeding, koMatches]);
 
   return (
     <section className="bg-slate-900/25 rounded-3xl border border-slate-800/80 p-4 md:p-6 shadow-2xl relative overflow-hidden">
@@ -207,16 +282,16 @@ export default function KnockoutBracket({
         }}>
 
           {/* ── LEFT HALF ── R32 → R16 → QF → SF */}
-          <MatchColumn matches={LEFT_R32} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} />
+          <MatchColumn matches={LEFT_R32} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
           <PairConnector pairCount={4} side="left" />
 
-          <MatchColumn matches={LEFT_R16} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} />
+          <MatchColumn matches={LEFT_R16} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
           <PairConnector pairCount={2} side="left" />
 
-          <MatchColumn matches={LEFT_QF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} />
+          <MatchColumn matches={LEFT_QF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
           <PairConnector pairCount={1} side="left" />
 
-          <MatchColumn matches={LEFT_SF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} />
+          <MatchColumn matches={LEFT_SF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
           <StraightConnector />
 
           {/* ── CENTER: FINALS + TROPHY ── */}
@@ -256,6 +331,9 @@ export default function KnockoutBracket({
                 team2={getSeeding(104)?.t2}
                 matchState={koMatches['KO-104']}
                 onScoreChange={onScoreChange}
+                hoveredTeamCode={hoveredTeamCode}
+                onTeamHover={setHoveredTeamCode}
+                isPathHighlighted={highlightedPath ? highlightedPath.has(104) : false}
               />
             </div>
 
@@ -270,6 +348,9 @@ export default function KnockoutBracket({
                 team2={getSeeding(103)?.t2}
                 matchState={koMatches['KO-103']}
                 onScoreChange={onScoreChange}
+                hoveredTeamCode={hoveredTeamCode}
+                onTeamHover={setHoveredTeamCode}
+                isPathHighlighted={highlightedPath ? highlightedPath.has(103) : false}
               />
             </div>
           </div>
@@ -277,16 +358,16 @@ export default function KnockoutBracket({
           <StraightConnector />
 
           {/* ── RIGHT HALF ── SF → QF → R16 → R32 */}
-          <MatchColumn matches={RIGHT_SF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} />
+          <MatchColumn matches={RIGHT_SF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
           <PairConnector pairCount={1} side="right" />
 
-          <MatchColumn matches={RIGHT_QF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} />
+          <MatchColumn matches={RIGHT_QF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
           <PairConnector pairCount={2} side="right" />
 
-          <MatchColumn matches={RIGHT_R16} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} />
+          <MatchColumn matches={RIGHT_R16} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
           <PairConnector pairCount={4} side="right" />
 
-          <MatchColumn matches={RIGHT_R32} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} />
+          <MatchColumn matches={RIGHT_R32} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
 
         </div>
       </div>

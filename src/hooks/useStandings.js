@@ -93,6 +93,32 @@ function sortWithH2H(standings, groupName, teamsList, groupMatches) {
         return a.code.localeCompare(b.code);
       });
 
+      // Assign tiebreaker reasons
+      for (let k = 0; k < tied.length; k++) {
+        const t = tied[k];
+        if (k === 0) {
+          const b = tied[1];
+          const ha = h2h[t.code], hb = h2h[b.code];
+          if (ha.pts !== hb.pts) t.tiebreakerReason = `Won tie via H2H Points`;
+          else if (ha.gd !== hb.gd) t.tiebreakerReason = `Won tie via H2H GD`;
+          else if (ha.gf !== hb.gf) t.tiebreakerReason = `Won tie via H2H Goals`;
+          else if (t.gd !== b.gd) t.tiebreakerReason = `Won tie via Overall GD`;
+          else if (t.gf !== b.gf) t.tiebreakerReason = `Won tie via Overall Goals`;
+          else if (t.fairPlay !== b.fairPlay) t.tiebreakerReason = `Won tie via Fair Play`;
+          else t.tiebreakerReason = `Won tie via Alphabetical`;
+        } else {
+          const a = tied[k-1];
+          const ha = h2h[a.code], ht = h2h[t.code];
+          if (ha.pts !== ht.pts) t.tiebreakerReason = `Lost tie via H2H Points`;
+          else if (ha.gd !== ht.gd) t.tiebreakerReason = `Lost tie via H2H GD`;
+          else if (ha.gf !== ht.gf) t.tiebreakerReason = `Lost tie via H2H Goals`;
+          else if (a.gd !== t.gd) t.tiebreakerReason = `Lost tie via Overall GD`;
+          else if (a.gf !== t.gf) t.tiebreakerReason = `Lost tie via Overall Goals`;
+          else if (a.fairPlay !== t.fairPlay) t.tiebreakerReason = `Lost tie via Fair Play`;
+          else t.tiebreakerReason = `Lost tie via Alphabetical`;
+        }
+      }
+
       result.push(...tied);
     }
 

@@ -6,13 +6,16 @@ import { PRESET_SCORES } from '../../constants/presetScores';
 // ================================================================================
 // KNOCKOUT BRACKET MATCH CARD SUB-COMPONENT
 // ================================================================================
-function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, isDraw, isLocked, matchId, onScoreChange }) {
+function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, isDraw, isLocked, matchId, onScoreChange, hoveredTeamCode, onTeamHover }) {
   const isResolved = typeof code === 'string' && code.length === 3;
   const country = TEAMS[code];
 
   return (
-    <div className={`flex items-center justify-between px-2 py-1 transition-colors ${isWinner ? 'bg-emerald-500/15' : ''
-      }`}>
+    <div 
+      className={`flex items-center justify-between px-2 py-1 transition-colors cursor-default ${isWinner ? 'bg-emerald-500/15' : ''} ${hoveredTeamCode === code && isResolved ? 'bg-cyan-500/30' : ''}`}
+      onMouseEnter={() => isResolved && onTeamHover(code)}
+      onMouseLeave={() => onTeamHover(null)}
+    >
       <div className="flex items-center gap-1.5 truncate flex-grow">
         {isResolved ? (
           <div className="flex items-center gap-1 truncate">
@@ -58,7 +61,7 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
   );
 }
 
-export default function KnockoutMatchCard({ matchId, team1, team2, matchState, onScoreChange }) {
+export default function KnockoutMatchCard({ matchId, team1, team2, matchState, onScoreChange, hoveredTeamCode, onTeamHover, isPathHighlighted }) {
   const score1 = matchState?.score1 ?? '';
   const score2 = matchState?.score2 ?? '';
   const penalty1 = matchState?.penalty1 ?? '';
@@ -76,10 +79,15 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
     }
   }
 
+  const isHighlighted = isPathHighlighted;
+  const isDimmed = hoveredTeamCode && !isHighlighted;
+
   return (
-    <div className={`rounded-xl border transition-all ${isLocked
+    <div className={`rounded-xl border transition-all duration-300 relative ${isLocked
       ? 'border-amber-500/30 bg-slate-950/70 shadow-sm'
       : 'border-slate-800/80 bg-slate-900/50 hover:border-slate-700 shadow-md'
+      } ${isHighlighted ? 'ring-2 ring-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.4)] z-10 scale-105' : ''
+      } ${isDimmed ? 'opacity-30' : ''
       } overflow-hidden w-full max-w-[155px] mx-auto`}>
 
       {/* Top micro match tracker indicator */}
@@ -105,6 +113,8 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         isLocked={isLocked}
         matchId={matchId}
         onScoreChange={onScoreChange}
+        hoveredTeamCode={hoveredTeamCode}
+        onTeamHover={onTeamHover}
       />
 
       <div className="h-px bg-slate-900"></div>
@@ -120,6 +130,8 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         isLocked={isLocked}
         matchId={matchId}
         onScoreChange={onScoreChange}
+        hoveredTeamCode={hoveredTeamCode}
+        onTeamHover={onTeamHover}
       />
     </div>
   );

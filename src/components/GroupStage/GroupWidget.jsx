@@ -13,9 +13,10 @@ export default function GroupWidget({
 }) {
   return (
     <div
-      className="rounded-xl border transition-all duration-300 overflow-hidden border-slate-800/80 hover:border-slate-700 bg-slate-900/30 hover:bg-slate-900/50 cursor-pointer group"
+      className="rounded-2xl transition-all duration-300 overflow-hidden p-[1px] bg-gradient-to-br from-slate-800/60 via-slate-800/20 to-slate-800/60 hover:from-emerald-500/50 hover:via-slate-800/50 hover:to-blue-500/50 cursor-pointer group shadow-lg"
       onClick={onToggle}
     >
+      <div className="bg-slate-900/80 rounded-[15px] overflow-hidden h-full flex flex-col">
 
       {/* Clickable Header */}
       <div className="w-full px-3 py-2.5 flex items-center justify-between text-left">
@@ -67,12 +68,12 @@ export default function GroupWidget({
                 else if (isBestThird) highlightClass = "text-blue-400 font-bold";
 
                 return (
-                  <tr key={team.code} className="border-b border-slate-900/50 last:border-0 hover:bg-slate-800/10 transition-all">
+                  <tr key={team.code} className={`border-b border-slate-900/50 last:border-0 transition-all ${isFirstOrSecond ? 'bg-emerald-950/15 hover:bg-emerald-950/25' : isBestThird ? 'bg-blue-950/15 hover:bg-blue-950/25' : 'hover:bg-slate-800/10'}`}>
                     <td className="py-1 flex items-center gap-1 font-medium pl-0.5">
                       <span className={`w-1 h-2 rounded-full flex-shrink-0 ${isFirstOrSecond ? 'bg-emerald-500' : isBestThird ? 'bg-blue-400' : 'bg-slate-800'
                         }`} />
-                      <span className="text-[11px]">{TEAMS[team.code]?.emoji}</span>
-                      <span className="text-slate-200 font-bold truncate max-w-[70px] text-[9px]">{TEAMS[team.code]?.name}</span>
+                      <span className={`text-[11px] ${isFirstOrSecond ? 'drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]' : isBestThird ? 'drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : ''}`}>{TEAMS[team.code]?.emoji}</span>
+                      <span className={`font-bold truncate max-w-[70px] text-[9px] ${isFirstOrSecond ? 'text-emerald-50' : isBestThird ? 'text-blue-50' : 'text-slate-200'}`}>{TEAMS[team.code]?.name}</span>
                     </td>
                     <td className="py-1 text-center font-bold text-slate-400">{team.played}</td>
                     <td className="py-1 text-center font-bold text-slate-400">{team.won}</td>
@@ -87,7 +88,7 @@ export default function GroupWidget({
                       }`}>
                       {team.fairPlay || 0}
                     </td>
-                    <td className={`py-1 text-center font-black ${highlightClass}`}>
+                    <td className={`py-1 text-center font-black cursor-help ${highlightClass}`} title={team.tiebreakerReason}>
                       {team.pts}
                     </td>
                   </tr>
@@ -98,6 +99,7 @@ export default function GroupWidget({
         </div>
       </div>
 
+      </div>
     </div>
   );
 }
