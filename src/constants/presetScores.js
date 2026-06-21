@@ -143,8 +143,8 @@ export const PRESET_SCORES = {
   },
   "G-E-2": { // Ecuador vs Curaçao
     score1: 0, score2: 0,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    yellow1: 1, yellow2: 5, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-E-3": { // Germany vs Ivory Coast
     score1: 2, score2: 1,
