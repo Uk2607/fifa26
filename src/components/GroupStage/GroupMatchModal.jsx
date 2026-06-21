@@ -200,11 +200,10 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                                     key={s}
                                     disabled={isDisabled}
                                     onClick={() => onScoreChange(id, 'status', s)}
-                                    className={`px-2.5 py-0.5 text-[8px] font-bold rounded-full uppercase transition-all flex items-center justify-center gap-1.5 ${
-                                      isSelected
-                                        ? (s === 'locked' ? 'bg-amber-500/20 text-amber-400' : s === 'open' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-300')
-                                        : 'text-slate-500 hover:text-slate-400'
-                                    } ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                                    className={`px-2.5 py-0.5 text-[8px] font-bold rounded-full uppercase transition-all flex items-center justify-center gap-1.5 ${isSelected
+                                      ? (s === 'locked' ? 'bg-amber-500/20 text-amber-400' : s === 'open' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-300')
+                                      : 'text-slate-500 hover:text-slate-400'
+                                      } ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                                   >
                                     {s === 'open' && isSelected && (
                                       <span className="relative flex h-1.5 w-1.5">
@@ -271,7 +270,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
             </div>
 
             {/* ── BACK FACE: TABLE (Right on Desktop) ── */}
-            <div className={`w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl ${!isFlipped ? 'hidden md:flex' : 'flex'}`}>
+            <div className={`w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[45vh] flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl ${!isFlipped ? 'hidden md:flex' : 'flex'}`}>
               <div className="flex-1 flex flex-col min-h-0 bg-slate-900/95 backdrop-blur-xl rounded-[15px] overflow-hidden">
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
@@ -281,110 +280,110 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                   </button>
                 </div>
 
-              {/* Mobile Tabs */}
-              <div className="md:hidden flex border-b border-slate-800/60 flex-shrink-0">
-                <button className="flex-1 py-2 text-xs font-bold text-slate-400 hover:text-slate-300 transition-colors" onClick={() => setIsFlipped(false)}>Fixtures</button>
-                <button className="flex-1 py-2 text-xs font-bold text-emerald-400 bg-emerald-950/20 border-b-2 border-emerald-500">Live Table</button>
-              </div>
-
-              {/* Table List */}
-              <div className="flex-1 p-4 overflow-y-auto overscroll-contain min-h-0">
-                <div className="overflow-x-auto rounded-lg border border-slate-800 bg-slate-950/40">
-                  <table className="w-full text-xs text-left min-w-[320px]">
-                    <thead>
-                      <tr className="bg-slate-900/60 text-slate-400 border-b border-slate-800">
-                        <th className="py-2 pl-3 font-semibold uppercase text-[10px]">Team</th>
-                        <th className="py-2 text-center font-semibold text-[10px]" title="Played">P</th>
-                        <th className="py-2 text-center font-semibold text-[10px]" title="Won">W</th>
-                        <th className="py-2 text-center font-semibold text-[10px]" title="Drawn">D</th>
-                        <th className="py-2 text-center font-semibold text-[10px]" title="Lost">L</th>
-                        <th className="py-2 text-center font-semibold text-[10px]" title="Goals For">GF</th>
-                        <th className="py-2 text-center font-semibold text-[10px]" title="Goals Against">GA</th>
-                        <th className="py-2 text-center font-semibold text-[10px]" title="Goal Difference">GD</th>
-                        <th className="py-2 text-center font-semibold text-[10px]" title="Fair Play Points">FP</th>
-                        <th className="py-2 pr-2 text-center font-bold text-emerald-400">Pts</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {groupStandings.map((team, index) => {
-                        const isFirstOrSecond = index < 2;
-                        const isBestThird = index === 2 && bestThirdsQualified?.includes(team.code);
-                        const highlightClass = isFirstOrSecond ? 'text-emerald-400' : isBestThird ? 'text-blue-400' : 'text-slate-500';
-
-                        return (
-                          <tr
-                            key={team.code}
-                            className={`border-b border-slate-800/60 last:border-0 transition-all ${isFirstOrSecond ? 'bg-emerald-900/20 hover:bg-emerald-900/30' : isBestThird ? 'bg-blue-900/20 hover:bg-blue-900/30' : 'hover:bg-slate-800/30'}`}
-                          >
-                            <td className="py-2.5 flex items-center gap-2 font-medium pl-3">
-                              <span
-                                className={`w-1.5 h-3 rounded-full flex-shrink-0 ${isFirstOrSecond ? "bg-emerald-500" : isBestThird ? "bg-blue-400" : "bg-slate-700"}`}
-                              />
-                              <span className={`text-sm ${isFirstOrSecond ? 'drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]' : isBestThird ? 'drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : ''}`}>
-                                {TEAMS[team.code]?.emoji}
-                              </span>
-                              <span className={`font-bold truncate max-w-[100px] text-[11px] ${isFirstOrSecond ? 'text-emerald-400' : isBestThird ? 'text-blue-400' : 'text-slate-300'}`}>
-                                {TEAMS[team.code]?.name}
-                              </span>
-                            </td>
-                            <td className="py-2.5 text-center font-bold text-slate-400">
-                              {team.played}
-                            </td>
-                            <td className="py-2.5 text-center font-bold text-slate-400">
-                              {team.won}
-                            </td>
-                            <td className="py-2.5 text-center font-bold text-slate-400">
-                              {team.drawn}
-                            </td>
-                            <td className="py-2.5 text-center font-bold text-slate-400">
-                              {team.lost}
-                            </td>
-                            <td className="py-2.5 text-center font-bold text-slate-300">
-                              {team.gf}
-                            </td>
-                            <td className="py-2.5 text-center font-bold text-slate-300">
-                              {team.ga}
-                            </td>
-                            <td
-                              className={`py-2.5 text-center font-bold ${team.gd >= 0 ? "text-slate-300" : "text-red-400"}`}
-                            >
-                              {team.gd >= 0 ? `+${team.gd}` : team.gd}
-                            </td>
-                            <td
-                              className={`py-2.5 text-center font-bold text-[10px] ${team.fairPlay < 0 ? "text-amber-400" : "text-slate-500"}`}
-                            >
-                              {team.fairPlay || 0}
-                            </td>
-                            <td
-                              className={`py-2.5 text-center font-black pr-2 cursor-help ${highlightClass}`}
-                              title={team.tiebreakerReason}
-                            >
-                              {team.pts}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
+                {/* Mobile Tabs */}
+                <div className="md:hidden flex border-b border-slate-800/60 flex-shrink-0">
+                  <button className="flex-1 py-2 text-xs font-bold text-slate-400 hover:text-slate-300 transition-colors" onClick={() => setIsFlipped(false)}>Fixtures</button>
+                  <button className="flex-1 py-2 text-xs font-bold text-emerald-400 bg-emerald-950/20 border-b-2 border-emerald-500">Live Table</button>
                 </div>
 
-                {/* Qualification Legend */}
-                <div className="mt-4 flex flex-wrap gap-3 items-center justify-center text-[10px] font-medium text-slate-400 bg-slate-900/40 p-2 rounded-lg border border-slate-800/60">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-3 bg-emerald-500 rounded-full" />
-                    <span>Top 2 Advance</span>
+                {/* Table List */}
+                <div className="flex-1 p-4 overflow-y-auto overscroll-contain min-h-0">
+                  <div className="overflow-x-auto rounded-lg border border-slate-800 bg-slate-950/40">
+                    <table className="w-full text-xs text-left min-w-[320px]">
+                      <thead>
+                        <tr className="bg-slate-900/60 text-slate-400 border-b border-slate-800">
+                          <th className="py-2 pl-3 font-semibold uppercase text-[10px]">Team</th>
+                          <th className="py-2 text-center font-semibold text-[10px]" title="Played">P</th>
+                          <th className="py-2 text-center font-semibold text-[10px]" title="Won">W</th>
+                          <th className="py-2 text-center font-semibold text-[10px]" title="Drawn">D</th>
+                          <th className="py-2 text-center font-semibold text-[10px]" title="Lost">L</th>
+                          <th className="py-2 text-center font-semibold text-[10px]" title="Goals For">GF</th>
+                          <th className="py-2 text-center font-semibold text-[10px]" title="Goals Against">GA</th>
+                          <th className="py-2 text-center font-semibold text-[10px]" title="Goal Difference">GD</th>
+                          <th className="py-2 text-center font-semibold text-[10px]" title="Fair Play Points">FP</th>
+                          <th className="py-2 pr-2 text-center font-bold text-emerald-400">Pts</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {groupStandings.map((team, index) => {
+                          const isFirstOrSecond = index < 2;
+                          const isBestThird = index === 2 && bestThirdsQualified?.includes(team.code);
+                          const highlightClass = isFirstOrSecond ? 'text-emerald-400' : isBestThird ? 'text-blue-400' : 'text-slate-500';
+
+                          return (
+                            <tr
+                              key={team.code}
+                              className={`border-b border-slate-800/60 last:border-0 transition-all ${isFirstOrSecond ? 'bg-emerald-900/20 hover:bg-emerald-900/30' : isBestThird ? 'bg-blue-900/20 hover:bg-blue-900/30' : 'hover:bg-slate-800/30'}`}
+                            >
+                              <td className="py-2.5 flex items-center gap-2 font-medium pl-3">
+                                <span
+                                  className={`w-1.5 h-3 rounded-full flex-shrink-0 ${isFirstOrSecond ? "bg-emerald-500" : isBestThird ? "bg-blue-400" : "bg-slate-700"}`}
+                                />
+                                <span className={`text-sm ${isFirstOrSecond ? 'drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]' : isBestThird ? 'drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : ''}`}>
+                                  {TEAMS[team.code]?.emoji}
+                                </span>
+                                <span className={`font-bold truncate max-w-[100px] text-[11px] ${isFirstOrSecond ? 'text-emerald-400' : isBestThird ? 'text-blue-400' : 'text-slate-300'}`}>
+                                  {TEAMS[team.code]?.name}
+                                </span>
+                              </td>
+                              <td className="py-2.5 text-center font-bold text-slate-400">
+                                {team.played}
+                              </td>
+                              <td className="py-2.5 text-center font-bold text-slate-400">
+                                {team.won}
+                              </td>
+                              <td className="py-2.5 text-center font-bold text-slate-400">
+                                {team.drawn}
+                              </td>
+                              <td className="py-2.5 text-center font-bold text-slate-400">
+                                {team.lost}
+                              </td>
+                              <td className="py-2.5 text-center font-bold text-slate-300">
+                                {team.gf}
+                              </td>
+                              <td className="py-2.5 text-center font-bold text-slate-300">
+                                {team.ga}
+                              </td>
+                              <td
+                                className={`py-2.5 text-center font-bold ${team.gd >= 0 ? "text-slate-300" : "text-red-400"}`}
+                              >
+                                {team.gd >= 0 ? `+${team.gd}` : team.gd}
+                              </td>
+                              <td
+                                className={`py-2.5 text-center font-bold text-[10px] ${team.fairPlay < 0 ? "text-amber-400" : "text-slate-500"}`}
+                              >
+                                {team.fairPlay || 0}
+                              </td>
+                              <td
+                                className={`py-2.5 text-center font-black pr-2 cursor-help ${highlightClass}`}
+                                title={team.tiebreakerReason}
+                              >
+                                {team.pts}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-3 bg-blue-400 rounded-full" />
-                    <span>Best 8 Thirds Advance</span>
+
+                  {/* Qualification Legend */}
+                  <div className="mt-4 flex flex-wrap gap-3 items-center justify-center text-[10px] font-medium text-slate-400 bg-slate-900/40 p-2 rounded-lg border border-slate-800/60">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-3 bg-emerald-500 rounded-full" />
+                      <span>Top 2 Advance</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-3 bg-blue-400 rounded-full" />
+                      <span>Best 8 Thirds Advance</span>
+                    </div>
                   </div>
+                </div>
               </div>
             </div>
           </div>
-          </div>
         </div>
       </div>
-    </div>
     </>
   );
 }
