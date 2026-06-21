@@ -9,8 +9,8 @@ function initKoMatches() {
       const preset = PRESET_SCORES[id];
       const isNotLocked = preset.status === 'upcoming' || preset.status === 'open';
       initial[id] = {
-        score1: (isNotLocked && preset.score1 === 0) ? '' : preset.score1,
-        score2: (isNotLocked && preset.score2 === 0) ? '' : preset.score2,
+        score1: (isNotLocked && preset.score1 === null) ? '' : preset.score1,
+        score2: (isNotLocked && preset.score2 === null) ? '' : preset.score2,
         penalty1: preset.penalty1 || '',
         penalty2: preset.penalty2 || '',
         status: preset.status || 'upcoming'

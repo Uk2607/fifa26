@@ -14,8 +14,8 @@ function initGroupMatches() {
       if (preset) {
         const isNotLocked = preset.status === 'upcoming' || preset.status === 'open';
         initial[id] = {
-          score1: (isNotLocked && preset.score1 === 0) ? '' : preset.score1,
-          score2: (isNotLocked && preset.score2 === 0) ? '' : preset.score2,
+          score1: (isNotLocked && preset.score1 === null) ? '' : preset.score1,
+          score2: (isNotLocked && preset.score2 === null) ? '' : preset.score2,
           status: preset.status || 'upcoming',
           yellow1: preset.yellow1 || 0,
           yellow2: preset.yellow2 || 0,
