@@ -56,6 +56,8 @@ export default function App() {
         <GroupMatchModal
           groupName={modalGroup}
           matches={groupMatches}
+          standings={groupStandings[modalGroup]}
+          bestThirdsQualified={qualificationState.thirds}
           onScoreChange={handleGroupScoreChange}
           onClose={() => setModalGroup(null)}
         />
