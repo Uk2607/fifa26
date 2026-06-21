@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { GROUPS_CONFIG, GROUP_MATCH_PAIRINGS } from '../constants/groups';
+import { FIFA_RANKINGS } from '../constants/fifaRankings';
 
 // ================================================================================
 // 🧮 STANDINGS ENGINE — with FIFA official tiebreakers
@@ -89,7 +90,11 @@ function sortWithH2H(standings, groupName, teamsList, groupMatches) {
         if (b.gf !== a.gf) return b.gf - a.gf;
         // Step 6: Fair Play (higher = better, i.e. less negative)
         if (b.fairPlay !== a.fairPlay) return b.fairPlay - a.fairPlay;
-        // Step 7: Alphabetical fallback (proxy for FIFA ranking)
+        // Step 7: FIFA World Ranking (lower is better)
+        const rankA = FIFA_RANKINGS[a.code]?.ranking || 999;
+        const rankB = FIFA_RANKINGS[b.code]?.ranking || 999;
+        if (rankA !== rankB) return rankA - rankB;
+        // Step 8: Alphabetical fallback
         return a.code.localeCompare(b.code);
       });
 
@@ -105,6 +110,7 @@ function sortWithH2H(standings, groupName, teamsList, groupMatches) {
           else if (t.gd !== b.gd) t.tiebreakerReason = `Won tie via Overall GD`;
           else if (t.gf !== b.gf) t.tiebreakerReason = `Won tie via Overall Goals`;
           else if (t.fairPlay !== b.fairPlay) t.tiebreakerReason = `Won tie via Fair Play`;
+          else if ((FIFA_RANKINGS[t.code]?.ranking || 999) !== (FIFA_RANKINGS[b.code]?.ranking || 999)) t.tiebreakerReason = `Won tie via FIFA Ranking`;
           else t.tiebreakerReason = `Won tie via Alphabetical`;
         } else {
           const a = tied[k-1];
@@ -115,6 +121,7 @@ function sortWithH2H(standings, groupName, teamsList, groupMatches) {
           else if (a.gd !== t.gd) t.tiebreakerReason = `Lost tie via Overall GD`;
           else if (a.gf !== t.gf) t.tiebreakerReason = `Lost tie via Overall Goals`;
           else if (a.fairPlay !== t.fairPlay) t.tiebreakerReason = `Lost tie via Fair Play`;
+          else if ((FIFA_RANKINGS[a.code]?.ranking || 999) !== (FIFA_RANKINGS[t.code]?.ranking || 999)) t.tiebreakerReason = `Lost tie via FIFA Ranking`;
           else t.tiebreakerReason = `Lost tie via Alphabetical`;
         }
       }
@@ -230,7 +237,11 @@ export function useStandings(groupMatches) {
       if (b.gf !== a.gf) return b.gf - a.gf;
       // Fair Play as 4th criterion
       if (b.fairPlay !== a.fairPlay) return b.fairPlay - a.fairPlay;
-      // Alphabetical fallback (proxy for FIFA World Ranking)
+      // 5th criterion: FIFA World Ranking (lower is better)
+      const rankA = FIFA_RANKINGS[a.code]?.ranking || 999;
+      const rankB = FIFA_RANKINGS[b.code]?.ranking || 999;
+      if (rankA !== rankB) return rankA - rankB;
+      // Alphabetical fallback
       return a.code.localeCompare(b.code);
     });
 

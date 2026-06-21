@@ -78,7 +78,7 @@ export default function App() {
               <div className="text-[10px] bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg text-slate-400 font-semibold uppercase">
                 Top 2 Advance + Best 8 Thirds
               </div>
-              
+
               <div className="relative">
                 <button
                   onClick={(e) => { e.stopPropagation(); setShowTiebreaker(prev => !prev); }}
@@ -103,7 +103,7 @@ export default function App() {
                       <li>Overall goal difference</li>
                       <li>Overall goals scored</li>
                       <li>Fair Play score <span className="text-slate-500">(YC −1, 2Y −3, RC −4)</span></li>
-                      <li>FIFA ranking <span className="text-slate-500">(alphabetical fallback)</span></li>
+                      <li>FIFA ranking</li>
                     </ol>
                   </div>
                 )}
