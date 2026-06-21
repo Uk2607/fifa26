@@ -53,33 +53,5 @@ export function useKnockoutMatches() {
     setKoMatches(initKoMatches());
   };
 
-  const randomizeKoMatches = () => {
-    setKoMatches(prev => {
-      const copy = { ...prev };
-      for (let mId = 73; mId <= 104; mId++) {
-        const id = `KO-${mId}`;
-        if (PRESET_SCORES[id]?.status !== 'locked') {
-          const s1 = Math.floor(Math.random() * 4);
-          let s2 = Math.floor(Math.random() * 4);
-          let p1 = '';
-          let p2 = '';
-          if (s1 === s2) {
-            p1 = Math.floor(Math.random() * 3) + 3;
-            p2 = p1 + (Math.random() > 0.5 ? 1 : -1);
-            if (p2 < 0) p2 = 0;
-          }
-          copy[id] = {
-            score1: s1,
-            score2: s2,
-            penalty1: p1,
-            penalty2: p2,
-            status: copy[id].status
-          };
-        }
-      }
-      return copy;
-    });
-  };
-
-  return { koMatches, handleKoScoreChange, resetKoMatches, randomizeKoMatches };
+  return { koMatches, handleKoScoreChange, resetKoMatches };
 }

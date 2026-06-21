@@ -21,8 +21,8 @@ export default function App() {
   const [showTiebreaker, setShowTiebreaker] = useState(false);
 
   // State hooks
-  const { groupMatches, handleGroupScoreChange, resetGroupMatches, randomizeGroupMatches } = useGroupMatches();
-  const { koMatches, handleKoScoreChange, resetKoMatches, randomizeKoMatches } = useKnockoutMatches();
+  const { groupMatches, handleGroupScoreChange, resetGroupMatches } = useGroupMatches();
+  const { koMatches, handleKoScoreChange, resetKoMatches } = useKnockoutMatches();
 
   // Derived data hooks
   const { groupStandings, qualificationState, allocatedThirds } = useStandings(groupMatches);
@@ -37,15 +37,10 @@ export default function App() {
     resetKoMatches();
   };
 
-  const handleRandomizeAll = () => {
-    randomizeGroupMatches();
-    randomizeKoMatches();
-  };
-
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950">
 
-      <Header onRandomize={handleRandomizeAll} onReset={handleResetAll} />
+      <Header onReset={handleResetAll} />
 
       <ChampionBanner tournamentChampion={tournamentChampion} />
 

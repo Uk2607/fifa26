@@ -68,27 +68,5 @@ export function useGroupMatches() {
     setGroupMatches(initGroupMatches());
   };
 
-  const randomizeGroupMatches = () => {
-    setGroupMatches(prev => {
-      const copy = { ...prev };
-      Object.keys(copy).forEach(id => {
-        if (PRESET_SCORES[id]?.status !== 'locked') {
-          copy[id] = {
-            score1: Math.floor(Math.random() * 4),
-            score2: Math.floor(Math.random() * 3),
-            status: copy[id].status,
-            yellow1: Math.floor(Math.random() * 4),
-            yellow2: Math.floor(Math.random() * 4),
-            secondYellow1: Math.random() < 0.2 ? 1 : 0,
-            secondYellow2: Math.random() < 0.2 ? 1 : 0,
-            red1: Math.random() < 0.1 ? 1 : 0,
-            red2: Math.random() < 0.1 ? 1 : 0,
-          };
-        }
-      });
-      return copy;
-    });
-  };
-
-  return { groupMatches, handleGroupScoreChange, resetGroupMatches, randomizeGroupMatches };
+  return { groupMatches, handleGroupScoreChange, resetGroupMatches };
 }
