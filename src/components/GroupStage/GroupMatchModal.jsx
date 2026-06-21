@@ -52,6 +52,29 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
 
   return (
     <>
+      {/* Custom Mobile Flip CSS */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+        @media (max-width: 767px) {
+          .flip-card {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          }
+          .flip-card.flipped {
+            transform: rotateY(180deg);
+          }
+          .flip-face {
+            position: absolute;
+            inset: 0;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+          }
+          .flip-face-back {
+            transform: rotateY(180deg);
+          }
+        }
+      `}} />
+
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 md:p-8"
@@ -64,10 +87,10 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
         >
           {/* Card */}
           <div
-            className="relative w-full h-full md:h-auto flex flex-col md:flex-row md:items-center justify-center gap-4"
+            className={`flip-card relative w-full h-full md:h-auto flex flex-col md:flex-row md:items-center justify-center gap-4 ${isFlipped ? 'flipped' : ''}`}
           >
             {/* ── FRONT FACE: FIXTURES (Left on Desktop) ── */}
-            <div className={`w-full md:w-[480px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex-col p-[1px] bg-gradient-to-br from-emerald-500/40 via-slate-800/40 to-slate-700/40 rounded-2xl shadow-2xl ${isFlipped ? 'hidden md:flex' : 'flex'}`}>
+            <div className={`flip-face flex w-full md:w-[480px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex-col p-[1px] bg-gradient-to-br from-emerald-500/40 via-slate-800/40 to-slate-700/40 rounded-2xl shadow-2xl`}>
               <div className="flex-1 flex flex-col min-h-0 bg-slate-900/95 backdrop-blur-xl rounded-[15px] overflow-hidden">
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
@@ -270,7 +293,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
             </div>
 
             {/* ── BACK FACE: TABLE (Right on Desktop) ── */}
-            <div className={`w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[45vh] flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl ${!isFlipped ? 'hidden md:flex' : 'flex'}`}>
+            <div className={`flip-face flip-face-back flex w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl`}>
               <div className="flex-1 flex flex-col min-h-0 bg-slate-900/95 backdrop-blur-xl rounded-[15px] overflow-hidden">
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
