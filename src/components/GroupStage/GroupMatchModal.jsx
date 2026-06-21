@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 import { GROUPS_CONFIG, GROUP_MATCH_PAIRINGS, GROUP_MATCH_NUMBERS } from '../../constants/groups';
@@ -42,7 +42,33 @@ function CardInput({ color, label, value, field, matchId, onScoreChange, disable
 // 🏟️ GROUP MATCH MODAL — compact popup with all fixtures for a group
 // ================================================================================
 export default function GroupMatchModal({ groupName, matches, standings, bestThirdsQualified, onScoreChange, onClose }) {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [activeTab, setActiveTab] = useState('fixtures');
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  const handleTabSwitch = (newTab) => {
+    if (newTab === activeTab || isAnimating) return;
+    setIsAnimating(true);
+    
+    // Swap content exactly halfway through the 0.6s animation (at 300ms) when the card is invisible at 90deg
+    setTimeout(() => {
+      setActiveTab(newTab);
+    }, 300);
+    
+    // Finish animation
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 600);
+  };
+
+  useEffect(() => {
+    // Lock body scroll when modal mounts
+    document.body.style.overflow = 'hidden';
+    return () => {
+      // Restore on unmount
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   if (!groupName) return null;
 
   const teamsList = GROUPS_CONFIG[groupName];
@@ -56,21 +82,15 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
       <style dangerouslySetInnerHTML={{
         __html: `
         @media (max-width: 767px) {
-          .flip-card {
+          .animate-flip {
+            animation: flipAnimation 0.6s ease-in-out;
             transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
           }
-          .flip-card.flipped {
-            transform: rotateY(180deg);
-          }
-          .flip-face {
-            position: absolute;
-            inset: 0;
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
-          }
-          .flip-face-back {
-            transform: rotateY(180deg);
+          @keyframes flipAnimation {
+            0% { transform: rotateY(0deg); }
+            49.9% { transform: rotateY(90deg); }
+            50% { transform: rotateY(-90deg); }
+            100% { transform: rotateY(0deg); }
           }
         }
       `}} />
@@ -87,10 +107,10 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
         >
           {/* Card */}
           <div
-            className={`flip-card relative w-full h-full md:h-auto flex flex-col md:flex-row md:items-center justify-center gap-4 ${isFlipped ? 'flipped' : ''}`}
+            className={`relative w-full h-full md:h-auto flex flex-col md:flex-row md:items-center justify-center gap-4 ${isAnimating ? 'animate-flip' : ''}`}
           >
             {/* ── FRONT FACE: FIXTURES (Left on Desktop) ── */}
-            <div className={`flip-face flex w-full md:w-[480px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex-col p-[1px] bg-gradient-to-br from-emerald-500/40 via-slate-800/40 to-slate-700/40 rounded-2xl shadow-2xl`}>
+            <div className={`w-full md:w-[480px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col p-[1px] bg-gradient-to-br from-emerald-500/40 via-slate-800/40 to-slate-700/40 rounded-2xl shadow-2xl ${activeTab === 'table' ? 'hidden md:flex' : 'flex'}`}>
               <div className="flex-1 flex flex-col min-h-0 bg-slate-900/95 backdrop-blur-xl rounded-[15px] overflow-hidden">
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
@@ -116,7 +136,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                 {/* Mobile Tabs */}
                 <div className="md:hidden flex border-b border-slate-800/60 flex-shrink-0">
                   <button className="flex-1 py-2 text-xs font-bold text-emerald-400 bg-emerald-950/20 border-b-2 border-emerald-500">Fixtures</button>
-                  <button className="flex-1 py-2 text-xs font-bold text-slate-400 hover:text-slate-300 transition-colors" onClick={() => setIsFlipped(true)}>Live Table</button>
+                  <button className="flex-1 py-2 text-xs font-bold text-slate-400 hover:text-slate-300 transition-colors" onClick={() => handleTabSwitch('table')}>Live Table</button>
                 </div>
 
                 {/* Fixtures List */}
@@ -293,7 +313,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
             </div>
 
             {/* ── BACK FACE: TABLE (Right on Desktop) ── */}
-            <div className={`flip-face flip-face-back flex w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl`}>
+            <div className={`w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl ${activeTab === 'fixtures' ? 'hidden md:flex' : 'flex'}`}>
               <div className="flex-1 flex flex-col min-h-0 bg-slate-900/95 backdrop-blur-xl rounded-[15px] overflow-hidden">
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
@@ -305,7 +325,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
 
                 {/* Mobile Tabs */}
                 <div className="md:hidden flex border-b border-slate-800/60 flex-shrink-0">
-                  <button className="flex-1 py-2 text-xs font-bold text-slate-400 hover:text-slate-300 transition-colors" onClick={() => setIsFlipped(false)}>Fixtures</button>
+                  <button className="flex-1 py-2 text-xs font-bold text-slate-400 hover:text-slate-300 transition-colors" onClick={() => handleTabSwitch('fixtures')}>Fixtures</button>
                   <button className="flex-1 py-2 text-xs font-bold text-emerald-400 bg-emerald-950/20 border-b-2 border-emerald-500">Live Table</button>
                 </div>
 
