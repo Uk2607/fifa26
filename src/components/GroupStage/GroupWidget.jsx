@@ -9,7 +9,8 @@ export default function GroupWidget({
   teamsList,
   standings,
   onToggle,
-  bestThirdsQualified
+  bestThirdsQualified,
+  tiebreakerLegends
 }) {
   return (
     <div
@@ -90,12 +91,24 @@ export default function GroupWidget({
                     </td>
                     <td className={`py-1 text-center font-black cursor-help ${highlightClass}`} title={team.tiebreakerReason}>
                       {team.pts}
+                      {team.tieGroupMarker && <sup className="ml-[1px] text-[8px] text-emerald-400 font-bold">{team.tieGroupMarker}</sup>}
                     </td>
                   </tr>
                 );
               })}
             </tbody>
           </table>
+
+          {tiebreakerLegends && tiebreakerLegends.length > 0 && (
+            <div className="px-3 pb-2 pt-1.5 border-t border-slate-800/40 bg-slate-900/20">
+              {tiebreakerLegends.map((l, i) => (
+                <div key={i} className="text-[8.5px] text-slate-400 flex items-start gap-1">
+                  <span className="text-emerald-400 font-bold">{l.marker}</span>
+                  <span>{l.text}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 

@@ -41,7 +41,7 @@ function CardInput({ color, label, value, field, matchId, onScoreChange, disable
 // ================================================================================
 // 🏟️ GROUP MATCH MODAL — compact popup with all fixtures for a group
 // ================================================================================
-export default function GroupMatchModal({ groupName, matches, standings, bestThirdsQualified, onScoreChange, onClose }) {
+export default function GroupMatchModal({ groupName, matches, standings, bestThirdsQualified, onScoreChange, onClose, tiebreakerLegends }) {
   const [activeTab, setActiveTab] = useState('fixtures');
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -402,6 +402,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                                 title={team.tiebreakerReason}
                               >
                                 {team.pts}
+                                {team.tieGroupMarker && <sup className="ml-[1px] text-[8px] text-emerald-400 font-bold">{team.tieGroupMarker}</sup>}
                               </td>
                             </tr>
                           );
@@ -409,6 +410,18 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                       </tbody>
                     </table>
                   </div>
+
+                  {/* Tiebreaker Legends */}
+                  {tiebreakerLegends && tiebreakerLegends.length > 0 && (
+                    <div className="mt-3 flex flex-col gap-0.5 px-2">
+                      {tiebreakerLegends.map((l, i) => (
+                        <div key={i} className="text-[10px] text-slate-400 flex items-start gap-1">
+                          <span className="text-emerald-400 font-bold">{l.marker}</span>
+                          <span>{l.text}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Qualification Legend */}
                   <div className="mt-4 flex flex-wrap gap-3 items-center justify-center text-[10px] font-medium text-slate-400 bg-slate-900/40 p-2 rounded-lg border border-slate-800/60">

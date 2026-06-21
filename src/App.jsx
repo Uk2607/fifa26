@@ -25,7 +25,7 @@ export default function App() {
   const { koMatches, handleKoScoreChange, resetKoMatches, randomizeKoMatches } = useKnockoutMatches();
 
   // Derived data hooks
-  const { groupStandings, qualificationState, allocatedThirds } = useStandings(groupMatches);
+  const { groupStandings, tiebreakerLegends, qualificationState, allocatedThirds } = useStandings(groupMatches);
   const {
     r32MatchesSeeding, roundOf16Seeding, quarterFinalsSeeding,
     semiFinalsSeeding, finalsSeeding, tournamentChampion
@@ -57,6 +57,7 @@ export default function App() {
           groupName={modalGroup}
           matches={groupMatches}
           standings={groupStandings[modalGroup]}
+          tiebreakerLegends={tiebreakerLegends[modalGroup]}
           bestThirdsQualified={qualificationState.thirds}
           onScoreChange={handleGroupScoreChange}
           onClose={() => setModalGroup(null)}
@@ -120,6 +121,7 @@ export default function App() {
                   groupName={gName}
                   teamsList={GROUPS_CONFIG[gName]}
                   standings={groupStandings[gName]}
+                  tiebreakerLegends={tiebreakerLegends[gName]}
                   matches={groupMatches}
                   onScoreChange={handleGroupScoreChange}
                   onToggle={() => setModalGroup(gName)}

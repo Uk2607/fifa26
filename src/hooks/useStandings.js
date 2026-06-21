@@ -54,12 +54,16 @@ function computeH2H(tiedCodes, groupName, teamsList, groupMatches) {
 // When teams are tied on points, FIFA applies (in order):
 //   1. H2H points  2. H2H GD  3. H2H GF
 //   4. Overall GD  5. Overall GF  6. Fair Play  7. Alphabetical
-function sortWithH2H(standings, groupName, teamsList, groupMatches) {
+function sortWithH2H(standings, groupName, teamsList, groupMatches, legendsObj) {
   // Rough sort by overall points first
   standings.sort((a, b) => b.pts - a.pts);
 
   const result = [];
   let i = 0;
+  
+  const availableMarkers = ['*', '†', '‡', '§'];
+  let markerIndex = 0;
+  const groupLegends = [];
 
   while (i < standings.length) {
     // Find the run of teams with the same point total
@@ -93,30 +97,26 @@ function sortWithH2H(standings, groupName, teamsList, groupMatches) {
         return a.code.localeCompare(b.code);
       });
 
-      // Assign tiebreaker reasons
+      // Determine exactly which metric broke the tie for the legend
+      const t = tied[0];
+      const b = tied[1];
+      const ha = h2h[t.code], hb = h2h[b.code];
+      let legendText = '';
+      if (ha.pts !== hb.pts) legendText = `Head-to-head points`;
+      else if (ha.gd !== hb.gd) legendText = `Head-to-head goal difference`;
+      else if (ha.gf !== hb.gf) legendText = `Head-to-head goals scored`;
+      else if (t.gd !== b.gd) legendText = `Overall goal difference`;
+      else if (t.gf !== b.gf) legendText = `Overall goals scored`;
+      else if (t.fairPlay !== b.fairPlay) legendText = `Fair Play score`;
+      else legendText = `Alphabetical order`;
+
+      const marker = availableMarkers[markerIndex] || '*';
+      markerIndex++;
+
+      groupLegends.push({ marker, text: `Tie broken via ${legendText}` });
+
       for (let k = 0; k < tied.length; k++) {
-        const t = tied[k];
-        if (k === 0) {
-          const b = tied[1];
-          const ha = h2h[t.code], hb = h2h[b.code];
-          if (ha.pts !== hb.pts) t.tiebreakerReason = `Won tie via H2H Points`;
-          else if (ha.gd !== hb.gd) t.tiebreakerReason = `Won tie via H2H GD`;
-          else if (ha.gf !== hb.gf) t.tiebreakerReason = `Won tie via H2H Goals`;
-          else if (t.gd !== b.gd) t.tiebreakerReason = `Won tie via Overall GD`;
-          else if (t.gf !== b.gf) t.tiebreakerReason = `Won tie via Overall Goals`;
-          else if (t.fairPlay !== b.fairPlay) t.tiebreakerReason = `Won tie via Fair Play`;
-          else t.tiebreakerReason = `Won tie via Alphabetical`;
-        } else {
-          const a = tied[k-1];
-          const ha = h2h[a.code], ht = h2h[t.code];
-          if (ha.pts !== ht.pts) t.tiebreakerReason = `Lost tie via H2H Points`;
-          else if (ha.gd !== ht.gd) t.tiebreakerReason = `Lost tie via H2H GD`;
-          else if (ha.gf !== ht.gf) t.tiebreakerReason = `Lost tie via H2H Goals`;
-          else if (a.gd !== t.gd) t.tiebreakerReason = `Lost tie via Overall GD`;
-          else if (a.gf !== t.gf) t.tiebreakerReason = `Lost tie via Overall Goals`;
-          else if (a.fairPlay !== t.fairPlay) t.tiebreakerReason = `Lost tie via Fair Play`;
-          else t.tiebreakerReason = `Lost tie via Alphabetical`;
-        }
+        tied[k].tieGroupMarker = marker;
       }
 
       result.push(...tied);
@@ -125,6 +125,7 @@ function sortWithH2H(standings, groupName, teamsList, groupMatches) {
     i = j;
   }
 
+  legendsObj[groupName] = groupLegends;
   return result;
 }
 
@@ -134,8 +135,9 @@ function sortWithH2H(standings, groupName, teamsList, groupMatches) {
 export function useStandings(groupMatches) {
 
   // ── Build group standings ──────────────────────────────────────────────────
-  const groupStandings = useMemo(() => {
+  const { groupStandings, tiebreakerLegends } = useMemo(() => {
     const standings = {};
+    const legends = {};
 
     // Initialise blank stats for every team
     Object.entries(GROUPS_CONFIG).forEach(([gName, teamsList]) => {
@@ -198,11 +200,11 @@ export function useStandings(groupMatches) {
 
       // Sort with official FIFA head-to-head tiebreakers
       standings[gName] = sortWithH2H(
-        standings[gName], gName, GROUPS_CONFIG[gName], groupMatches
+        standings[gName], gName, GROUPS_CONFIG[gName], groupMatches, legends
       );
     });
 
-    return standings;
+    return { groupStandings: standings, tiebreakerLegends: legends };
   }, [groupMatches]);
 
   // ── Top qualifiers + 8 best thirds ─────────────────────────────────────────
@@ -296,5 +298,5 @@ export function useStandings(groupMatches) {
     return assignment;
   }, [qualificationState]);
 
-  return { groupStandings, qualificationState, allocatedThirds };
+  return { groupStandings, tiebreakerLegends, qualificationState, allocatedThirds };
 }
