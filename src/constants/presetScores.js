@@ -243,9 +243,9 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "open"
   },
   "G-H-3": { // Spain vs Saudi Arabia
-    score1: 3, score2: 0,
-    yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 4, score2: 0,
+    yellow1: 0, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-H-4": { // Spain vs Uruguay
     score1: null, score2: null,
