@@ -46,7 +46,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
   if (!groupName) return null;
 
   const teamsList = GROUPS_CONFIG[groupName];
-  
+
   // Get table data for this group
   const groupStandings = standings || [];
 
@@ -68,7 +68,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
           >
             {/* ── FRONT FACE: FIXTURES (Left on Desktop) ── */}
             <div className={`w-full md:w-[480px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col bg-slate-900/95 backdrop-blur-xl border border-slate-700/60 rounded-2xl shadow-2xl overflow-hidden transition-opacity duration-500 ${isFlipped ? 'max-md:opacity-0 max-md:pointer-events-none' : ''}`}>
-              
+
               {/* Header */}
               <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-slate-800/60 bg-slate-950/40">
                 <div className="flex items-center gap-2.5">
@@ -113,7 +113,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                     const t2Code = teamsList[match.t2];
                     const isLocked = state.status === 'locked';
                     const isOpen = state.status === 'open';
-                    
+
                     const s1 = state.score1 !== '' ? parseInt(state.score1, 10) : NaN;
                     const s2 = state.score2 !== '' ? parseInt(state.score2, 10) : NaN;
                     const hasScores = !isNaN(s1) && !isNaN(s2);
@@ -200,11 +200,10 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                                   key={s}
                                   disabled={isDisabled}
                                   onClick={() => onScoreChange(id, 'status', s)}
-                                  className={`px-2.5 py-0.5 text-[8px] font-bold rounded-full uppercase transition-all ${
-                                    isSelected 
-                                      ? (s === 'locked' ? 'bg-amber-500/20 text-amber-400' : s === 'open' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-300')
-                                      : 'text-slate-500 hover:text-slate-400'
-                                  } ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                                  className={`px-2.5 py-0.5 text-[8px] font-bold rounded-full uppercase transition-all ${isSelected
+                                    ? (s === 'locked' ? 'bg-amber-500/20 text-amber-400' : s === 'open' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-300')
+                                    : 'text-slate-500 hover:text-slate-400'
+                                    } ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                                 >
                                   {s}
                                 </button>
@@ -222,7 +221,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                               <CardInput color="#f59e0b" label="Second Yellow" value={state.secondYellow1} field="secondYellow1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
                               <CardInput color="#ef4444" label="Direct Red" value={state.red1} field="red1" matchId={id} onScoreChange={onScoreChange} disabled={isLocked} />
                             </div>
-                            
+
                             <span className="text-slate-800 text-[8px]">│</span>
 
                             {/* Team 2 Cards */}
@@ -264,10 +263,10 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
             </div>
 
             {/* ── BACK FACE: TABLE (Right on Desktop) ── */}
-            <div className={`w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col bg-blue-950/90 backdrop-blur-xl border border-blue-800/60 rounded-2xl shadow-2xl overflow-hidden max-md:absolute max-md:inset-0 max-md:[transform:rotateY(180deg)] transition-opacity duration-500 ${!isFlipped ? 'max-md:opacity-0 max-md:pointer-events-none' : ''}`}>
-              
+            <div className={`w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col bg-blue-900/60 backdrop-blur-xl border border-blue-700/40 rounded-2xl shadow-2xl overflow-hidden max-md:absolute max-md:inset-0 max-md:[transform:rotateY(180deg)] transition-opacity duration-500 ${!isFlipped ? 'max-md:opacity-0 max-md:pointer-events-none' : ''}`}>
+
               {/* Header */}
-              <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-blue-800/60 bg-blue-950/40">
+              <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-blue-700/40 bg-blue-900/40">
                 <h3 className="text-sm font-black uppercase text-blue-200 tracking-wider">Live Table</h3>
                 <button onClick={onClose} className="md:hidden ml-1 w-7 h-7 rounded-lg bg-blue-900/60 hover:bg-blue-800/60 border border-blue-700/40 flex items-center justify-center transition-all hover:border-blue-600">
                   <X className="w-3.5 h-3.5 text-blue-400" />
@@ -275,14 +274,14 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
               </div>
 
               {/* Mobile Tabs */}
-              <div className="md:hidden flex border-b border-blue-800/60 flex-shrink-0">
+              <div className="md:hidden flex border-b border-blue-700/40 flex-shrink-0">
                 <button className="flex-1 py-2 text-xs font-bold text-slate-400 hover:text-slate-300 transition-colors" onClick={() => setIsFlipped(false)}>Fixtures</button>
                 <button className="flex-1 py-2 text-xs font-bold text-blue-400 bg-blue-900/30 border-b-2 border-blue-500">Live Table</button>
               </div>
 
               {/* Table List */}
               <div className="flex-1 p-4 overflow-y-auto overscroll-contain min-h-0">
-                <div className="overflow-x-auto rounded-lg border border-blue-800/50 bg-blue-900/20">
+                <div className="overflow-x-auto rounded-lg border border-blue-700/30 bg-blue-500/10">
                   <table className="w-full text-xs text-left min-w-[320px]">
                     <thead>
                       <tr className="bg-blue-900/40 text-blue-300 border-b border-blue-800/50">
