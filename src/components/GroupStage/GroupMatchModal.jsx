@@ -103,6 +103,12 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                 const t2Code = teamsList[match.t2];
                 const isLocked = state.status === 'locked';
                 const isOpen = state.status === 'open';
+                
+                const s1 = state.score1 !== '' ? parseInt(state.score1, 10) : NaN;
+                const s2 = state.score2 !== '' ? parseInt(state.score2, 10) : NaN;
+                const hasScores = !isNaN(s1) && !isNaN(s2);
+                const isT1Winner = isLocked && hasScores && s1 > s2;
+                const isT2Winner = isLocked && hasScores && s2 > s1;
 
                 // Border/bg color coding: amber for locked, emerald for open, default for upcoming
                 const borderColor = isLocked
@@ -130,8 +136,8 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                     <div className={`flex items-center justify-center px-3 pt-2 pb-1 rounded-t-lg border border-b-0 ${borderColor} ${bgColor}`}>
                       {/* Team 1 — right aligned, fixed width */}
                       <div className="flex items-center gap-1.5 justify-end w-[140px]">
-                        <span className="text-[10px] truncate text-slate-300 text-right font-medium">{TEAMS[t1Code]?.name}</span>
-                        <span className="text-sm flex-shrink-0">{TEAMS[t1Code]?.emoji}</span>
+                        <span className={`text-[10px] truncate text-right font-medium transition-colors ${isT1Winner ? 'text-white font-bold' : isT2Winner ? 'text-slate-500' : 'text-slate-300'}`}>{TEAMS[t1Code]?.name}</span>
+                        <span className={`text-sm flex-shrink-0 transition-opacity ${isT2Winner ? 'opacity-40 grayscale' : ''}`}>{TEAMS[t1Code]?.emoji}</span>
                       </div>
 
                       {/* Score inputs — centered */}
@@ -145,7 +151,7 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                           disabled={isLocked}
                           onChange={(e) => onScoreChange(id, 'score1', e.target.value)}
                           className={`w-7 h-7 rounded-md text-center text-xs font-black outline-none transition-all ${isLocked
-                            ? 'bg-slate-850 text-slate-500 cursor-not-allowed border border-slate-800'
+                            ? `cursor-not-allowed border ${isT1Winner ? 'text-amber-400 bg-amber-950/30 border-amber-500/30' : isT2Winner ? 'text-slate-600 bg-slate-850 border-slate-800' : 'text-slate-400 bg-slate-850 border-slate-800'}`
                             : 'bg-slate-800 text-white border border-slate-700 focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400'
                             }`}
                         />
@@ -159,7 +165,7 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
                           disabled={isLocked}
                           onChange={(e) => onScoreChange(id, 'score2', e.target.value)}
                           className={`w-7 h-7 rounded-md text-center text-xs font-black outline-none transition-all ${isLocked
-                            ? 'bg-slate-850 text-slate-500 cursor-not-allowed border border-slate-800'
+                            ? `cursor-not-allowed border ${isT2Winner ? 'text-amber-400 bg-amber-950/30 border-amber-500/30' : isT1Winner ? 'text-slate-600 bg-slate-850 border-slate-800' : 'text-slate-400 bg-slate-850 border-slate-800'}`
                             : 'bg-slate-800 text-white border border-slate-700 focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400'
                             }`}
                         />
@@ -167,8 +173,8 @@ export default function GroupMatchModal({ groupName, matches, onScoreChange, onC
 
                       {/* Team 2 — left aligned, fixed width */}
                       <div className="flex items-center gap-1.5 justify-start w-[140px]">
-                        <span className="text-sm flex-shrink-0">{TEAMS[t2Code]?.emoji}</span>
-                        <span className="text-[10px] truncate text-slate-300 font-medium">{TEAMS[t2Code]?.name}</span>
+                        <span className={`text-sm flex-shrink-0 transition-opacity ${isT1Winner ? 'opacity-40 grayscale' : ''}`}>{TEAMS[t2Code]?.emoji}</span>
+                        <span className={`text-[10px] truncate font-medium transition-colors ${isT2Winner ? 'text-white font-bold' : isT1Winner ? 'text-slate-500' : 'text-slate-300'}`}>{TEAMS[t2Code]?.name}</span>
                       </div>
                     </div>
 
