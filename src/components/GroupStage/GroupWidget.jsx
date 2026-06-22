@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TEAMS } from '../../constants/teams';
 
 // ================================================================================
@@ -11,17 +11,9 @@ export default function GroupWidget({
   onToggle,
   bestThirdsQualified
 }) {
-  const [hoveredTeam, setHoveredTeam] = useState(null);
-  
-  const auraColor = hoveredTeam ? TEAMS[hoveredTeam]?.color : null;
-  const outerStyle = auraColor ? {
-    backgroundImage: `linear-gradient(to bottom right, ${auraColor}90, rgba(30, 41, 59, 0.4), ${auraColor}90)`
-  } : {};
-
   return (
     <div
-      className={`rounded-2xl transition-all duration-300 overflow-hidden p-[1px] cursor-pointer group shadow-lg ${!auraColor ? 'bg-gradient-to-br from-slate-800/60 via-slate-800/20 to-slate-800/60 hover:from-emerald-500/50 hover:via-slate-800/50 hover:to-blue-500/50' : ''}`}
-      style={outerStyle}
+      className="rounded-2xl transition-all duration-300 overflow-hidden p-[1px] bg-gradient-to-br from-slate-800/60 via-slate-800/20 to-slate-800/60 hover:from-emerald-500/50 hover:via-slate-800/50 hover:to-blue-500/50 cursor-pointer group shadow-lg"
       onClick={onToggle}
     >
       <div className="bg-slate-900/80 rounded-[15px] overflow-hidden h-full flex flex-col">
@@ -79,8 +71,6 @@ export default function GroupWidget({
                   <tr 
                     key={team.code} 
                     className={`border-b border-slate-900/50 last:border-0 transition-all ${isFirstOrSecond ? 'bg-emerald-950/15 hover:bg-emerald-950/25' : isBestThird ? 'bg-blue-950/15 hover:bg-blue-950/25' : 'hover:bg-slate-800/10'}`}
-                    onMouseEnter={() => setHoveredTeam(team.code)}
-                    onMouseLeave={() => setHoveredTeam(null)}
                   >
                     <td className="py-1 flex items-center gap-1 font-medium pl-0.5">
                       <span 

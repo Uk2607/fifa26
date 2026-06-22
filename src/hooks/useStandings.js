@@ -231,27 +231,93 @@ export function useStandings(groupMatches) {
         const totalScenarios = Math.pow(3, unplayed.length);
         for (let s = 0; s < totalScenarios; s++) {
           const simPts = {};
-          teams.forEach(t => { simPts[t.code] = t.pts; });
+          teams.forEach(t => { simPts[t.code] = 0; });
 
           let temp = s;
-          for (let i = 0; i < unplayed.length; i++) {
-            const outcome = temp % 3;
-            temp = Math.floor(temp / 3);
-            const t1Code = teamsList[unplayed[i].t1];
-            const t2Code = teamsList[unplayed[i].t2];
+          const simMatchResults = [];
+          
+          GROUP_MATCH_PAIRINGS.forEach((pairing, idx) => {
+            const id = `G-${gName}-${idx}`;
+            const match = groupMatches[id];
+            const t1Code = teamsList[pairing.t1];
+            const t2Code = teamsList[pairing.t2];
 
-            if (outcome === 0) simPts[t1Code] += 3; // t1 wins
-            else if (outcome === 1) simPts[t2Code] += 3; // t2 wins
-            else { simPts[t1Code] += 1; simPts[t2Code] += 1; } // draw
-          }
+            let outcome; // 0: t1 wins, 1: t2 wins, 2: draw
+            if (!match || match.status === 'upcoming' || match.score1 === '' || match.score2 === '') {
+              outcome = temp % 3;
+              temp = Math.floor(temp / 3);
+            } else {
+              const s1 = Number(match.score1);
+              const s2 = Number(match.score2);
+              if (s1 > s2) outcome = 0;
+              else if (s2 > s1) outcome = 1;
+              else outcome = 2;
+            }
+            
+            simMatchResults.push({ t1: t1Code, t2: t2Code, outcome });
 
-          const ptsArray = Object.values(simPts).sort((a, b) => b - a);
-          const pts3 = ptsArray[2];
+            if (outcome === 0) simPts[t1Code] += 3;
+            else if (outcome === 1) simPts[t2Code] += 3;
+            else { simPts[t1Code] += 1; simPts[t2Code] += 1; }
+          });
 
+          // Group by total points
+          const pointsMap = {};
           teams.forEach(t => {
             const p = simPts[t.code];
-            if (p <= pts3) qeStatus[t.code].canFailQ = true;
-            if (p >= pts3) qeStatus[t.code].canFailE = true;
+            if (!pointsMap[p]) pointsMap[p] = [];
+            pointsMap[p].push(t.code);
+          });
+
+          const sortedPoints = Object.keys(pointsMap).map(Number).sort((a, b) => b - a);
+          let currentRank = 1;
+
+          sortedPoints.forEach(p => {
+            const tiedTeams = pointsMap[p];
+            if (tiedTeams.length === 1) {
+              const tCode = tiedTeams[0];
+              if (currentRank > 2) qeStatus[tCode].canFailQ = true;
+              if (currentRank < 4) qeStatus[tCode].canFailE = true;
+              currentRank++;
+            } else {
+              // H2H Points Tiebreaker
+              const h2hPts = {};
+              tiedTeams.forEach(t => { h2hPts[t] = 0; });
+              const tiedSet = new Set(tiedTeams);
+
+              simMatchResults.forEach(m => {
+                if (tiedSet.has(m.t1) && tiedSet.has(m.t2)) {
+                  if (m.outcome === 0) h2hPts[m.t1] += 3;
+                  else if (m.outcome === 1) h2hPts[m.t2] += 3;
+                  else { h2hPts[m.t1] += 1; h2hPts[m.t2] += 1; }
+                }
+              });
+
+              const h2hMap = {};
+              tiedTeams.forEach(t => {
+                const h = h2hPts[t];
+                if (!h2hMap[h]) h2hMap[h] = [];
+                h2hMap[h].push(t);
+              });
+              
+              const sortedH2H = Object.keys(h2hMap).map(Number).sort((a, b) => b - a);
+              let tieRank = currentRank;
+              
+              sortedH2H.forEach(h => {
+                const subTied = h2hMap[h];
+                const bestRank = tieRank;
+                const worstRank = tieRank + subTied.length - 1;
+
+                subTied.forEach(tCode => {
+                  if (worstRank > 2) qeStatus[tCode].canFailQ = true;
+                  if (bestRank < 4) qeStatus[tCode].canFailE = true;
+                });
+                
+                tieRank += subTied.length;
+              });
+
+              currentRank += tiedTeams.length;
+            }
           });
         }
 
