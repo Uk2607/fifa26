@@ -30,7 +30,7 @@ export default function BestThirdsPanel({ bestThirdsRanking }) {
                   }`}>
                   {idx + 1}
                 </span>
-                <span className="text-[10px] leading-none">{TEAMS[t.code]?.emoji}</span>
+                <span className="text-[10px] leading-none"><img src={`https://flagcdn.com/w20/${TEAMS[t.code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                 <span className="font-bold text-[9px] text-slate-300">{TEAMS[t.code]?.name}</span>
                 <span className="text-[8px] text-slate-400">({t.groupName})</span>
               </div>

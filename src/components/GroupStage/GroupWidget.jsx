@@ -27,10 +27,10 @@ export default function GroupWidget({
           <span className="font-extrabold text-slate-200 text-xs tracking-wider uppercase">Group {groupName}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="flex -space-x-1">
+          <div className="flex gap-1">
             {teamsList.map(code => (
-              <span key={code} className="text-[20px] transform scale-95 border border-slate-900 rounded-full" title={TEAMS[code]?.name}>
-                {TEAMS[code]?.emoji}
+              <span key={code} className="shadow-sm border border-slate-900/50 rounded-[2px] overflow-hidden leading-none" title={TEAMS[code]?.name}>
+                <img src={`https://flagcdn.com/w20/${TEAMS[code]?.iso2}.png`} alt="flag" className="block w-4 h-[11px] object-cover" />
               </span>
             ))}
           </div>
@@ -70,14 +70,14 @@ export default function GroupWidget({
                 return (
                   <tr 
                     key={team.code} 
-                    className={`border-b border-slate-900/50 last:border-0 transition-all ${isFirstOrSecond ? 'bg-emerald-950/15 hover:bg-emerald-950/25' : isBestThird ? 'bg-blue-950/15 hover:bg-blue-950/25' : 'hover:bg-slate-800/10'}`}
+                    className={`border-b border-slate-900/50 last:border-0 transition-all ${isFirstOrSecond ? 'bg-emerald-500/15 hover:bg-emerald-500/25' : isBestThird ? 'bg-blue-500/15 hover:bg-blue-500/25' : 'hover:bg-slate-800/10'}`}
                   >
                     <td className="py-1 flex items-center gap-1 font-medium pl-0.5">
                       <span 
                         className={`w-1 h-2 rounded-full flex-shrink-0 ${!isFirstOrSecond && !isBestThird ? 'bg-slate-800' : ''}`} 
                         style={(isFirstOrSecond || isBestThird) ? { backgroundColor: TEAMS[team.code]?.color, boxShadow: `0 0 6px ${TEAMS[team.code]?.color}80` } : {}}
                       />
-                      <span className={`text-[11px] ${isFirstOrSecond ? 'drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]' : isBestThird ? 'drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : ''}`}>{TEAMS[team.code]?.emoji}</span>
+                      <span className={`text-[11px] ${isFirstOrSecond ? 'drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]' : isBestThird ? 'drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : ''}`}><img src={`https://flagcdn.com/w20/${TEAMS[team.code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                       <span 
                         className="px-1 py-[0.5px] rounded text-[6px] font-black uppercase tracking-wider" 
                         style={{ backgroundColor: TEAMS[team.code]?.color, color: TEAMS[team.code]?.textColor }}

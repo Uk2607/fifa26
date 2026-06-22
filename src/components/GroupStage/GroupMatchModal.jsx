@@ -190,7 +190,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                             {/* Team 1 */}
                             <div className="flex items-center gap-1.5 justify-end w-[140px]">
                               <span className={`text-[10px] truncate text-right font-medium transition-colors ${isT1Winner ? 'text-white font-bold' : isT2Winner ? 'text-slate-500' : 'text-slate-300'}`}>{TEAMS[t1Code]?.name}</span>
-                              <span className={`text-sm flex-shrink-0 transition-opacity ${isT2Winner ? 'opacity-40 grayscale' : ''}`}>{TEAMS[t1Code]?.emoji}</span>
+                              <span className={`text-sm flex-shrink-0 transition-opacity ${isT2Winner ? 'opacity-40 grayscale' : ''}`}><img src={`https://flagcdn.com/w20/${TEAMS[t1Code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                             </div>
 
                             {/* Score inputs */}
@@ -226,7 +226,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
 
                             {/* Team 2 */}
                             <div className="flex items-center gap-1.5 justify-start w-[140px]">
-                              <span className={`text-sm flex-shrink-0 transition-opacity ${isT1Winner ? 'opacity-40 grayscale' : ''}`}>{TEAMS[t2Code]?.emoji}</span>
+                              <span className={`text-sm flex-shrink-0 transition-opacity ${isT1Winner ? 'opacity-40 grayscale' : ''}`}><img src={`https://flagcdn.com/w20/${TEAMS[t2Code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                               <span className={`text-[10px] truncate font-medium transition-colors ${isT2Winner ? 'text-white font-bold' : isT1Winner ? 'text-slate-500' : 'text-slate-300'}`}>{TEAMS[t2Code]?.name}</span>
                             </div>
                           </div>
@@ -369,7 +369,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                                   style={(isFirstOrSecond || isBestThird) ? { backgroundColor: TEAMS[team.code]?.color, boxShadow: `0 0 8px ${TEAMS[team.code]?.color}80` } : {}}
                                 />
                                 <span className={`text-sm ${isFirstOrSecond ? 'drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]' : isBestThird ? 'drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : ''}`}>
-                                  {TEAMS[team.code]?.emoji}
+                                  <img src={`https://flagcdn.com/w20/${TEAMS[team.code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" />
                                 </span>
                                 <span 
                                   className="px-1.5 py-px rounded text-[8px] font-black uppercase tracking-wider" 
