@@ -365,14 +365,23 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                             >
                               <td className="py-2.5 flex items-center gap-2 font-medium pl-3">
                                 <span
-                                  className={`w-1.5 h-3 rounded-full flex-shrink-0 ${isFirstOrSecond ? "bg-emerald-500" : isBestThird ? "bg-blue-400" : "bg-slate-700"}`}
+                                  className={`w-1.5 h-3 rounded-full flex-shrink-0 ${!isFirstOrSecond && !isBestThird ? "bg-slate-700" : ""}`}
+                                  style={(isFirstOrSecond || isBestThird) ? { backgroundColor: TEAMS[team.code]?.color, boxShadow: `0 0 8px ${TEAMS[team.code]?.color}80` } : {}}
                                 />
                                 <span className={`text-sm ${isFirstOrSecond ? 'drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]' : isBestThird ? 'drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : ''}`}>
                                   {TEAMS[team.code]?.emoji}
                                 </span>
-                                <span className={`font-bold truncate max-w-[100px] text-[11px] ${isFirstOrSecond ? 'text-emerald-400' : isBestThird ? 'text-blue-400' : 'text-slate-300'}`}>
+                                <span 
+                                  className="px-1.5 py-px rounded text-[8px] font-black uppercase tracking-wider" 
+                                  style={{ backgroundColor: TEAMS[team.code]?.color, color: TEAMS[team.code]?.textColor }}
+                                >
+                                  {team.code}
+                                </span>
+                                <span className={`font-bold truncate max-w-[70px] text-[11px] ${isFirstOrSecond ? 'text-emerald-400' : isBestThird ? 'text-blue-400' : 'text-slate-300'}`}>
                                   {TEAMS[team.code]?.name}
                                 </span>
+                                {team.isQ && <span className="text-[9px] font-black text-emerald-400" title="Guaranteed Top 2">(Q)</span>}
+                                {team.isE && <span className="text-[9px] font-black text-red-500" title="Mathematically Eliminated">(E)</span>}
                               </td>
                               <td className="py-2.5 text-center font-bold text-slate-400">
                                 {team.played}

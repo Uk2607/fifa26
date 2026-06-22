@@ -12,7 +12,11 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
 
   return (
     <div 
-      className={`flex items-center justify-between px-2 py-1 transition-colors cursor-default ${isWinner ? 'bg-emerald-500/15' : ''} ${hoveredTeamCode === code && isResolved ? 'bg-cyan-500/30' : ''}`}
+      className="flex items-center justify-between px-2 py-1 transition-colors cursor-default border-l-[3px] border-transparent"
+      style={{
+        borderLeftColor: isResolved ? country?.color : 'transparent',
+        backgroundColor: isWinner && isResolved ? `${country?.color}26` : (hoveredTeamCode === code && isResolved ? `${country?.color}4D` : 'transparent')
+      }}
       onMouseEnter={() => isResolved && onTeamHover(code)}
       onMouseLeave={() => onTeamHover(null)}
     >

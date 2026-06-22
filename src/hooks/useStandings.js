@@ -207,6 +207,59 @@ export function useStandings(groupMatches) {
       standings[gName] = sortWithH2H(
         standings[gName], gName, GROUPS_CONFIG[gName], groupMatches
       );
+
+      // --- Mathematical Qualification / Elimination Simulator ---
+      const teams = standings[gName];
+      const unplayed = [];
+      GROUP_MATCH_PAIRINGS.forEach((pairing, idx) => {
+        const id = `G-${gName}-${idx}`;
+        const match = groupMatches[id];
+        if (!match || match.status === 'upcoming' || match.score1 === '' || match.score2 === '') {
+          unplayed.push(pairing);
+        }
+      });
+
+      if (unplayed.length === 0) {
+        // All matches played, exact positions are locked
+        teams[0].isQ = true;
+        teams[1].isQ = true;
+        teams[3].isE = true;
+      } else {
+        const qeStatus = {};
+        teams.forEach(t => { qeStatus[t.code] = { canFailQ: false, canFailE: false }; });
+
+        const totalScenarios = Math.pow(3, unplayed.length);
+        for (let s = 0; s < totalScenarios; s++) {
+          const simPts = {};
+          teams.forEach(t => { simPts[t.code] = t.pts; });
+
+          let temp = s;
+          for (let i = 0; i < unplayed.length; i++) {
+            const outcome = temp % 3;
+            temp = Math.floor(temp / 3);
+            const t1Code = teamsList[unplayed[i].t1];
+            const t2Code = teamsList[unplayed[i].t2];
+
+            if (outcome === 0) simPts[t1Code] += 3; // t1 wins
+            else if (outcome === 1) simPts[t2Code] += 3; // t2 wins
+            else { simPts[t1Code] += 1; simPts[t2Code] += 1; } // draw
+          }
+
+          const ptsArray = Object.values(simPts).sort((a, b) => b - a);
+          const pts3 = ptsArray[2];
+
+          teams.forEach(t => {
+            const p = simPts[t.code];
+            if (p <= pts3) qeStatus[t.code].canFailQ = true;
+            if (p >= pts3) qeStatus[t.code].canFailE = true;
+          });
+        }
+
+        teams.forEach(t => {
+          if (!qeStatus[t.code].canFailQ) t.isQ = true;
+          if (!qeStatus[t.code].canFailE) t.isE = true;
+        });
+      }
     });
 
     return standings;

@@ -115,7 +115,12 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
               </div>
 
               {/* Score row */}
-              <div className="flex items-center justify-center px-2 pt-2.5 pb-1.5 rounded-t border border-b-0 bg-emerald-950/10 border-emerald-500/20">
+              <div 
+                className="flex items-center justify-center px-2 pt-2.5 pb-1.5 rounded-t border border-b-0 border-emerald-500/20"
+                style={{
+                  background: `linear-gradient(90deg, ${TEAMS[t1Code]?.color}26 0%, transparent 50%, ${TEAMS[t2Code]?.color}26 100%)`
+                }}
+              >
                 {/* Team 1 — right aligned, fixed width */}
                 <div className="flex items-center gap-0.5 justify-end flex-1 min-w-0">
                   <span className="text-[8px] truncate text-slate-300 text-right font-medium">{TEAMS[t1Code]?.name}</span>
