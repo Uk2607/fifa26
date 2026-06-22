@@ -41,7 +41,7 @@ function CardInput({ color, label, value, field, matchId, onScoreChange, disable
 // ⚡ OPEN MATCHES QUICK ACCESS PANEL
 // Shows all matches with status "open" for quick predictions
 // ================================================================================
-export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
+export default function OpenMatchesPanel({ groupMatches, onScoreChange, gridColumns = 3 }) {
   // Collect all open matches across all groups
   const openMatches = [];
 
@@ -101,7 +101,7 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
           </div>
         </div>
 
-        <div className="space-y-2.5">
+        <div className={gridColumns === 1 ? "space-y-4" : gridColumns === 2 ? "space-y-3.5" : "space-y-2.5"}>
           {openMatches.map(({ id, groupName, matchNum, t1Code, t2Code, state }) => (
             <div key={id} className="relative">
               {/* Match number + group badge — floated above the row */}
@@ -124,7 +124,7 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
                 {/* Team 1 — right aligned, fixed width */}
                 <div className="flex items-center gap-0.5 justify-end flex-1 min-w-0">
                   <span className="text-[8px] truncate text-slate-300 text-right font-medium">{TEAMS[t1Code]?.name}</span>
-                  <span className="text-[9px] flex-shrink-0"><img src={`https://flagcdn.com/w20/${TEAMS[t1Code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
+                  <span className="text-[9px] flex-shrink-0"><img src={`https://flagcdn.com/${TEAMS[t1Code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                 </div>
 
                 {/* Score inputs — centered */}
@@ -152,7 +152,7 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
 
                 {/* Team 2 — left aligned, fixed width */}
                 <div className="flex items-center gap-0.5 justify-start flex-1 min-w-0">
-                  <span className="text-[9px] flex-shrink-0"><img src={`https://flagcdn.com/w20/${TEAMS[t2Code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
+                  <span className="text-[9px] flex-shrink-0"><img src={`https://flagcdn.com/${TEAMS[t2Code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                   <span className="text-[8px] truncate text-slate-300 font-medium">{TEAMS[t2Code]?.name}</span>
                 </div>
               </div>

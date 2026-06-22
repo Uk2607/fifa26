@@ -341,15 +341,15 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                       <thead>
                         <tr className="bg-card-bg/60 text-slate-400 border-b border-theme-border">
                           <th className="py-2 pl-3 font-semibold uppercase text-[10px]">Team</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[28px]" title="Played">P</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[28px]" title="Won">W</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[28px]" title="Drawn">D</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[28px]" title="Lost">L</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[32px]" title="Goals For">GF</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[32px]" title="Goals Against">GA</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[36px]" title="Goal Difference">GD</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[36px]" title="Fair Play Points">FP</th>
-                          <th className="py-2 pr-2 text-center font-bold text-emerald-400 w-[42px]">Pts</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[20px] md:w-[28px]" title="Played">P</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[20px] md:w-[28px]" title="Won">W</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[20px] md:w-[28px]" title="Drawn">D</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[20px] md:w-[28px]" title="Lost">L</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[24px] md:w-[32px]" title="Goals For">GF</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[24px] md:w-[32px]" title="Goals Against">GA</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[28px] md:w-[36px]" title="Goal Difference">GD</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[28px] md:w-[36px]" title="Fair Play Points">FP</th>
+                          <th className="py-2 pr-2 text-center font-bold text-emerald-400 w-[30px] md:w-[42px]">Pts</th>
                         </tr>
                       </thead>
                       <tbody>

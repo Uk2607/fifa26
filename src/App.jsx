@@ -19,7 +19,7 @@ export default function App() {
   const [modalGroup, setModalGroup] = useState(null);
   const [showDeveloperGuide, setShowDeveloperGuide] = useState(false);
   const [showTiebreaker, setShowTiebreaker] = useState(false);
-  const [gridColumns, setGridColumns] = useState(3);
+  const [gridColumns, setGridColumns] = useState(2);
 
   const getGridClasses = () => {
     switch(gridColumns) {
@@ -167,10 +167,14 @@ export default function App() {
 
             {/* Right Sidebar: Best 3rd-Place Panel + Open Matches */}
             <div className="lg:col-span-1 space-y-6">
-              <BestThirdsPanel bestThirdsRanking={qualificationState.bestThirdsRanking} />
+              <BestThirdsPanel 
+                bestThirdsRanking={qualificationState.bestThirdsRanking} 
+                gridColumns={gridColumns}
+              />
               <OpenMatchesPanel
                 groupMatches={groupMatches}
                 onScoreChange={handleGroupScoreChange}
+                gridColumns={gridColumns}
               />
             </div>
           </div>

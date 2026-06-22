@@ -2,7 +2,8 @@ import React from 'react';
 import { Award } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 
-export default function BestThirdsPanel({ bestThirdsRanking }) {
+export default function BestThirdsPanel({ bestThirdsRanking, gridColumns = 3 }) {
+  const rowPadding = gridColumns === 1 ? 'py-2.5' : gridColumns === 2 ? 'py-2' : 'py-1';
   return (
     <div className="p-[1px] bg-gradient-to-br from-amber-500/30 via-slate-800/40 to-slate-800/40 rounded-xl shadow-lg">
       <div className="bg-card-bg/80 rounded-[11px] p-3">
@@ -20,7 +21,7 @@ export default function BestThirdsPanel({ bestThirdsRanking }) {
           return (
             <div
               key={t.code}
-              className={`px-1.5 py-1 rounded-md border flex items-center justify-between transition-all ${isQualified
+              className={`px-1.5 ${rowPadding} rounded-md border flex items-center justify-between transition-all ${isQualified
                 ? 'bg-emerald-950/20 border-emerald-500/20 hover:border-emerald-500/40'
                 : 'bg-app-bg/40 border-theme-border'
                 }`}
@@ -30,7 +31,7 @@ export default function BestThirdsPanel({ bestThirdsRanking }) {
                   }`}>
                   {idx + 1}
                 </span>
-                <span className="text-[10px] leading-none"><img src={`https://flagcdn.com/w20/${TEAMS[t.code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
+                <span className="text-[10px] leading-none"><img src={`https://flagcdn.com/${TEAMS[t.code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                 <span className="font-bold text-[9px] text-slate-300">{TEAMS[t.code]?.name}</span>
                 <span className="text-[8px] text-slate-400">({t.groupName})</span>
               </div>
