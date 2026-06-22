@@ -208,7 +208,13 @@ export function useStandings(groupMatches) {
         standings[gName], gName, GROUPS_CONFIG[gName], groupMatches
       );
 
-      // --- Mathematical Qualification / Elimination Simulator ---
+      // ====================================================================================
+      // 🔮 MATHEMATICAL QUALIFICATION / ELIMINATION SIMULATOR (Q / E tags)
+      // ====================================================================================
+      // This algorithm brute-forces all remaining matches in the group to mathematically
+      // guarantee if a team is locked into the Top 2 (Q) or mathematically eliminated (E).
+      // It perfectly accounts for FIFA tiebreakers: Points -> H2H Points -> H2H GD/GF.
+      
       const teams = standings[gName];
       const unplayed = [];
       GROUP_MATCH_PAIRINGS.forEach((pairing, idx) => {
@@ -220,7 +226,7 @@ export function useStandings(groupMatches) {
       });
 
       if (unplayed.length === 0) {
-        // All matches played, exact positions are locked
+        // All matches played, exact positions are completely locked
         teams[0].isQ = true;
         teams[1].isQ = true;
         teams[3].isE = true;
@@ -228,8 +234,12 @@ export function useStandings(groupMatches) {
         const qeStatus = {};
         teams.forEach(t => { qeStatus[t.code] = { canFailQ: false, canFailE: false }; });
 
+        // Total future scenarios = 3 ^ (number of unplayed matches)
+        // (Because each match has 3 outcomes: W, D, L)
         const totalScenarios = Math.pow(3, unplayed.length);
+        
         for (let s = 0; s < totalScenarios; s++) {
+          // --- STEP 1: Calculate total points for this specific scenario ---
           const simPts = {};
           teams.forEach(t => { simPts[t.code] = 0; });
 
@@ -261,7 +271,7 @@ export function useStandings(groupMatches) {
             else { simPts[t1Code] += 1; simPts[t2Code] += 1; }
           });
 
-          // Group by total points
+          // --- STEP 2: Group teams by their total points and sort them ---
           const pointsMap = {};
           teams.forEach(t => {
             const p = simPts[t.code];
@@ -272,15 +282,22 @@ export function useStandings(groupMatches) {
           const sortedPoints = Object.keys(pointsMap).map(Number).sort((a, b) => b - a);
           let currentRank = 1;
 
+          // --- STEP 3: Assign ranks and determine Q/E status ---
           sortedPoints.forEach(p => {
             const tiedTeams = pointsMap[p];
             if (tiedTeams.length === 1) {
+              // CASE A: No tie on total points.
+              // The team's rank is absolutely fixed for this specific scenario.
+              // We check their rank: if it's > 2, they failed to get Top 2 in this scenario.
+              // If it's < 4, they avoided 4th place in this scenario.
               const tCode = tiedTeams[0];
               if (currentRank > 2) qeStatus[tCode].canFailQ = true;
               if (currentRank < 4) qeStatus[tCode].canFailE = true;
               currentRank++;
             } else {
-              // H2H Points Tiebreaker
+              // CASE B: Multiple teams tied on total points!
+              // FIFA Tiebreaker 1: Head-to-Head (H2H) Points among the tied teams.
+              // We calculate H2H points based on both real and simulated W/D/L outcomes.
               const h2hPts = {};
               tiedTeams.forEach(t => { h2hPts[t] = 0; });
               const tiedSet = new Set(tiedTeams);
@@ -307,11 +324,16 @@ export function useStandings(groupMatches) {
                 const subTied = h2hMap[h];
                 
                 if (subTied.length === 1) {
+                  // CASE B1: H2H Points successfully broke the tie for this team.
+                  // Their rank is strictly defined.
                   const tCode = subTied[0];
                   if (tieRank > 2) qeStatus[tCode].canFailQ = true;
                   if (tieRank < 4) qeStatus[tCode].canFailE = true;
                   tieRank++;
                 } else {
+                  // CASE B2: Teams are STILL TIED on H2H Points!
+                  // We must now check if all internal matches between these specific tied teams 
+                  // have already been played in real life.
                   let allInternalPlayed = true;
                   const internalStats = {};
                   subTied.forEach(t => internalStats[t] = { gd: 0, gf: 0 });
@@ -337,6 +359,9 @@ export function useStandings(groupMatches) {
                   });
 
                   if (allInternalPlayed) {
+                    // CASE B3: All internal matches are completed!
+                    // This means their H2H GD and H2H GF are PERMANENTLY LOCKED.
+                    // We can safely sort them by these exact locked stats.
                     subTied.sort((a, b) => {
                       if (internalStats[b].gd !== internalStats[a].gd) return internalStats[b].gd - internalStats[a].gd;
                       return internalStats[b].gf - internalStats[a].gf;
@@ -356,6 +381,9 @@ export function useStandings(groupMatches) {
                     }
                     identicalGroups.push(currGroup);
 
+                    // For any teams that are completely identical across all H2H stats (Points, GD, GF),
+                    // they must share a "Rank Range" (e.g. they both share 2nd and 3rd).
+                    // This perfectly handles unpredictable future metrics like Fair Play or Overall GD.
                     identicalGroups.forEach(ig => {
                       const bestRank = tieRank;
                       const worstRank = tieRank + ig.length - 1;
@@ -366,6 +394,10 @@ export function useStandings(groupMatches) {
                       tieRank += ig.length;
                     });
                   } else {
+                    // CASE B4: Internal matches are NOT fully completed!
+                    // This means H2H GD can swing infinitely based on unknown scorelines.
+                    // To be safe, we assume any team could win the GD tiebreaker, 
+                    // so they share the Best/Worst Rank Range.
                     const bestRank = tieRank;
                     const worstRank = tieRank + subTied.length - 1;
                     subTied.forEach(tCode => {
