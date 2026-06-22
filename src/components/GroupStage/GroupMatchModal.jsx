@@ -81,7 +81,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
       {/* Custom Mobile Flip CSS */}
       <style dangerouslySetInnerHTML={{
         __html: `
-        @media (max-width: 767px) {
+        @media (max-width: 1023px) {
           .animate-flip {
             animation: flipAnimation 0.6s ease-in-out;
             transform-style: preserve-3d;
@@ -97,20 +97,20 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
 
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 md:p-8"
+        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 lg:p-8"
         onClick={onClose}
       >
         {/* Scene */}
         <div
-          className="w-full max-w-[480px] md:max-w-[1050px] h-full md:h-auto max-h-[95vh] flex flex-col [perspective:1000px]"
+          className="w-full max-w-[480px] lg:max-w-[1050px] h-full lg:h-auto max-h-[95vh] flex flex-col [perspective:1000px]"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Card */}
           <div
-            className={`relative w-full h-full md:h-auto flex flex-col md:flex-row md:items-center justify-center gap-4 ${isAnimating ? 'animate-flip' : ''}`}
+            className={`relative w-full h-full lg:h-auto flex flex-col lg:flex-row lg:items-center justify-center gap-4 ${isAnimating ? 'animate-flip' : ''}`}
           >
             {/* ── FRONT FACE: FIXTURES (Left on Desktop) ── */}
-            <div className={`w-full md:w-[480px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col p-[1px] bg-gradient-to-br from-emerald-500/40 via-slate-800/40 to-slate-700/40 rounded-2xl shadow-2xl ${activeTab === 'table' ? 'hidden md:flex' : 'flex'}`}>
+            <div className={`w-full lg:w-[480px] flex-1 min-h-0 lg:flex-none lg:h-auto max-h-[95vh] flex flex-col p-[1px] bg-gradient-to-br from-emerald-500/40 via-slate-800/40 to-slate-700/40 rounded-2xl shadow-2xl ${activeTab === 'table' ? 'hidden lg:flex' : 'flex'}`}>
               <div className="flex-1 flex flex-col min-h-0 bg-modal-bg backdrop-blur-xl rounded-[15px] overflow-hidden">
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-theme-border/60 bg-app-bg/40">
@@ -134,7 +134,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                 </div>
 
                 {/* Mobile Tabs */}
-                <div className="md:hidden flex border-b border-theme-border/60 flex-shrink-0">
+                <div className="lg:hidden flex border-b border-theme-border/60 flex-shrink-0">
                   <button className="flex-1 py-2 text-xs font-bold text-emerald-400 bg-emerald-950/20 border-b-2 border-emerald-500">Fixtures</button>
                   <button className="flex-1 py-2 text-xs font-bold text-slate-400 hover:text-slate-300 transition-colors" onClick={() => handleTabSwitch('table')}>Live Table</button>
                 </div>
@@ -318,18 +318,18 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
             </div>
 
             {/* ── BACK FACE: TABLE (Right on Desktop) ── */}
-            <div className={`w-full md:w-[520px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl ${activeTab === 'fixtures' ? 'hidden md:flex' : 'flex'}`}>
+            <div className={`w-full lg:w-[520px] flex-1 min-h-0 lg:flex-none lg:h-auto max-h-[95vh] flex flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl ${activeTab === 'fixtures' ? 'hidden lg:flex' : 'flex'}`}>
               <div className="flex-1 flex flex-col min-h-0 bg-modal-bg backdrop-blur-xl rounded-[15px] overflow-hidden">
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-theme-border/60 bg-app-bg/40">
                   <h3 className="text-sm font-black uppercase text-slate-200 tracking-wider">Live Table</h3>
-                  <button onClick={onClose} className="md:hidden ml-1 w-7 h-7 rounded-lg bg-slate-800/60 hover:bg-slate-700/60 border border-theme-border/40 flex items-center justify-center transition-all hover:border-slate-600">
+                  <button onClick={onClose} className="lg:hidden ml-1 w-7 h-7 rounded-lg bg-slate-800/60 hover:bg-slate-700/60 border border-theme-border/40 flex items-center justify-center transition-all hover:border-slate-600">
                     <X className="w-3.5 h-3.5 text-slate-400" />
                   </button>
                 </div>
 
                 {/* Mobile Tabs */}
-                <div className="md:hidden flex border-b border-theme-border/60 flex-shrink-0">
+                <div className="lg:hidden flex border-b border-theme-border/60 flex-shrink-0">
                   <button className="flex-1 py-2 text-xs font-bold text-slate-400 hover:text-slate-300 transition-colors" onClick={() => handleTabSwitch('fixtures')}>Fixtures</button>
                   <button className="flex-1 py-2 text-xs font-bold text-emerald-400 bg-emerald-950/20 border-b-2 border-emerald-500">Live Table</button>
                 </div>
@@ -341,15 +341,15 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                       <thead>
                         <tr className="bg-card-bg/60 text-slate-400 border-b border-theme-border">
                           <th className="py-2 pl-3 font-semibold uppercase text-[10px]">Team</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[20px] md:w-[28px]" title="Played">P</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[20px] md:w-[28px]" title="Won">W</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[20px] md:w-[28px]" title="Drawn">D</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[20px] md:w-[28px]" title="Lost">L</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[24px] md:w-[32px]" title="Goals For">GF</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[24px] md:w-[32px]" title="Goals Against">GA</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[28px] md:w-[36px]" title="Goal Difference">GD</th>
-                          <th className="py-2 text-center font-semibold text-[10px] w-[28px] md:w-[36px]" title="Fair Play Points">FP</th>
-                          <th className="py-2 pr-2 text-center font-bold text-emerald-400 w-[30px] md:w-[42px]">Pts</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[16px] md:w-[28px]" title="Played">P</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[16px] md:w-[28px]" title="Won">W</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[16px] md:w-[28px]" title="Drawn">D</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[16px] md:w-[28px]" title="Lost">L</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[20px] md:w-[32px]" title="Goals For">GF</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[20px] md:w-[32px]" title="Goals Against">GA</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[22px] md:w-[36px]" title="Goal Difference">GD</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[22px] md:w-[36px]" title="Fair Play Points">FP</th>
+                          <th className="py-2 pr-2 text-center font-bold text-emerald-400 w-[26px] md:w-[42px]">Pts</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -372,7 +372,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                                   <img src={`https://flagcdn.com/${TEAMS[team.code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" />
                                 </span>
                                 <span 
-                                  className="px-1.5 py-px rounded text-[8px] font-black uppercase tracking-wider" 
+                                  className="px-1.5 py-px rounded text-[8px] font-black uppercase tracking-wider hidden sm:inline-block" 
                                   style={{ backgroundColor: TEAMS[team.code]?.color, color: TEAMS[team.code]?.textColor }}
                                 >
                                   {team.code}

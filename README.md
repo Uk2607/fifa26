@@ -6,6 +6,9 @@ A highly dynamic, interactive, and mathematically rigorous React application bui
 - **Live Group Standings:** Instantly updates table rankings based on official FIFA tiebreaker rules (Points > H2H Points > H2H GD > H2H GF > Overall GD > Overall GF > Fair Play > Alphabetical).
 - **Advanced Q/E Simulator:** Uses brute-force algorithmic predictions to calculate every possible future outcome ($3^{\text{unplayed matches}}$ scenarios instantly). Accurately awards `(Q)` (Guaranteed Top 2) and `(E)` (Mathematically Eliminated) tags to teams based on their absolute best and worst possible rank ranges.
 - **Interactive Knockout Bracket:** Fully dynamic visualization of the Round of 32 through to the Final, with dynamic borders matching team colors.
+- **Dynamic Zoom Dashboard:** Fully responsive grid layout allowing users to zoom the dashboard between 1, 2, or 3 columns with buttery-smooth cross-fade "camera" animations.
+- **High-Definition Vector Flags:** Dynamically integrated FlagCDN `.svg` vector graphics mapped natively to each team's ISO-2 country code for infinitely sharp resolutions across all devices.
+- **Adaptive Mobile Layouts:** Intelligent mobile-first UI featuring responsive flip-card modals that dynamically evolve into side-by-side dashboards on larger tablets and desktops, while automatically ensuring horizontal fit on tiny screens.
 - **Premium Aesthetics:** Dark mode, glassmorphism, dynamic split-gradients for match rows, and hovering aura effects.
 
 ## 📁 Project Structure

@@ -13,7 +13,7 @@ const GroupWidget = React.memo(function GroupWidget({
 }) {
   return (
     <div
-      style={{ fontSize: `calc(10px * var(--zoom-scale, 1))` }} className="rounded-[1.6em] overflow-hidden p-[0.1em] bg-gradient-to-br from-theme-border/60 via-theme-border/20 to-theme-border/60 hover:from-emerald-500/50 hover:via-theme-border/50 hover:to-blue-500/50 cursor-pointer group shadow-lg"
+      style={{ fontSize: `calc(10px * var(--zoom-scale, 1))` }} className="max-md:!text-[8.5px] rounded-[1.6em] overflow-hidden p-[0.1em] bg-gradient-to-br from-theme-border/60 via-theme-border/20 to-theme-border/60 hover:from-emerald-500/50 hover:via-theme-border/50 hover:to-blue-500/50 cursor-pointer group shadow-lg"
       onClick={() => onToggle(groupName)}
     >
       <div className="bg-card-bg/80 rounded-[1.5em] overflow-hidden h-full flex flex-col">

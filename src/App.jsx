@@ -99,7 +99,7 @@ export default function App() {
               </h2>
             </div>
             <div className="flex items-center gap-2">
-              <div className="flex items-center bg-card-bg border border-theme-border rounded-lg overflow-hidden mr-2">
+              <div className="hidden md:flex items-center bg-card-bg border border-theme-border rounded-lg overflow-hidden mr-2">
                 <button 
                   onClick={() => handleZoom(Math.max(1, gridColumns - 1))}
                   disabled={gridColumns === 1}
