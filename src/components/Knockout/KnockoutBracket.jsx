@@ -229,7 +229,7 @@ export default function KnockoutBracket({
       else if (currentMatchId >= 89 && currentMatchId <= 96) nextId = Math.floor((currentMatchId - 89) / 2) + 97;
       else if (currentMatchId >= 97 && currentMatchId <= 100) nextId = Math.floor((currentMatchId - 97) / 2) + 101;
       else if (currentMatchId === 101 || currentMatchId === 102) nextId = 104;
-      
+
       currentMatchId = nextId;
     }
 
@@ -308,14 +308,14 @@ export default function KnockoutBracket({
             {/* Trophy Display */}
             <div className="p-3 bg-gradient-to-b from-amber-500/20 to-transparent rounded-2xl border border-amber-500/30 text-center w-full">
               <Trophy className="w-10 h-10 text-amber-400 fill-amber-500/10 mx-auto animate-pulse mb-1" />
-              <p className="text-[8px] font-black tracking-widest text-amber-400 uppercase">🏆 Champion 🏆</p>
+              <p className="text-[8px] font-black tracking-widest text-amber-400 uppercase">Champion</p>
               <h4 className="text-xs font-black text-white mt-0.5">
                 {tournamentChampion ? (
                   <span className="inline-flex items-center gap-1 bg-card-bg px-2 py-0.5 rounded border border-emerald-500/20">
                     <img src={`https://flagcdn.com/w20/${TEAMS[tournamentChampion]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /> {TEAMS[tournamentChampion]?.name}
                   </span>
                 ) : (
-                  <span className="text-slate-500 italic text-[10px]">TBD</span>
+                  <span className="text-slate-500 italic text-[10px]">-</span>
                 )}
               </h4>
             </div>
