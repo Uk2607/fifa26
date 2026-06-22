@@ -236,8 +236,13 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                             <div className="flex items-center bg-slate-900/80 rounded-full border border-slate-800/80 p-0.5">
                               {['upcoming', 'open', 'locked'].map(s => {
                                 const isSelected = state.status === s;
-                                const isPresetLocked = PRESET_SCORES[id]?.status === 'locked';
-                                const isDisabled = isPresetLocked && s !== 'locked';
+                                const presetStatus = PRESET_SCORES[id]?.status || 'upcoming';
+                                let isDisabled = false;
+                                if (presetStatus === 'locked') {
+                                  isDisabled = true;
+                                } else if (presetStatus === 'open') {
+                                  isDisabled = s === 'upcoming';
+                                }
                                 return (
                                   <button
                                     key={s}
@@ -246,7 +251,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                                     className={`px-2.5 py-0.5 text-[8px] font-bold rounded-full uppercase transition-all flex items-center justify-center gap-1.5 ${isSelected
                                       ? (s === 'locked' ? 'bg-amber-500/20 text-amber-400' : s === 'open' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-300')
                                       : 'text-slate-500 hover:text-slate-400'
-                                      } ${isDisabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                                      } ${isDisabled ? (isSelected ? 'cursor-not-allowed' : 'opacity-50 cursor-not-allowed') : 'cursor-pointer'}`}
                                   >
                                     {s === 'open' && isSelected && (
                                       <span className="relative flex h-1.5 w-1.5">
