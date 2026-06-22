@@ -305,15 +305,76 @@ export function useStandings(groupMatches) {
               
               sortedH2H.forEach(h => {
                 const subTied = h2hMap[h];
-                const bestRank = tieRank;
-                const worstRank = tieRank + subTied.length - 1;
-
-                subTied.forEach(tCode => {
-                  if (worstRank > 2) qeStatus[tCode].canFailQ = true;
-                  if (bestRank < 4) qeStatus[tCode].canFailE = true;
-                });
                 
-                tieRank += subTied.length;
+                if (subTied.length === 1) {
+                  const tCode = subTied[0];
+                  if (tieRank > 2) qeStatus[tCode].canFailQ = true;
+                  if (tieRank < 4) qeStatus[tCode].canFailE = true;
+                  tieRank++;
+                } else {
+                  let allInternalPlayed = true;
+                  const internalStats = {};
+                  subTied.forEach(t => internalStats[t] = { gd: 0, gf: 0 });
+
+                  GROUP_MATCH_PAIRINGS.forEach((pairing, idx) => {
+                    const id = `G-${gName}-${idx}`;
+                    const t1Code = teamsList[pairing.t1];
+                    const t2Code = teamsList[pairing.t2];
+                    
+                    if (subTied.includes(t1Code) && subTied.includes(t2Code)) {
+                      const m = groupMatches[id];
+                      if (!m || m.status === 'upcoming' || m.score1 === '' || m.score2 === '') {
+                        allInternalPlayed = false;
+                      } else {
+                        const s1 = Number(m.score1);
+                        const s2 = Number(m.score2);
+                        internalStats[t1Code].gf += s1;
+                        internalStats[t1Code].gd += (s1 - s2);
+                        internalStats[t2Code].gf += s2;
+                        internalStats[t2Code].gd += (s2 - s1);
+                      }
+                    }
+                  });
+
+                  if (allInternalPlayed) {
+                    subTied.sort((a, b) => {
+                      if (internalStats[b].gd !== internalStats[a].gd) return internalStats[b].gd - internalStats[a].gd;
+                      return internalStats[b].gf - internalStats[a].gf;
+                    });
+
+                    const identicalGroups = [];
+                    let currGroup = [subTied[0]];
+                    for (let k = 1; k < subTied.length; k++) {
+                      const prev = subTied[k-1];
+                      const curr = subTied[k];
+                      if (internalStats[curr].gd === internalStats[prev].gd && internalStats[curr].gf === internalStats[prev].gf) {
+                        currGroup.push(curr);
+                      } else {
+                        identicalGroups.push(currGroup);
+                        currGroup = [curr];
+                      }
+                    }
+                    identicalGroups.push(currGroup);
+
+                    identicalGroups.forEach(ig => {
+                      const bestRank = tieRank;
+                      const worstRank = tieRank + ig.length - 1;
+                      ig.forEach(tCode => {
+                        if (worstRank > 2) qeStatus[tCode].canFailQ = true;
+                        if (bestRank < 4) qeStatus[tCode].canFailE = true;
+                      });
+                      tieRank += ig.length;
+                    });
+                  } else {
+                    const bestRank = tieRank;
+                    const worstRank = tieRank + subTied.length - 1;
+                    subTied.forEach(tCode => {
+                      if (worstRank > 2) qeStatus[tCode].canFailQ = true;
+                      if (bestRank < 4) qeStatus[tCode].canFailE = true;
+                    });
+                    tieRank += subTied.length;
+                  }
+                }
               });
 
               currentRank += tiedTeams.length;
