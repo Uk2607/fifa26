@@ -134,7 +134,7 @@ function RoundLabel({ label, width }) {
   if (!label) return <div style={{ width, flexShrink: 0 }} />;
   return (
     <div style={{ width, flexShrink: 0, textAlign: 'center', padding: '0 2px' }}>
-      <span className="text-[9px] font-black uppercase text-slate-400 tracking-wider bg-slate-900/80 px-2 py-1 rounded-full border border-slate-800 whitespace-nowrap inline-block">
+      <span className="text-[9px] font-black uppercase text-slate-400 tracking-wider bg-card-bg/80 px-2 py-1 rounded-full border border-theme-border whitespace-nowrap inline-block">
         {label}
       </span>
     </div>
@@ -237,10 +237,10 @@ export default function KnockoutBracket({
   }, [hoveredTeamCode, r32MatchesSeeding, roundOf16Seeding, quarterFinalsSeeding, semiFinalsSeeding, finalsSeeding, koMatches]);
 
   return (
-    <section className="bg-slate-900/25 rounded-3xl border border-slate-800/80 p-4 md:p-6 shadow-2xl relative overflow-hidden">
+    <section className="bg-card-bg/25 rounded-3xl border border-theme-border/80 p-4 md:p-6 shadow-2xl relative overflow-hidden">
 
       {/* Section Header */}
-      <div className="border-b border-slate-800 pb-4 mb-5">
+      <div className="border-b border-theme-border pb-4 mb-5">
         <h2 className="text-lg font-black uppercase text-amber-400 flex items-center gap-2">
           Interactive Knockout Bracket
         </h2>
@@ -311,7 +311,7 @@ export default function KnockoutBracket({
               <p className="text-[8px] font-black tracking-widest text-amber-400 uppercase">🏆 Champion 🏆</p>
               <h4 className="text-xs font-black text-white mt-0.5">
                 {tournamentChampion ? (
-                  <span className="inline-flex items-center gap-1 bg-slate-900 px-2 py-0.5 rounded border border-emerald-500/20">
+                  <span className="inline-flex items-center gap-1 bg-card-bg px-2 py-0.5 rounded border border-emerald-500/20">
                     <img src={`https://flagcdn.com/w20/${TEAMS[tournamentChampion]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /> {TEAMS[tournamentChampion]?.name}
                   </span>
                 ) : (
@@ -339,7 +339,7 @@ export default function KnockoutBracket({
 
             {/* 3rd Place Playoff — Match 103 */}
             <div className="w-full space-y-1">
-              <span className="text-[8px] font-black uppercase text-slate-400 block text-center bg-slate-800/20 py-0.5 rounded border border-slate-800">
+              <span className="text-[8px] font-black uppercase text-slate-400 block text-center bg-slate-800/20 py-0.5 rounded border border-theme-border">
                 MATCH 103 • 3RD PLACE
               </span>
               <KnockoutMatchCard

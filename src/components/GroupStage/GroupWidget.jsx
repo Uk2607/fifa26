@@ -13,10 +13,10 @@ export default function GroupWidget({
 }) {
   return (
     <div
-      className="rounded-2xl transition-all duration-300 overflow-hidden p-[1px] bg-gradient-to-br from-slate-800/60 via-slate-800/20 to-slate-800/60 hover:from-emerald-500/50 hover:via-slate-800/50 hover:to-blue-500/50 cursor-pointer group shadow-lg"
+      className="rounded-2xl transition-all duration-300 overflow-hidden p-[1px] bg-gradient-to-br from-theme-border/60 via-theme-border/20 to-theme-border/60 hover:from-emerald-500/50 hover:via-theme-border/50 hover:to-blue-500/50 cursor-pointer group shadow-lg"
       onClick={onToggle}
     >
-      <div className="bg-slate-900/80 rounded-[15px] overflow-hidden h-full flex flex-col">
+      <div className="bg-card-bg/80 rounded-[15px] overflow-hidden h-full flex flex-col">
 
       {/* Clickable Header */}
       <div className="w-full px-3 py-2.5 flex items-center justify-between text-left">
@@ -29,7 +29,7 @@ export default function GroupWidget({
         <div className="flex items-center gap-1.5">
           <div className="flex gap-1">
             {teamsList.map(code => (
-              <span key={code} className="shadow-sm border border-slate-900/50 rounded-[2px] overflow-hidden leading-none" title={TEAMS[code]?.name}>
+              <span key={code} className="shadow-sm border border-theme-border/50 rounded-[2px] overflow-hidden leading-none" title={TEAMS[code]?.name}>
                 <img src={`https://flagcdn.com/w20/${TEAMS[code]?.iso2}.png`} alt="flag" className="block w-4 h-[11px] object-cover" />
               </span>
             ))}
@@ -41,11 +41,11 @@ export default function GroupWidget({
       </div>
 
       {/* ── Enriched Standings Table ── */}
-      <div className="px-2.5 pb-2.5 border-t border-slate-800/40 pt-1.5 bg-slate-950/20">
+      <div className="px-2.5 pb-2.5 border-t border-theme-border/40 pt-1.5 bg-app-bg/20">
         <div className="overflow-x-auto">
           <table className="w-full text-[10px] text-left min-w-[290px]">
             <thead>
-              <tr className="text-slate-500 font-bold border-b border-slate-900/80 uppercase text-[7px] tracking-wider">
+              <tr className="text-slate-500 font-bold border-b border-theme-border/80 uppercase text-[7px] tracking-wider">
                 <th className="py-0.5 pl-0.5">Team</th>
                 <th className="py-0.5 text-center w-5">PL</th>
                 <th className="py-0.5 text-center w-5">W</th>
@@ -70,7 +70,7 @@ export default function GroupWidget({
                 return (
                   <tr 
                     key={team.code} 
-                    className={`border-b border-slate-900/50 last:border-0 transition-all ${isFirstOrSecond ? 'bg-emerald-500/15 hover:bg-emerald-500/25' : isBestThird ? 'bg-blue-500/15 hover:bg-blue-500/25' : 'hover:bg-slate-800/10'}`}
+                    className={`border-b border-theme-border/50 last:border-0 transition-all ${isFirstOrSecond ? 'bg-emerald-500/15 hover:bg-emerald-500/25' : isBestThird ? 'bg-blue-500/15 hover:bg-blue-500/25' : 'hover:bg-slate-800/10'}`}
                   >
                     <td className="py-1 flex items-center gap-1 font-medium pl-0.5">
                       <span 

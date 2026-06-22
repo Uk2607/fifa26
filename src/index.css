@@ -1,1 +1,21 @@
 @import "tailwindcss";
+
+@theme {
+  /* ========================================= */
+  /* 🎨 GLOBAL APP THEME VARIABLES           */
+  /* ========================================= */
+  /* Main background of the application (Black) */
+  --color-app-bg: #09090b;
+  
+  /* Background for Group Tiles, Panels, and Cards (Dark Gray / Zinc) */
+  --color-card-bg: #18181b;
+  
+  /* Background for hover states on Cards */
+  --color-card-hover: #27272a;
+  
+  /* Background for Modals and Popups (Semi-transparent Black) */
+  --color-modal-bg: rgba(9, 9, 11, 0.95);
+  
+  /* Standard structural border color across the app */
+  --color-theme-border: #27272a;
+}

@@ -25,8 +25,8 @@ function CardInput({ color, label, value, field, matchId, onScoreChange, disable
       disabled={disabled}
       onChange={(e) => onScoreChange(matchId, field, e.target.value)}
       className={`w-4 h-4 rounded text-center text-[7px] font-bold outline-none transition-all ${disabled
-        ? 'bg-slate-900 text-slate-600 cursor-not-allowed border border-slate-800'
-        : 'bg-slate-800/60 text-slate-300 border border-slate-700/60 focus:border-slate-500 focus:ring-1 focus:ring-slate-500'
+        ? 'bg-card-bg text-slate-600 cursor-not-allowed border border-theme-border'
+        : 'bg-slate-800/60 text-slate-300 border border-theme-border/60 focus:border-slate-500 focus:ring-1 focus:ring-slate-500'
         }`}
     />
   );
@@ -69,9 +69,9 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
 
   if (openMatches.length === 0) {
     return (
-      <div className="p-[1px] bg-gradient-to-br from-slate-800/60 via-slate-800/20 to-slate-800/60 rounded-xl shadow-lg">
-        <div className="bg-slate-900/80 rounded-[11px] p-3">
-          <div className="flex items-center gap-1.5 border-b border-slate-800 pb-2 mb-2">
+      <div className="p-[1px] bg-gradient-to-br from-theme-border/60 via-theme-border/20 to-theme-border/60 rounded-xl shadow-lg">
+        <div className="bg-card-bg/80 rounded-[11px] p-3">
+          <div className="flex items-center gap-1.5 border-b border-theme-border pb-2 mb-2">
             <Zap className="w-3.5 h-3.5 text-emerald-400" />
             <div className="flex items-center justify-center gap-2 mb-2">
               <h3 className="text-[10px] font-black uppercase text-slate-200 tracking-wider">Open Matches</h3>
@@ -86,8 +86,8 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
 
   return (
     <div className="p-[1px] bg-gradient-to-br from-emerald-500/40 via-slate-800/40 to-blue-500/40 rounded-xl shadow-lg">
-      <div className="bg-slate-900/80 rounded-[11px] p-3">
-        <div className="flex items-center gap-1.5 border-b border-slate-800 mb-2">
+      <div className="bg-card-bg/80 rounded-[11px] p-3">
+        <div className="flex items-center gap-1.5 border-b border-theme-border mb-2">
           <div className="relative">
             {/* <Zap className="w-3.5 h-3.5 text-emerald-400" /> */}
             <span className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping" />
@@ -136,7 +136,7 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
                     placeholder="-"
                     value={state.score1}
                     onChange={(e) => onScoreChange(id, 'score1', e.target.value)}
-                    className="w-5 h-5 rounded text-center text-[10px] font-black outline-none transition-all bg-slate-800 text-white border border-slate-700 focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400"
+                    className="w-5 h-5 rounded text-center text-[10px] font-black outline-none transition-all bg-slate-800 text-white border border-theme-border focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400"
                   />
                   <span className="text-slate-600 font-black text-[8px]">:</span>
                   <input
@@ -146,7 +146,7 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
                     placeholder="-"
                     value={state.score2}
                     onChange={(e) => onScoreChange(id, 'score2', e.target.value)}
-                    className="w-5 h-5 rounded text-center text-[10px] font-black outline-none transition-all bg-slate-800 text-white border border-slate-700 focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400"
+                    className="w-5 h-5 rounded text-center text-[10px] font-black outline-none transition-all bg-slate-800 text-white border border-theme-border focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400"
                   />
                 </div>
 
@@ -176,7 +176,7 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange }) {
         </div>
 
         {/* Legend */}
-        <div className="flex items-center justify-center gap-3 pt-2 border-t border-slate-900/50 mt-2 flex-wrap">
+        <div className="flex items-center justify-center gap-3 pt-2 border-t border-theme-border/50 mt-2 flex-wrap">
           <div className="flex items-center gap-1">
             <span className="w-2 h-3 rounded-[2px] bg-yellow-500 inline-block" />
             <span className="text-[7px] text-slate-500">Yellow (−1)</span>

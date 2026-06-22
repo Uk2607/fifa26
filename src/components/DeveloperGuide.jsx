@@ -6,8 +6,8 @@ export default function DeveloperGuide({ show, onClose }) {
 
   return (
     <div className="max-w-[1920px] mx-auto w-full px-4 pt-4">
-      <div className="bg-slate-900 border border-emerald-500/30 p-5 rounded-2xl">
-        <div className="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+      <div className="bg-card-bg border border-emerald-500/30 p-5 rounded-2xl">
+        <div className="flex items-center justify-between mb-3 border-b border-theme-border pb-2">
           <h3 className="text-md font-extrabold text-emerald-400 uppercase flex items-center gap-2">
             <Sparkles className="w-4 h-4" /> Bracket Integration Manual
           </h3>
@@ -18,7 +18,7 @@ export default function DeveloperGuide({ show, onClose }) {
             <p className="mb-2 leading-relaxed">
               🔒 <strong className="text-white">Presetting official matches:</strong> Input completed results directly in the top-level <code className="text-emerald-400 font-mono">PRESET_SCORES</code> constant. When <code className="text-emerald-400 font-mono">status: 'locked'</code> is provided, users cannot modify results on the web interface.
             </p>
-            <pre className="bg-slate-950 p-2.5 rounded font-mono text-[10px] text-slate-400 overflow-x-auto">
+            <pre className="bg-app-bg p-2.5 rounded font-mono text-[10px] text-slate-400 overflow-x-auto">
               {`"G-A-0": { score1: 2, score2: 0, status: 'locked' }, // Mexico vs South Africa Locked
 "KO-75": { score1: 3, score2: 1, status: 'locked' },  // R32 Match 75 (1E vs 3ABCDF) Locked`}
             </pre>

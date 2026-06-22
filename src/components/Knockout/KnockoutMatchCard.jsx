@@ -43,7 +43,7 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
             value={penaltyVal}
             disabled={isLocked}
             onChange={(e) => onScoreChange(matchId, side === 't1' ? 'penalty1' : 'penalty2', e.target.value)}
-            className="w-4 h-4 rounded text-center text-[8px] font-black bg-slate-950 border border-slate-800 text-amber-400 outline-none"
+            className="w-4 h-4 rounded text-center text-[8px] font-black bg-app-bg border border-theme-border text-amber-400 outline-none"
             title="Penalty shootouts score"
           />
         )}
@@ -56,8 +56,8 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
           disabled={isLocked}
           onChange={(e) => onScoreChange(matchId, side === 't1' ? 'score1' : 'score2', e.target.value)}
           className={`w-5 h-5 rounded text-center text-[10px] font-black outline-none transition-all ${isLocked
-            ? 'bg-slate-850 text-slate-500 cursor-not-allowed border border-slate-800'
-            : 'bg-slate-800 text-white border border-slate-700 focus:border-emerald-400'
+            ? 'bg-slate-850 text-slate-500 cursor-not-allowed border border-theme-border'
+            : 'bg-slate-800 text-white border border-theme-border focus:border-emerald-400'
             }`}
         />
       </div>
@@ -88,14 +88,14 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
 
   return (
     <div className={`rounded-xl border transition-all duration-300 relative ${isLocked
-      ? 'border-amber-500/30 bg-slate-950/70 shadow-sm'
-      : 'border-slate-800/80 bg-slate-900/50 hover:border-slate-700 shadow-md'
+      ? 'border-amber-500/30 bg-app-bg/70 shadow-sm'
+      : 'border-theme-border/80 bg-card-bg/50 hover:border-theme-border shadow-md'
       } ${isHighlighted ? 'ring-2 ring-cyan-400 drop-shadow-[0_0_10px_rgba(34,211,238,0.4)] z-10 scale-105' : ''
       } ${isDimmed ? 'opacity-30' : ''
       } overflow-hidden w-full max-w-[155px] mx-auto`}>
 
       {/* Top micro match tracker indicator */}
-      <div className="bg-slate-950 px-2 py-0.5 flex items-center justify-between text-[7px] font-extrabold text-slate-500 tracking-wider uppercase border-b border-slate-900">
+      <div className="bg-app-bg px-2 py-0.5 flex items-center justify-between text-[7px] font-extrabold text-slate-500 tracking-wider uppercase border-b border-theme-border">
         <span>MATCH {matchId}</span>
         {isLocked ? (
           <span className="flex items-center gap-0.5 text-amber-500 font-bold scale-90">
@@ -121,7 +121,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         onTeamHover={onTeamHover}
       />
 
-      <div className="h-px bg-slate-900"></div>
+      <div className="h-px bg-card-bg"></div>
 
       <TeamRow
         code={team2}

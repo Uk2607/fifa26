@@ -5,8 +5,8 @@ import { TEAMS } from '../../constants/teams';
 export default function BestThirdsPanel({ bestThirdsRanking }) {
   return (
     <div className="p-[1px] bg-gradient-to-br from-amber-500/30 via-slate-800/40 to-slate-800/40 rounded-xl shadow-lg">
-      <div className="bg-slate-900/80 rounded-[11px] p-3">
-        <div className="flex items-center gap-1.5 border-b border-slate-800 pb-2 mb-2">
+      <div className="bg-card-bg/80 rounded-[11px] p-3">
+        <div className="flex items-center gap-1.5 border-b border-theme-border pb-2 mb-2">
         <Award className="w-3.5 h-3.5 text-amber-400" />
         <div>
           <h3 className="text-[10px] font-black uppercase text-slate-200 tracking-wider">Best 3rd-Place Rank</h3>
@@ -22,7 +22,7 @@ export default function BestThirdsPanel({ bestThirdsRanking }) {
               key={t.code}
               className={`px-1.5 py-1 rounded-md border flex items-center justify-between transition-all ${isQualified
                 ? 'bg-emerald-950/20 border-emerald-500/20 hover:border-emerald-500/40'
-                : 'bg-slate-950/40 border-slate-900'
+                : 'bg-app-bg/40 border-theme-border'
                 }`}
             >
               <div className="flex items-center gap-1.5 truncate">
@@ -43,7 +43,7 @@ export default function BestThirdsPanel({ bestThirdsRanking }) {
                 </span>
                 <span className={`text-[7px] px-1 py-0.5 rounded font-black uppercase tracking-wider ${isQualified
                   ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-                  : 'bg-slate-900 text-slate-500'
+                  : 'bg-card-bg text-slate-500'
                   }`}>
                   {isQualified ? 'IN' : 'OUT'}
                 </span>

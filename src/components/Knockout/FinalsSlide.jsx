@@ -15,7 +15,7 @@ export default function FinalsSlide({ finalsSeeding, koMatches, onScoreChange, t
             <p className="text-[9px] font-black tracking-widest text-amber-400 uppercase">🏆 Projected World Champion 🏆</p>
             <h4 className="text-md font-black text-white mt-1">
               {tournamentChampion ? (
-                <span className="bg-slate-900 px-3 py-1 rounded border border-emerald-500/20 inline-flex items-center gap-2">
+                <span className="bg-card-bg px-3 py-1 rounded border border-emerald-500/20 inline-flex items-center gap-2">
                   <img src={`https://flagcdn.com/w20/${TEAMS[tournamentChampion]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /> {TEAMS[tournamentChampion]?.name}
                 </span>
               ) : (
@@ -39,7 +39,7 @@ export default function FinalsSlide({ finalsSeeding, koMatches, onScoreChange, t
 
         {/* THIRD PLACE PLAYOFF COMPONENT */}
         <div className="space-y-1.5">
-          <span className="text-[9px] font-black uppercase text-slate-400 block text-center bg-slate-800/20 py-1 rounded border border-slate-800">MATCH 103 • 3RD PLACE PLAYOFF</span>
+          <span className="text-[9px] font-black uppercase text-slate-400 block text-center bg-slate-800/20 py-1 rounded border border-theme-border">MATCH 103 • 3RD PLACE PLAYOFF</span>
           <KnockoutMatchCard
             matchId={103}
             team1={finalsSeeding[103].t1}

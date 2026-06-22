@@ -38,7 +38,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950">
+    <div className="min-h-screen bg-app-bg text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950">
 
       <Header onReset={handleResetAll} />
 
@@ -63,14 +63,14 @@ export default function App() {
 
         {/* SECTION 1: GROUP STAGES */}
         <section className="space-y-4">
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-slate-800 pb-3 gap-2">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-theme-border pb-3 gap-2">
             <div>
               <h2 className="text-lg font-black tracking-wider uppercase text-emerald-400 flex items-center gap-2">
                 2026 World Cup Group Stages
               </h2>
             </div>
             <div className="flex items-center gap-2">
-              <div className="text-[10px] bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg text-slate-400 font-semibold uppercase">
+              <div className="text-[10px] bg-card-bg border border-theme-border px-3 py-1 rounded-lg text-slate-400 font-semibold uppercase">
                 Top 2 Advance + Best 8 Thirds
               </div>
 
@@ -79,14 +79,14 @@ export default function App() {
                   onClick={(e) => { e.stopPropagation(); setShowTiebreaker(prev => !prev); }}
                   onMouseEnter={() => setShowTiebreaker(true)}
                   onMouseLeave={() => setShowTiebreaker(false)}
-                  className="w-5 h-5 rounded-full flex items-center justify-center bg-slate-800/80 hover:bg-slate-700 border border-slate-700/60 hover:border-slate-500 transition-all cursor-help"
+                  className="w-5 h-5 rounded-full flex items-center justify-center bg-slate-800/80 hover:bg-slate-700 border border-theme-border/60 hover:border-slate-500 transition-all cursor-help"
                   title="Ranking criteria"
                 >
                   <Info className="w-3.5 h-3.5 text-slate-400" />
                 </button>
                 {showTiebreaker && (
                   <div
-                    className="absolute right-0 top-8 z-50 w-64 bg-slate-900 border border-slate-700 rounded-lg shadow-xl shadow-black/50 p-3 text-left"
+                    className="absolute right-0 top-8 z-50 w-64 bg-card-bg border border-theme-border rounded-lg shadow-xl shadow-black/50 p-3 text-left"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <p className="text-[9px] font-black text-emerald-400 uppercase tracking-wider mb-2">Ranking Criteria (in order)</p>

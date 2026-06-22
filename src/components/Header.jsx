@@ -3,7 +3,7 @@ import { Trophy, RefreshCw } from 'lucide-react';
 
 export default function Header({ onReset }) {
   return (
-    <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur px-4 py-3.5 shadow-xl">
+    <header className="border-b border-theme-border bg-card-bg/50 backdrop-blur px-4 py-3.5 shadow-xl">
       <div className="max-w-[1920px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="bg-gradient-to-br from-emerald-400 to-emerald-600 p-2 rounded-xl shadow-lg shadow-emerald-500/10">
@@ -21,7 +21,7 @@ export default function Header({ onReset }) {
         <div className="flex items-center gap-2">
           <button
             onClick={onReset}
-            className="bg-slate-900 hover:bg-red-950/40 text-red-400 px-3 py-1.5 rounded-lg text-xs font-bold border border-red-900/20 transition active:scale-95 flex items-center gap-1.5"
+            className="bg-card-bg hover:bg-red-950/40 text-red-400 px-3 py-1.5 rounded-lg text-xs font-bold border border-red-900/20 transition active:scale-95 flex items-center gap-1.5"
           >
             <RefreshCw className="w-3 h-3" /> Reset
           </button>
