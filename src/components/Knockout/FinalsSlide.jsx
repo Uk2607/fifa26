@@ -16,7 +16,7 @@ export default function FinalsSlide({ finalsSeeding, koMatches, onScoreChange, t
             <h4 className="text-md font-black text-white mt-1">
               {tournamentChampion ? (
                 <span className="bg-card-bg px-3 py-1 rounded border border-emerald-500/20 inline-flex items-center gap-2">
-                  <img src={`https://flagcdn.com/w20/${TEAMS[tournamentChampion]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /> {TEAMS[tournamentChampion]?.name}
+                  <img src={`https://flagcdn.com/${TEAMS[tournamentChampion]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /> {TEAMS[tournamentChampion]?.name}
                 </span>
               ) : (
                 <span className="text-slate-500 italic text-xs">Awaiting predicting outcomes</span>

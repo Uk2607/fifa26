@@ -312,7 +312,7 @@ export default function KnockoutBracket({
               <h4 className="text-xs font-black text-white mt-0.5">
                 {tournamentChampion ? (
                   <span className="inline-flex items-center gap-1 bg-card-bg px-2 py-0.5 rounded border border-emerald-500/20">
-                    <img src={`https://flagcdn.com/w20/${TEAMS[tournamentChampion]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /> {TEAMS[tournamentChampion]?.name}
+                    <img src={`https://flagcdn.com/${TEAMS[tournamentChampion]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /> {TEAMS[tournamentChampion]?.name}
                   </span>
                 ) : (
                   <span className="text-slate-500 italic text-[10px]">-</span>

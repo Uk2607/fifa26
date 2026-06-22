@@ -23,7 +23,7 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
       <div className="flex items-center gap-1.5 truncate flex-grow">
         {isResolved ? (
           <div className="flex items-center gap-1 truncate">
-            <span className="text-xs leading-none"><img src={`https://flagcdn.com/w20/${country?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
+            <span className="text-xs leading-none"><img src={`https://flagcdn.com/${country?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
             <span className={`text-[10px] truncate max-w-[85px] ${isWinner ? 'text-white font-extrabold' : 'text-slate-300 font-medium'}`}>
               {country?.name}
             </span>
