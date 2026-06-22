@@ -216,9 +216,9 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-G-4": { // Belgium vs Iran
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 0, score2: 0,
+    yellow1: 1, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 1, red2: 0, status: "locked"
   },
   "G-G-5": { // New Zealand vs Egypt
     score1: null, score2: null,
@@ -238,9 +238,9 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-H-2": { // Uruguay vs Cape Verde
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 2, score2: 2,
+    yellow1: 2, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-H-3": { // Spain vs Saudi Arabia
     score1: 4, score2: 0,
