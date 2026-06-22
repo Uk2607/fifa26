@@ -102,7 +102,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
       >
         {/* Scene */}
         <div
-          className="w-full max-w-[480px] md:max-w-[900px] h-full md:h-auto max-h-[95vh] flex flex-col [perspective:1000px]"
+          className="w-full max-w-[480px] md:max-w-[1050px] h-full md:h-auto max-h-[95vh] flex flex-col [perspective:1000px]"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Card */}
@@ -190,7 +190,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                             {/* Team 1 */}
                             <div className="flex items-center gap-1.5 justify-end w-[140px]">
                               <span className={`text-[10px] truncate text-right font-medium transition-colors ${isT1Winner ? 'text-white font-bold' : isT2Winner ? 'text-slate-500' : 'text-slate-300'}`}>{TEAMS[t1Code]?.name}</span>
-                              <span className={`text-sm flex-shrink-0 transition-opacity ${isT2Winner ? 'opacity-40 grayscale' : ''}`}><img src={`https://flagcdn.com/w20/${TEAMS[t1Code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
+                              <span className={`text-sm flex-shrink-0 transition-opacity ${isT2Winner ? 'opacity-40 grayscale' : ''}`}><img src={`https://flagcdn.com/${TEAMS[t1Code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                             </div>
 
                             {/* Score inputs */}
@@ -226,7 +226,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
 
                             {/* Team 2 */}
                             <div className="flex items-center gap-1.5 justify-start w-[140px]">
-                              <span className={`text-sm flex-shrink-0 transition-opacity ${isT1Winner ? 'opacity-40 grayscale' : ''}`}><img src={`https://flagcdn.com/w20/${TEAMS[t2Code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
+                              <span className={`text-sm flex-shrink-0 transition-opacity ${isT1Winner ? 'opacity-40 grayscale' : ''}`}><img src={`https://flagcdn.com/${TEAMS[t2Code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                               <span className={`text-[10px] truncate font-medium transition-colors ${isT2Winner ? 'text-white font-bold' : isT1Winner ? 'text-slate-500' : 'text-slate-300'}`}>{TEAMS[t2Code]?.name}</span>
                             </div>
                           </div>
@@ -318,7 +318,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
             </div>
 
             {/* ── BACK FACE: TABLE (Right on Desktop) ── */}
-            <div className={`w-full md:w-[400px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl ${activeTab === 'fixtures' ? 'hidden md:flex' : 'flex'}`}>
+            <div className={`w-full md:w-[520px] flex-1 min-h-0 md:flex-none md:h-auto max-h-[95vh] flex flex-col p-[1px] bg-gradient-to-br from-slate-700/40 via-slate-800/40 to-slate-900/40 rounded-2xl shadow-2xl ${activeTab === 'fixtures' ? 'hidden md:flex' : 'flex'}`}>
               <div className="flex-1 flex flex-col min-h-0 bg-modal-bg backdrop-blur-xl rounded-[15px] overflow-hidden">
                 {/* Header */}
                 <div className="flex-shrink-0 flex items-center justify-between px-4 py-3 border-b border-theme-border/60 bg-app-bg/40">
@@ -341,15 +341,15 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                       <thead>
                         <tr className="bg-card-bg/60 text-slate-400 border-b border-theme-border">
                           <th className="py-2 pl-3 font-semibold uppercase text-[10px]">Team</th>
-                          <th className="py-2 text-center font-semibold text-[10px]" title="Played">P</th>
-                          <th className="py-2 text-center font-semibold text-[10px]" title="Won">W</th>
-                          <th className="py-2 text-center font-semibold text-[10px]" title="Drawn">D</th>
-                          <th className="py-2 text-center font-semibold text-[10px]" title="Lost">L</th>
-                          <th className="py-2 text-center font-semibold text-[10px]" title="Goals For">GF</th>
-                          <th className="py-2 text-center font-semibold text-[10px]" title="Goals Against">GA</th>
-                          <th className="py-2 text-center font-semibold text-[10px]" title="Goal Difference">GD</th>
-                          <th className="py-2 text-center font-semibold text-[10px]" title="Fair Play Points">FP</th>
-                          <th className="py-2 pr-2 text-center font-bold text-emerald-400">Pts</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[28px]" title="Played">P</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[28px]" title="Won">W</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[28px]" title="Drawn">D</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[28px]" title="Lost">L</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[32px]" title="Goals For">GF</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[32px]" title="Goals Against">GA</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[36px]" title="Goal Difference">GD</th>
+                          <th className="py-2 text-center font-semibold text-[10px] w-[36px]" title="Fair Play Points">FP</th>
+                          <th className="py-2 pr-2 text-center font-bold text-emerald-400 w-[42px]">Pts</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -369,7 +369,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                                   style={(isFirstOrSecond || isBestThird) ? { backgroundColor: TEAMS[team.code]?.color, boxShadow: `0 0 8px ${TEAMS[team.code]?.color}80` } : {}}
                                 />
                                 <span className={`text-sm ${isFirstOrSecond ? 'drop-shadow-[0_0_8px_rgba(16,185,129,0.8)]' : isBestThird ? 'drop-shadow-[0_0_8px_rgba(56,189,248,0.8)]' : ''}`}>
-                                  <img src={`https://flagcdn.com/w20/${TEAMS[team.code]?.iso2}.png`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" />
+                                  <img src={`https://flagcdn.com/${TEAMS[team.code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" />
                                 </span>
                                 <span 
                                   className="px-1.5 py-px rounded text-[8px] font-black uppercase tracking-wider" 
@@ -377,7 +377,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                                 >
                                   {team.code}
                                 </span>
-                                <span className={`font-bold truncate max-w-[70px] text-[11px] ${isFirstOrSecond ? 'text-emerald-400' : isBestThird ? 'text-blue-400' : 'text-slate-300'}`}>
+                                <span className={`font-bold truncate max-w-[140px] text-[11px] ${isFirstOrSecond ? 'text-emerald-400' : isBestThird ? 'text-blue-400' : 'text-slate-300'}`}>
                                   {TEAMS[team.code]?.name}
                                 </span>
                                 {team.isQ && <span className="text-[9px] font-black text-emerald-400" title="Guaranteed Top 2">(Q)</span>}

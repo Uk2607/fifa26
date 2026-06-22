@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Info } from 'lucide-react';
+import { Info, ZoomIn, ZoomOut } from 'lucide-react';
 import { GROUPS_CONFIG } from './constants/groups';
 import { useGroupMatches } from './hooks/useGroupMatches';
 import { useKnockoutMatches } from './hooks/useKnockoutMatches';
@@ -19,6 +19,25 @@ export default function App() {
   const [modalGroup, setModalGroup] = useState(null);
   const [showDeveloperGuide, setShowDeveloperGuide] = useState(false);
   const [showTiebreaker, setShowTiebreaker] = useState(false);
+  const [gridColumns, setGridColumns] = useState(3);
+
+  const getGridClasses = () => {
+    switch(gridColumns) {
+      case 1: return "grid-cols-1";
+      case 2: return "grid-cols-1 md:grid-cols-2";
+      case 3:
+      default: return "grid-cols-1 md:grid-cols-2 xl:grid-cols-3";
+    }
+  };
+
+  const getZoomScale = () => {
+    switch(gridColumns) {
+      case 1: return 1.5;
+      case 2: return 1.25;
+      case 3:
+      default: return 1.0;
+    }
+  };
 
   // State hooks
   const { groupMatches, handleGroupScoreChange, resetGroupMatches } = useGroupMatches();
@@ -70,7 +89,27 @@ export default function App() {
               </h2>
             </div>
             <div className="flex items-center gap-2">
-              <div className="text-[10px] bg-card-bg border border-theme-border px-3 py-1 rounded-lg text-slate-400 font-semibold uppercase">
+              <div className="flex items-center bg-card-bg border border-theme-border rounded-lg overflow-hidden mr-2">
+                <button 
+                  onClick={() => setGridColumns(prev => Math.max(1, prev - 1))}
+                  disabled={gridColumns === 1}
+                  className="px-2.5 py-1 text-slate-400 hover:text-emerald-400 hover:bg-slate-800 disabled:opacity-30 disabled:hover:text-slate-400 disabled:hover:bg-transparent transition-colors"
+                  title="Zoom In (Fewer Columns)"
+                >
+                  <ZoomIn className="w-4 h-4" />
+                </button>
+                <div className="w-px h-4 bg-theme-border"></div>
+                <button 
+                  onClick={() => setGridColumns(prev => Math.min(3, prev + 1))}
+                  disabled={gridColumns === 3}
+                  className="px-2.5 py-1 text-slate-400 hover:text-emerald-400 hover:bg-slate-800 disabled:opacity-30 disabled:hover:text-slate-400 disabled:hover:bg-transparent transition-colors"
+                  title="Zoom Out (More Columns)"
+                >
+                  <ZoomOut className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="text-[10px] bg-card-bg border border-theme-border px-3 py-1 rounded-lg text-slate-400 font-semibold uppercase hidden sm:block">
                 Top 2 Advance + Best 8 Thirds
               </div>
 
@@ -108,7 +147,10 @@ export default function App() {
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Groups Grid */}
-            <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div 
+              className={`lg:col-span-3 grid ${getGridClasses()} gap-4 transition-all duration-500`}
+              style={{ '--zoom-scale': getZoomScale() }}
+            >
               {Object.keys(GROUPS_CONFIG).map(gName => (
                 <GroupWidget
                   key={gName}
