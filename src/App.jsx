@@ -20,6 +20,16 @@ export default function App() {
   const [showDeveloperGuide, setShowDeveloperGuide] = useState(false);
   const [showTiebreaker, setShowTiebreaker] = useState(false);
   const [gridColumns, setGridColumns] = useState(2);
+  const [isZooming, setIsZooming] = useState(false);
+
+  const handleZoom = (newColumns) => {
+    if (newColumns === gridColumns) return;
+    setIsZooming(true);
+    setTimeout(() => {
+      setGridColumns(newColumns);
+      setIsZooming(false);
+    }, 150); // Fast fade out, then swap layout, then fade in
+  };
 
   const getGridClasses = () => {
     switch(gridColumns) {
@@ -91,7 +101,7 @@ export default function App() {
             <div className="flex items-center gap-2">
               <div className="flex items-center bg-card-bg border border-theme-border rounded-lg overflow-hidden mr-2">
                 <button 
-                  onClick={() => setGridColumns(prev => Math.max(1, prev - 1))}
+                  onClick={() => handleZoom(Math.max(1, gridColumns - 1))}
                   disabled={gridColumns === 1}
                   className="px-2.5 py-1 text-slate-400 hover:text-emerald-400 hover:bg-slate-800 disabled:opacity-30 disabled:hover:text-slate-400 disabled:hover:bg-transparent transition-colors"
                   title="Zoom In (Fewer Columns)"
@@ -100,7 +110,7 @@ export default function App() {
                 </button>
                 <div className="w-px h-4 bg-theme-border"></div>
                 <button 
-                  onClick={() => setGridColumns(prev => Math.min(3, prev + 1))}
+                  onClick={() => handleZoom(Math.min(3, gridColumns + 1))}
                   disabled={gridColumns === 3}
                   className="px-2.5 py-1 text-slate-400 hover:text-emerald-400 hover:bg-slate-800 disabled:opacity-30 disabled:hover:text-slate-400 disabled:hover:bg-transparent transition-colors"
                   title="Zoom Out (More Columns)"
@@ -148,7 +158,7 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Groups Grid */}
             <div 
-              className={`lg:col-span-3 grid ${getGridClasses()} gap-4 transition-all duration-500`}
+              className={`lg:col-span-3 grid gap-4 ${getGridClasses()} transition-all duration-200 ease-in-out ${isZooming ? 'opacity-0 scale-[0.98]' : 'opacity-100 scale-100'}`}
               style={{ '--zoom-scale': getZoomScale() }}
             >
               {Object.keys(GROUPS_CONFIG).map(gName => (
@@ -159,7 +169,7 @@ export default function App() {
                   standings={groupStandings[gName]}
                   matches={groupMatches}
                   onScoreChange={handleGroupScoreChange}
-                  onToggle={() => setModalGroup(gName)}
+                  onToggle={setModalGroup}
                   bestThirdsQualified={qualificationState.thirds}
                 />
               ))}
