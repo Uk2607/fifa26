@@ -270,9 +270,9 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-I-2": { // Norway vs Senegal
-    score1: 1, score2: 0,
+    score1: 3, score2: 2,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, status: "locked"
   },
   "G-I-3": { // France vs Iraq
     score1: 3, score2: 0,
