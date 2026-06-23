@@ -5,6 +5,7 @@ A highly dynamic, interactive, and mathematically rigorous React application bui
 ## 🚀 Features
 - **Live Group Standings:** Instantly updates table rankings based on official FIFA tiebreaker rules (Points > H2H Points > H2H GD > H2H GF > Overall GD > Overall GF > Fair Play > Alphabetical).
 - **Advanced Q/E Simulator:** Uses brute-force algorithmic predictions to calculate every possible future outcome ($3^{\text{unplayed matches}}$ scenarios instantly). Accurately awards `(Q)` (Guaranteed Top 2) and `(E)` (Mathematically Eliminated) tags to teams based on their absolute best and worst possible rank ranges.
+- **Deterministic Knockout Seeding:** Replicates official FIFA regulations (Annexe C) utilizing a pre-computed 495-combination lookup table to perfectly match the 8 best third-placed teams against their opponents without heuristic guesswork.
 - **Interactive Knockout Bracket:** Fully dynamic visualization of the Round of 32 through to the Final, with dynamic borders matching team colors.
 - **Dynamic Zoom Dashboard:** Fully responsive grid layout allowing users to zoom the dashboard between 1, 2, or 3 columns with buttery-smooth cross-fade "camera" animations.
 - **High-Definition Vector Flags:** Dynamically integrated FlagCDN `.svg` vector graphics mapped natively to each team's ISO-2 country code for infinitely sharp resolutions across all devices.
@@ -24,6 +25,11 @@ The application is built using React (Vite) and styled exclusively with Tailwind
   - `groups.js`: Contains the static groupings and match pairings (which team plays which team).
   - `presetScores.js`: Crucial configuration file used to lock specific match scores. If a match is marked as "locked" here, the score is mathematically cemented and the UI inputs for that match are disabled.
   - `FIFA_RANKINGS.js`: Contains the official FIFA World Rankings used as the ultimate tiebreaker in the Simulator if teams are deadlocked on all other metrics.
+  - `combinations.js`: Auto-generated lookup dictionary of the 495 official FIFA third-place qualification combinations (12C8).
+- `scripts/`
+  - `parse_combinations.cjs`: Node script that parses the official FIFA `combinations.csv` data to generate the raw `combinations.js` dictionary without mapping to internal match IDs. Run via `npm run parse-combinations`.
+  - `combinations.csv`: The official source data containing the mappings.
+  - `matches.txt`: A scratchpad referencing old match dependencies.
 
 ## 🛠️ Local Development Setup
 
