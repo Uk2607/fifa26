@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { GROUPS_CONFIG, GROUP_MATCH_PAIRINGS } from '../constants/groups';
 import { FIFA_RANKINGS } from '../constants/fifaRankings';
+import { THIRD_PLACE_COMBINATIONS } from '../constants/combinations';
 
 // ================================================================================
 // 🧮 STANDINGS ENGINE — with FIFA official tiebreakers
@@ -28,7 +29,7 @@ function computeH2H(tiedCodes, groupName, teamsList, groupMatches) {
 
     // Only include matches where BOTH teams are in the tied subset
     if (match && match.status !== 'upcoming' && match.score1 !== '' && match.score2 !== '' &&
-        tiedSet.has(t1Code) && tiedSet.has(t2Code)) {
+      tiedSet.has(t1Code) && tiedSet.has(t2Code)) {
       const s1 = Number(match.score1);
       const s2 = Number(match.score2);
 
@@ -113,7 +114,7 @@ function sortWithH2H(standings, groupName, teamsList, groupMatches) {
           else if ((FIFA_RANKINGS[t.code]?.ranking || 999) !== (FIFA_RANKINGS[b.code]?.ranking || 999)) t.tiebreakerReason = `Won tie via FIFA Ranking`;
           else t.tiebreakerReason = `Won tie via Alphabetical`;
         } else {
-          const a = tied[k-1];
+          const a = tied[k - 1];
           const ha = h2h[a.code], ht = h2h[t.code];
           if (ha.pts !== ht.pts) t.tiebreakerReason = `Lost tie via H2H Points`;
           else if (ha.gd !== ht.gd) t.tiebreakerReason = `Lost tie via H2H GD`;
@@ -214,7 +215,7 @@ export function useStandings(groupMatches) {
       // This algorithm brute-forces all remaining matches in the group to mathematically
       // guarantee if a team is locked into the Top 2 (Q) or mathematically eliminated (E).
       // It perfectly accounts for FIFA tiebreakers: Points -> H2H Points -> H2H GD/GF.
-      
+
       const teams = standings[gName];
       const unplayed = [];
       GROUP_MATCH_PAIRINGS.forEach((pairing, idx) => {
@@ -237,7 +238,7 @@ export function useStandings(groupMatches) {
         // Total future scenarios = 3 ^ (number of unplayed matches)
         // (Because each match has 3 outcomes: W, D, L)
         const totalScenarios = Math.pow(3, unplayed.length);
-        
+
         for (let s = 0; s < totalScenarios; s++) {
           // --- STEP 1: Calculate total points for this specific scenario ---
           const simPts = {};
@@ -245,7 +246,7 @@ export function useStandings(groupMatches) {
 
           let temp = s;
           const simMatchResults = [];
-          
+
           GROUP_MATCH_PAIRINGS.forEach((pairing, idx) => {
             const id = `G-${gName}-${idx}`;
             const match = groupMatches[id];
@@ -263,7 +264,7 @@ export function useStandings(groupMatches) {
               else if (s2 > s1) outcome = 1;
               else outcome = 2;
             }
-            
+
             simMatchResults.push({ t1: t1Code, t2: t2Code, outcome });
 
             if (outcome === 0) simPts[t1Code] += 3;
@@ -316,13 +317,13 @@ export function useStandings(groupMatches) {
                 if (!h2hMap[h]) h2hMap[h] = [];
                 h2hMap[h].push(t);
               });
-              
+
               const sortedH2H = Object.keys(h2hMap).map(Number).sort((a, b) => b - a);
               let tieRank = currentRank;
-              
+
               sortedH2H.forEach(h => {
                 const subTied = h2hMap[h];
-                
+
                 if (subTied.length === 1) {
                   // CASE B1: H2H Points successfully broke the tie for this team.
                   // Their rank is strictly defined.
@@ -342,7 +343,7 @@ export function useStandings(groupMatches) {
                     const id = `G-${gName}-${idx}`;
                     const t1Code = teamsList[pairing.t1];
                     const t2Code = teamsList[pairing.t2];
-                    
+
                     if (subTied.includes(t1Code) && subTied.includes(t2Code)) {
                       const m = groupMatches[id];
                       if (!m || m.status === 'upcoming' || m.score1 === '' || m.score2 === '') {
@@ -370,7 +371,7 @@ export function useStandings(groupMatches) {
                     const identicalGroups = [];
                     let currGroup = [subTied[0]];
                     for (let k = 1; k < subTied.length; k++) {
-                      const prev = subTied[k-1];
+                      const prev = subTied[k - 1];
                       const curr = subTied[k];
                       if (internalStats[curr].gd === internalStats[prev].gd && internalStats[curr].gf === internalStats[prev].gf) {
                         currGroup.push(curr);
@@ -461,17 +462,17 @@ export function useStandings(groupMatches) {
     return { auto, thirds: best8Thirds, bestThirdsRanking: thirdPlacedTeams };
   }, [groupStandings]);
 
-  // ── Bipartite matching for third-place bracket slots (unchanged) ───────────
+  // ── Official FIFA Lookup for third-place bracket slots ───────────
   const allocatedThirds = useMemo(() => {
     const slots = [
-      { matchId: 75, allowedGroups: ['A', 'B', 'C', 'D', 'F'], label: "3ABCDF" },
-      { matchId: 78, allowedGroups: ['C', 'D', 'F', 'G', 'H'], label: "3CDFGH" },
+      { matchId: 74, allowedGroups: ['A', 'B', 'C', 'D', 'F'], label: "3ABCDF" },
+      { matchId: 77, allowedGroups: ['C', 'D', 'F', 'G', 'H'], label: "3CDFGH" },
       { matchId: 79, allowedGroups: ['C', 'E', 'F', 'H', 'I'], label: "3CEHFI" },
       { matchId: 80, allowedGroups: ['E', 'H', 'I', 'J', 'K'], label: "3EHIJK" },
-      { matchId: 81, allowedGroups: ['A', 'E', 'H', 'I', 'J'], label: "3AEHIJ" },
-      { matchId: 82, allowedGroups: ['B', 'E', 'F', 'I', 'J'], label: "3BEFIJ" },
+      { matchId: 81, allowedGroups: ['B', 'E', 'F', 'I', 'J'], label: "3BEFIJ" },
+      { matchId: 82, allowedGroups: ['A', 'E', 'H', 'I', 'J'], label: "3AEHIJ" },
       { matchId: 85, allowedGroups: ['E', 'F', 'G', 'I', 'J'], label: "3EFGIJ" },
-      { matchId: 88, allowedGroups: ['D', 'E', 'I', 'J', 'L'], label: "3DEIJL" },
+      { matchId: 87, allowedGroups: ['D', 'E', 'I', 'J', 'L'], label: "3DEIJL" },
     ];
 
     const { thirds, bestThirdsRanking } = qualificationState;
@@ -481,42 +482,41 @@ export function useStandings(groupMatches) {
       return { code, groupName: rankInfo ? rankInfo.groupName : null };
     }).filter(t => t.groupName !== null);
 
-    const assignment = {};
-    const used = new Set();
+    // If we have exactly 8 qualified 3rd-placed teams, use the deterministic FIFA table
+    if (qualifiedThirds.length === 8) {
+      const groupKey = qualifiedThirds.map(t => t.groupName).sort().join('');
+      const lookup = THIRD_PLACE_COMBINATIONS[groupKey];
 
-    const backtrack = (slotIndex) => {
-      if (slotIndex === slots.length) return true;
-      const slot = slots[slotIndex];
-      for (let i = 0; i < qualifiedThirds.length; i++) {
-        const team = qualifiedThirds[i];
-        if (!used.has(team.code) && slot.allowedGroups.includes(team.groupName)) {
-          used.add(team.code);
-          assignment[slot.matchId] = team.code;
-          if (backtrack(slotIndex + 1)) return true;
-          used.delete(team.code);
-          delete assignment[slot.matchId];
+      if (lookup) {
+        const assignment = {};
+        Object.keys(lookup).forEach(matchId => {
+          const groupNeeded = lookup[matchId];
+          const team = qualifiedThirds.find(t => t.groupName === groupNeeded);
+          if (team) {
+            assignment[matchId] = team.code;
+          }
+        });
+
+        // Ensure all 8 slots are successfully matched
+        if (Object.keys(assignment).length === 8) {
+          return assignment;
         }
       }
-      return false;
-    };
-
-    if (!backtrack(0)) {
-      // Greedy fallback for partial simulations
-      const fb = {};
-      const fbUsed = new Set();
-      slots.forEach(slot => {
-        const match = qualifiedThirds.find(t => !fbUsed.has(t.code) && slot.allowedGroups.includes(t.groupName));
-        if (match) {
-          fb[slot.matchId] = match.code;
-          fbUsed.add(match.code);
-        } else {
-          fb[slot.matchId] = slot.label;
-        }
-      });
-      return fb;
     }
 
-    return assignment;
+    // Greedy fallback for partial simulations (when < 8 teams are locked in)
+    const fb = {};
+    const fbUsed = new Set();
+    slots.forEach(slot => {
+      const match = qualifiedThirds.find(t => !fbUsed.has(t.code) && slot.allowedGroups.includes(t.groupName));
+      if (match) {
+        fb[slot.matchId] = match.code;
+        fbUsed.add(match.code);
+      } else {
+        fb[slot.matchId] = slot.label;
+      }
+    });
+    return fb;
   }, [qualificationState]);
 
   return { groupStandings, qualificationState, allocatedThirds };

@@ -13,14 +13,14 @@ const LINE_COLOR = '#475569';         // slate-600
 const LINE_HIGHLIGHT = '#10b981';     // emerald-500
 
 // Left half of the bracket (flows left → right toward finals)
-const LEFT_R32 = [73, 74, 75, 76, 77, 78, 79, 80];
-const LEFT_R16 = [89, 90, 91, 92];
+const LEFT_R32 = [74, 77, 73, 75, 83, 84, 81, 82];
+const LEFT_R16 = [89, 90, 93, 94];
 const LEFT_QF = [97, 98];
 const LEFT_SF = [101];
 
 // Right half of the bracket (flows right → left toward finals)
-const RIGHT_R32 = [81, 82, 83, 84, 85, 86, 87, 88];
-const RIGHT_R16 = [93, 94, 95, 96];
+const RIGHT_R32 = [76, 78, 79, 80, 86, 88, 85, 87];
+const RIGHT_R16 = [91, 92, 95, 96];
 const RIGHT_QF = [99, 100];
 const RIGHT_SF = [102];
 
@@ -224,13 +224,25 @@ export default function KnockoutBracket({
         }
       }
 
-      let nextId = null;
-      if (currentMatchId >= 73 && currentMatchId <= 88) nextId = Math.floor((currentMatchId - 73) / 2) + 89;
-      else if (currentMatchId >= 89 && currentMatchId <= 96) nextId = Math.floor((currentMatchId - 89) / 2) + 97;
-      else if (currentMatchId >= 97 && currentMatchId <= 100) nextId = Math.floor((currentMatchId - 97) / 2) + 101;
-      else if (currentMatchId === 101 || currentMatchId === 102) nextId = 104;
+      const NEXT_MATCH_MAP = {
+        74: 89, 77: 89,
+        73: 90, 75: 90,
+        76: 91, 78: 91,
+        79: 92, 80: 92,
+        83: 93, 84: 93,
+        81: 94, 82: 94,
+        86: 95, 88: 95,
+        85: 96, 87: 96,
+        89: 97, 90: 97,
+        93: 98, 94: 98,
+        91: 99, 92: 99,
+        95: 100, 96: 100,
+        97: 101, 98: 101,
+        99: 102, 100: 102,
+        101: 104, 102: 104
+      };
 
-      currentMatchId = nextId;
+      currentMatchId = NEXT_MATCH_MAP[currentMatchId] || null;
     }
 
     return path;
