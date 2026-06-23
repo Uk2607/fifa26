@@ -270,14 +270,14 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-I-2": { // Norway vs Senegal
-    score1: null, score2: null,
+    score1: 1, score2: 0,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "G-I-3": { // France vs Iraq
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 3, score2: 0,
+    yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-I-4": { // France vs Norway
     score1: null, score2: null,
@@ -336,12 +336,12 @@ export const PRESET_SCORES = {
   "G-K-2": { // Colombia vs DR Congo
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-K-3": { // Portugal vs Uzbekistan
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-K-4": { // Portugal vs Colombia
     score1: null, score2: null,
@@ -368,12 +368,12 @@ export const PRESET_SCORES = {
   "G-L-2": { // Panama vs Croatia
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-L-3": { // England vs Ghana
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-L-4": { // England vs Panama
     score1: null, score2: null,
