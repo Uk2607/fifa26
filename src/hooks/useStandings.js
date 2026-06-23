@@ -465,14 +465,14 @@ export function useStandings(groupMatches) {
   // ── Official FIFA Lookup for third-place bracket slots ───────────
   const allocatedThirds = useMemo(() => {
     const slots = [
-      { matchId: 74, allowedGroups: ['A', 'B', 'C', 'D', 'F'], label: "3ABCDF" },
-      { matchId: 77, allowedGroups: ['C', 'D', 'F', 'G', 'H'], label: "3CDFGH" },
-      { matchId: 79, allowedGroups: ['C', 'E', 'F', 'H', 'I'], label: "3CEHFI" },
-      { matchId: 80, allowedGroups: ['E', 'H', 'I', 'J', 'K'], label: "3EHIJK" },
-      { matchId: 81, allowedGroups: ['B', 'E', 'F', 'I', 'J'], label: "3BEFIJ" },
-      { matchId: 82, allowedGroups: ['A', 'E', 'H', 'I', 'J'], label: "3AEHIJ" },
-      { matchId: 85, allowedGroups: ['E', 'F', 'G', 'I', 'J'], label: "3EFGIJ" },
-      { matchId: 87, allowedGroups: ['D', 'E', 'I', 'J', 'L'], label: "3DEIJL" },
+      { matchId: 74, csvHeader: '1E', allowedGroups: ['A', 'B', 'C', 'D', 'F'], label: "3ABCDF" },
+      { matchId: 77, csvHeader: '1I', allowedGroups: ['C', 'D', 'F', 'G', 'H'], label: "3CDFGH" },
+      { matchId: 79, csvHeader: '1A', allowedGroups: ['C', 'E', 'F', 'H', 'I'], label: "3CEHFI" },
+      { matchId: 80, csvHeader: '1L', allowedGroups: ['E', 'H', 'I', 'J', 'K'], label: "3EHIJK" },
+      { matchId: 81, csvHeader: '1D', allowedGroups: ['B', 'E', 'F', 'I', 'J'], label: "3BEFIJ" },
+      { matchId: 82, csvHeader: '1G', allowedGroups: ['A', 'E', 'H', 'I', 'J'], label: "3AEHIJ" },
+      { matchId: 85, csvHeader: '1B', allowedGroups: ['E', 'F', 'G', 'I', 'J'], label: "3EFGIJ" },
+      { matchId: 87, csvHeader: '1K', allowedGroups: ['D', 'E', 'I', 'J', 'L'], label: "3DEIJL" },
     ];
 
     const { thirds, bestThirdsRanking } = qualificationState;
@@ -489,11 +489,14 @@ export function useStandings(groupMatches) {
 
       if (lookup) {
         const assignment = {};
-        Object.keys(lookup).forEach(matchId => {
-          const groupNeeded = lookup[matchId];
-          const team = qualifiedThirds.find(t => t.groupName === groupNeeded);
-          if (team) {
-            assignment[matchId] = team.code;
+        Object.keys(lookup).forEach(csvHeader => {
+          const slot = slots.find(s => s.csvHeader === csvHeader);
+          if (slot) {
+            const groupNeeded = lookup[csvHeader];
+            const team = qualifiedThirds.find(t => t.groupName === groupNeeded);
+            if (team) {
+              assignment[slot.matchId] = team.code;
+            }
           }
         });
 

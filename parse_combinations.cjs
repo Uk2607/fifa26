@@ -4,16 +4,6 @@ const csv = fs.readFileSync('combinations.csv', 'utf-8');
 const lines = csv.trim().split('\n');
 const headers = lines[0].split(',').map(s => s.trim());
 
-const headerToMatchId = {
-  '1E': 74,
-  '1I': 77,
-  '1A': 79,
-  '1L': 80,
-  '1D': 81,
-  '1G': 82,
-  '1B': 85,
-  '1K': 87
-};
 
 const map = {};
 
@@ -30,8 +20,7 @@ for (let i = 1; i < lines.length; i++) {
     groups.push(groupLetter);
 
     const header = headers[j]; // e.g. "1A"
-    const matchId = headerToMatchId[header];
-    allocation[matchId] = groupLetter;
+    allocation[header] = groupLetter;
   }
 
   const key = groups.sort().join('');
