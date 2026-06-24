@@ -46,14 +46,14 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-B-2": { // Qatar vs Bosnia & Herzegovina
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 1, score2: 3,
+    yellow1: 1, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-B-3": { // Canada vs Switzerland
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 1, score2: 2,
+    yellow1: 2, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-B-4": { // Canada vs Qatar
     score1: 6, score2: 0,
