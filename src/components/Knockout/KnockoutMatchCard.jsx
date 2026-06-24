@@ -12,10 +12,11 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
 
   return (
     <div 
-      className="flex items-center justify-between px-2 py-1 transition-colors cursor-default border-l-[3px] border-transparent"
+      className={`flex items-center justify-between px-2 py-1.5 transition-all duration-200 cursor-default border-l-[4px] border-transparent ${isWinner && isResolved ? 'shadow-sm' : ''}`}
       style={{
         borderLeftColor: isResolved ? country?.color : 'transparent',
-        backgroundColor: isWinner && isResolved ? `${country?.color}26` : (hoveredTeamCode === code && isResolved ? `${country?.color}4D` : 'transparent')
+        backgroundColor: isWinner && isResolved ? `${country?.color}40` : (hoveredTeamCode === code && isResolved ? `${country?.color}30` : 'transparent'),
+        boxShadow: isWinner && isResolved ? `inset 0 0 12px ${country?.color}20, 0 0 6px ${country?.color}15` : 'none'
       }}
       onMouseEnter={() => isResolved && onTeamHover(code)}
       onMouseLeave={() => onTeamHover(null)}
@@ -24,7 +25,9 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
         {isResolved ? (
           <div className="flex items-center gap-1 truncate">
             <span className="text-xs leading-none"><img src={`https://flagcdn.com/${country?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
-            <span className={`text-[10px] truncate max-w-[85px] ${isWinner ? 'text-white font-extrabold' : 'text-slate-300 font-medium'}`}>
+            <span className={`text-[10px] truncate max-w-[85px] transition-all ${isWinner ? 'text-white font-extrabold drop-shadow-sm' : 'text-slate-300 font-medium'}`}
+              style={{ color: isWinner ? (country?.textColor==='#000000' ? '#ffffff' : country?.color) : undefined }}
+              >
               {country?.name}
             </span>
           </div>
