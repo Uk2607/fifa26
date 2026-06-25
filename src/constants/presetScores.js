@@ -24,12 +24,12 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-A-4": { // Mexico vs Czechia
-    score1: null, score2: null,
+    score1: 0, score2: 0,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "G-A-5": { // South Africa vs South Korea
-    score1: null, score2: null,
+    score1: 0, score2: 0,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
