@@ -88,14 +88,14 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-C-4": { // Brazil vs Scotland
-    score1: 2, score2: 0,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 3, score2: 0,
+    yellow1: 2, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-C-5": { // Haiti vs Morocco
-    score1: 2, score2: 2,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 2, score2: 4,
+    yellow1: 3, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
 
   // Group D
