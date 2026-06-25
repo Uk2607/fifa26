@@ -24,14 +24,14 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-A-4": { // Mexico vs Czechia
-    score1: 0, score2: 0,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 3, score2: 0,
+    yellow1: 1, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-A-5": { // South Africa vs South Korea
-    score1: 0, score2: 0,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 1, score2: 0,
+    yellow1: 1, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
 
   // Group B
@@ -122,12 +122,12 @@ export const PRESET_SCORES = {
   "G-D-4": { // USA vs Türkiye
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-D-5": { // Paraguay vs Australia
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
 
   // Group E
@@ -154,12 +154,12 @@ export const PRESET_SCORES = {
   "G-E-4": { // Germany vs Ecuador
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-E-5": { // Curaçao vs Ivory Coast
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
 
   // Group F
@@ -186,12 +186,12 @@ export const PRESET_SCORES = {
   "G-F-4": { // Netherlands vs Tunisia
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-F-5": { // Sweden vs Japan
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
 
   // Group G
