@@ -386,6 +386,37 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "upcoming"
   },
 
-  // Knockouts Matchday 1 Presets
-  // "KO-73": { score1: 2, score2: 1, status: "locked" }, // Match 73 predictive score
+  // Knockouts Matchday Presets (open, locked)
+  "KO-73": { score1: null, score2: null, status: "open" },
+  "KO-74": { score1: null, score2: null, status: "open" },
+  "KO-75": { score1: null, score2: null, status: "open" },
+  "KO-76": { score1: null, score2: null, status: "open" },
+  "KO-77": { score1: null, score2: null, status: "open" },
+  "KO-78": { score1: null, score2: null, status: "open" },
+  "KO-79": { score1: null, score2: null, status: "open" },
+  "KO-80": { score1: null, score2: null, status: "open" },
+  "KO-81": { score1: null, score2: null, status: "open" },
+  "KO-82": { score1: null, score2: null, status: "open" },
+  "KO-83": { score1: null, score2: null, status: "open" },
+  "KO-84": { score1: null, score2: null, status: "open" },
+  "KO-85": { score1: null, score2: null, status: "open" },
+  "KO-86": { score1: null, score2: null, status: "open" },
+  "KO-87": { score1: null, score2: null, status: "open" },
+  "KO-88": { score1: null, score2: null, status: "open" },
+  "KO-89": { score1: null, score2: null, status: "open" },
+  "KO-90": { score1: null, score2: null, status: "open" },
+  "KO-91": { score1: null, score2: null, status: "open" },
+  "KO-92": { score1: null, score2: null, status: "open" },
+  "KO-93": { score1: null, score2: null, status: "open" },
+  "KO-94": { score1: null, score2: null, status: "open" },
+  "KO-95": { score1: null, score2: null, status: "open" },
+  "KO-96": { score1: null, score2: null, status: "open" },
+  "KO-97": { score1: null, score2: null, status: "open" },
+  "KO-98": { score1: null, score2: null, status: "open" },
+  "KO-99": { score1: null, score2: null, status: "open" },
+  "KO-100": { score1: null, score2: null, status: "open" },
+  "KO-101": { score1: null, score2: null, status: "open" },
+  "KO-102": { score1: null, score2: null, status: "open" },
+  "KO-103": { score1: null, score2: null, status: "open" },
+  "KO-104": { score1: null, score2: null, status: "open" }
 };
