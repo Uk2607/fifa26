@@ -1,5 +1,5 @@
 /* ================================================================================
-DEVELOPER CONFIGURATION: PRESET & LOCKED SCORES
+DEVELOPER CONFIGURATION: PRESET & LOCKED SCORES (upcoming, open, locked)
 ================================================================================ */
 export const PRESET_SCORES = {
   // Group A
@@ -152,14 +152,14 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-E-4": { // Germany vs Ecuador
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 1, score2: 2,
+    yellow1: 1, yellow2: 3, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-E-5": { // Curaçao vs Ivory Coast
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 0, score2: 2,
+    yellow1: 2, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
 
   // Group F
@@ -184,14 +184,14 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-F-4": { // Netherlands vs Tunisia
-    score1: null, score2: null,
+    score1: 3, score2: 1,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, status: "locked"
   },
   "G-F-5": { // Sweden vs Japan
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 1, score2: 1,
+    yellow1: 2, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
 
   // Group G
