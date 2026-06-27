@@ -201,7 +201,7 @@ export const PRESET_SCORES = {
 
   // Group G
   "G-G-0": { // Belgium vs New Zealand
-    score1: 2, score2: 0,
+    score1: 3, score2: 0,
     yellow1: 0, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
