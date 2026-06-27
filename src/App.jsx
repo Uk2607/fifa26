@@ -120,7 +120,7 @@ export default function App() {
   }, [tournamentChampion]);
 
   return (
-    <div className={`min-h-screen bg-app-bg text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950 transition-opacity duration-500 ${isResetting ? 'opacity-0' : 'opacity-100'}`}>
+    <div className={`min-h-screen bg-app-bg text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950 transition-all duration-500 origin-top ${isResetting ? 'opacity-50 blur-sm scale-[0.98]' : 'opacity-100 blur-0 scale-100'}`}>
 
       <Header onReset={handleResetAll} />
 
