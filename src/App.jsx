@@ -120,27 +120,16 @@ export default function App() {
   }, [tournamentChampion]);
 
   return (
-    <div className={`min-h-screen bg-app-bg text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950 transition-all duration-500 origin-top ${isResetting ? 'opacity-50 blur-sm scale-[0.98]' : 'opacity-100 blur-0 scale-100'}`}>
+    <div className="min-h-screen bg-app-bg text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950">
+      
+      {/* Content wrapper with transition */}
+      <div className={`flex-1 flex flex-col transition-all duration-500 origin-top ${isResetting ? 'opacity-50 blur-sm scale-[0.98]' : ''}`}>
+        
+        <Header onReset={handleResetAll} />
 
-      <Header onReset={handleResetAll} />
+        <ChampionBanner tournamentChampion={tournamentChampion} />
 
-      <ChampionBanner tournamentChampion={tournamentChampion} />
-
-      <DeveloperGuide show={showDeveloperGuide} onClose={() => setShowDeveloperGuide(false)} />
-
-      {/* GROUP MATCH MODAL (popup) */}
-      {modalGroup && (
-        <GroupMatchModal
-          groupName={modalGroup}
-          matches={groupMatches}
-          standings={groupStandings[modalGroup]}
-          bestThirdsQualified={qualificationState.thirds}
-          onScoreChange={handleGroupScoreChange}
-          onClose={() => setModalGroup(null)}
-        />
-      )}
-
-      {/* MAIN CONTAINER */}
+        {/* MAIN CONTAINER */}
       <main className="flex-grow px-4 py-6 max-w-[1920px] mx-auto w-full flex flex-col gap-8">
 
         {/* SECTION 1: GROUP STAGES */}
@@ -261,6 +250,22 @@ export default function App() {
       </main>
 
       <Footer />
+      </div>
+
+      {/* MODALS (Placed outside the transformed div so position: fixed works relative to viewport) */}
+      <DeveloperGuide show={showDeveloperGuide} onClose={() => setShowDeveloperGuide(false)} />
+
+      {/* GROUP MATCH MODAL (popup) */}
+      {modalGroup && (
+        <GroupMatchModal
+          groupName={modalGroup}
+          matches={groupMatches}
+          standings={groupStandings[modalGroup]}
+          bestThirdsQualified={qualificationState.thirds}
+          onScoreChange={handleGroupScoreChange}
+          onClose={() => setModalGroup(null)}
+        />
+      )}
     </div>
   );
 }
