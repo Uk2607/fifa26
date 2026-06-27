@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import confetti from 'canvas-confetti';
 import { Info, ZoomIn, ZoomOut } from 'lucide-react';
 import { GROUPS_CONFIG } from './constants/groups';
+import { TEAMS } from './constants/teams';
 import { useGroupMatches } from './hooks/useGroupMatches';
 import { useKnockoutMatches } from './hooks/useKnockoutMatches';
 import { useStandings } from './hooks/useStandings';
@@ -61,14 +63,64 @@ export default function App() {
     semiFinalsSeeding, finalsSeeding, tournamentChampion
   } = useBracketSeeding(qualificationState, allocatedThirds, koMatches, bracketMode, confirmedPositions);
 
+  const [isResetting, setIsResetting] = useState(false);
+
   // Combined handlers
   const handleResetAll = () => {
-    resetGroupMatches();
-    resetKoMatches();
+    setIsResetting(true);
+    setTimeout(() => {
+      resetGroupMatches();
+      resetKoMatches();
+      setBracketMode('standings');
+      setIsResetting(false);
+    }, 400); // Wait for fade out
   };
 
+  // Confetti effect when champion is crowned
+  useEffect(() => {
+    if (tournamentChampion && tournamentChampion.length === 3) {
+      const duration = 3000;
+      const end = Date.now() + duration;
+      const team = TEAMS[tournamentChampion];
+      
+      // Base tournament colors (Emerald, Amber, Slate)
+      let colors = ['#34d399', '#fbbf24', '#f8fafc'];
+      
+      // If team exists, heavily bias the confetti towards the team's colors
+      if (team) {
+        colors = [
+          '#34d399', '#fbbf24', // Lower proportion of tournament colors
+          team.color, team.color, team.color, team.color, // High proportion of primary team color
+          team.textColor, team.textColor // Secondary team color
+        ];
+      }
+
+      const frame = () => {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: colors
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: colors
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      };
+      frame();
+    }
+  }, [tournamentChampion]);
+
   return (
-    <div className="min-h-screen bg-app-bg text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950">
+    <div className={`min-h-screen bg-app-bg text-slate-100 flex flex-col font-sans selection:bg-amber-400 selection:text-slate-950 transition-opacity duration-500 ${isResetting ? 'opacity-0' : 'opacity-100'}`}>
 
       <Header onReset={handleResetAll} />
 
@@ -99,8 +151,8 @@ export default function App() {
                 2026 World Cup Group Stages
               </h2>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="hidden md:flex items-center bg-card-bg border border-theme-border rounded-lg overflow-hidden mr-2">
+            <div className="flex flex-wrap items-center gap-2 max-w-full">
+              <div className="hidden md:flex items-center bg-card-bg border border-theme-border rounded-lg overflow-hidden mr-2 shrink-0">
                 <button 
                   onClick={() => handleZoom(Math.max(1, gridColumns - 1))}
                   disabled={gridColumns === 1}
@@ -120,7 +172,7 @@ export default function App() {
                 </button>
               </div>
 
-              <div className="text-[10px] bg-card-bg border border-theme-border px-3 py-1 rounded-lg text-slate-400 font-semibold uppercase hidden sm:block">
+              <div className="text-[10px] bg-card-bg border border-theme-border px-3 py-1 rounded-lg text-slate-400 font-semibold uppercase shrink-0">
                 Top 2 Advance + Best 8 Thirds
               </div>
 
@@ -136,7 +188,7 @@ export default function App() {
                 </button>
                 {showTiebreaker && (
                   <div
-                    className="absolute right-0 top-8 z-50 w-64 bg-card-bg border border-theme-border rounded-lg shadow-xl shadow-black/50 p-3 text-left"
+                    className="absolute right-0 sm:-right-4 top-8 z-50 w-64 max-w-[90vw] bg-card-bg border border-theme-border rounded-lg shadow-xl shadow-black/50 p-3 text-left"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <p className="text-[9px] font-black text-emerald-400 uppercase tracking-wider mb-2">Ranking Criteria (in order)</p>
