@@ -23,36 +23,54 @@ function getLoser(t1, t2, mId, koMatches) {
   return w === t1 ? t2 : t1;
 }
 
-export function useBracketSeeding(qualificationState, allocatedThirds, koMatches) {
+export function useBracketSeeding(qualificationState, allocatedThirds, koMatches, bracketMode, confirmedPositions) {
   // Symmetrical Seeding based on official matches
   const r32MatchesSeeding = useMemo(() => {
     const { auto } = qualificationState;
 
+    // In 'fixtures' mode, only use teams whose position is confirmed
+    // confirmedPositions[group] = [1st|null, 2nd|null, 3rd|null, 4th|null]
+    const cp = confirmedPositions || {};
+    const get1st = (g) => bracketMode === 'fixtures' ? (cp[g]?.[0] || `1${g}`) : (auto[g]?.[0] || `1${g}`);
+    const get2nd = (g) => bracketMode === 'fixtures' ? (cp[g]?.[1] || `2${g}`) : (auto[g]?.[1] || `2${g}`);
+
+    // Third-place allocation: in fixtures mode, only valid if all groups are complete
+    // (since 8-best-thirds requires all 12 groups finalized)
+    const getThird = (matchId, label) => {
+      if (bracketMode === 'fixtures') {
+        // Check if allocatedThirds resolved to a real team code
+        const code = allocatedThirds[matchId];
+        if (code && code.length === 3) return code;
+        return label; // Show placeholder like "3ABCDF"
+      }
+      return allocatedThirds[matchId] || label;
+    };
+
     // Official pairings mapping to matches 73 to 88 with unique allocation integrated
     return {
-      73: { t1: auto["A"]?.[1] || "2A", t2: auto["B"]?.[1] || "2B" },
-      74: { t1: auto["E"]?.[0] || "1E", t2: allocatedThirds[74] || "3ABCDF" },
+      73: { t1: get2nd("A"), t2: get2nd("B") },
+      74: { t1: get1st("E"), t2: getThird(74, "3ABCDF") },
 
-      75: { t1: auto["F"]?.[0] || "1F", t2: auto["C"]?.[1] || "2C" },
-      76: { t1: auto["C"]?.[0] || "1C", t2: auto["F"]?.[1] || "2F" },
-      77: { t1: auto["I"]?.[0] || "1I", t2: allocatedThirds[77] || "3CDFGH" },
+      75: { t1: get1st("F"), t2: get2nd("C") },
+      76: { t1: get1st("C"), t2: get2nd("F") },
+      77: { t1: get1st("I"), t2: getThird(77, "3CDFGH") },
 
-      78: { t1: auto["E"]?.[1] || "2E", t2: auto["I"]?.[1] || "2I" },
-      79: { t1: auto["A"]?.[0] || "1A", t2: allocatedThirds[79] || "3CEHFI" },
-      80: { t1: auto["L"]?.[0] || "1L", t2: allocatedThirds[80] || "3EHIJK" },
+      78: { t1: get2nd("E"), t2: get2nd("I") },
+      79: { t1: get1st("A"), t2: getThird(79, "3CEHFI") },
+      80: { t1: get1st("L"), t2: getThird(80, "3EHIJK") },
 
-      81: { t1: auto["D"]?.[0] || "1D", t2: allocatedThirds[81] || "3BEFIJ" },
-      82: { t1: auto["G"]?.[0] || "1G", t2: allocatedThirds[82] || "3AEHIJ" },
+      81: { t1: get1st("D"), t2: getThird(81, "3BEFIJ") },
+      82: { t1: get1st("G"), t2: getThird(82, "3AEHIJ") },
 
-      83: { t1: auto["K"]?.[1] || "2K", t2: auto["L"]?.[1] || "2L" },
-      84: { t1: auto["H"]?.[0] || "1H", t2: auto["J"]?.[1] || "2J" },
-      85: { t1: auto["B"]?.[0] || "1B", t2: allocatedThirds[85] || "3EFGIJ" },
-      86: { t1: auto["J"]?.[0] || "1J", t2: auto["H"]?.[1] || "2H" },
+      83: { t1: get2nd("K"), t2: get2nd("L") },
+      84: { t1: get1st("H"), t2: get2nd("J") },
+      85: { t1: get1st("B"), t2: getThird(85, "3EFGIJ") },
+      86: { t1: get1st("J"), t2: get2nd("H") },
 
-      87: { t1: auto["K"]?.[0] || "1K", t2: allocatedThirds[87] || "3DEIJL" },
-      88: { t1: auto["D"]?.[1] || "2D", t2: auto["G"]?.[1] || "2G" },
+      87: { t1: get1st("K"), t2: getThird(87, "3DEIJL") },
+      88: { t1: get2nd("D"), t2: get2nd("G") },
     };
-  }, [qualificationState, allocatedThirds]);
+  }, [qualificationState, allocatedThirds, bracketMode, confirmedPositions]);
 
   const roundOf16Seeding = useMemo(() => {
     const m = r32MatchesSeeding;

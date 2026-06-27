@@ -1,4 +1,4 @@
-export const FIFA_RANKINGS = {
+export const FIFA_RANKINGS = { // Below are the rankings of 48 teams that have qualified for the FIFA World Cup 2026. The rankings are based on the FIFA World Rankings as of Apr 2026.
   ARG: { name: "Argentina", ranking: 1 },
   ESP: { name: "Spain", ranking: 2 },
   FRA: { name: "France", ranking: 3 },

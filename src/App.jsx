@@ -52,13 +52,14 @@ export default function App() {
   // State hooks
   const { groupMatches, handleGroupScoreChange, resetGroupMatches } = useGroupMatches();
   const { koMatches, handleKoScoreChange, resetKoMatches } = useKnockoutMatches();
+  const [bracketMode, setBracketMode] = useState('standings');
 
   // Derived data hooks
-  const { groupStandings, qualificationState, allocatedThirds } = useStandings(groupMatches);
+  const { groupStandings, qualificationState, allocatedThirds, confirmedPositions, allGroupsComplete } = useStandings(groupMatches);
   const {
     r32MatchesSeeding, roundOf16Seeding, quarterFinalsSeeding,
     semiFinalsSeeding, finalsSeeding, tournamentChampion
-  } = useBracketSeeding(qualificationState, allocatedThirds, koMatches);
+  } = useBracketSeeding(qualificationState, allocatedThirds, koMatches, bracketMode, confirmedPositions);
 
   // Combined handlers
   const handleResetAll = () => {
@@ -200,6 +201,9 @@ export default function App() {
           koMatches={koMatches}
           onScoreChange={handleKoScoreChange}
           tournamentChampion={tournamentChampion}
+          bracketMode={bracketMode}
+          onBracketModeChange={setBracketMode}
+          allGroupsComplete={allGroupsComplete}
         />
 
       </main>

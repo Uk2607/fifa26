@@ -152,7 +152,10 @@ export default function KnockoutBracket({
   finalsSeeding,
   koMatches,
   onScoreChange,
-  tournamentChampion
+  tournamentChampion,
+  bracketMode,
+  onBracketModeChange,
+  allGroupsComplete
 }) {
   const [hoveredTeamCode, setHoveredTeamCode] = useState(null);
 
@@ -253,10 +256,44 @@ export default function KnockoutBracket({
 
       {/* Section Header */}
       <div className="border-b border-theme-border pb-4 mb-5">
-        <h2 className="text-lg font-black uppercase text-amber-400 flex items-center gap-2">
-          Interactive Knockout Bracket
-        </h2>
-        <p className="text-[10px] text-slate-500 mt-1">Scroll horizontally to explore the full bracket · Winners auto-advance through each round</p>
+        <div className="flex items-center justify-between flex-wrap gap-2">
+          <div>
+            <h2 className="text-lg font-black uppercase text-amber-400 flex items-center gap-2">
+              Interactive Knockout Bracket
+            </h2>
+            <p className="text-[10px] text-slate-500 mt-1">Scroll horizontally to explore the full bracket · Winners auto-advance through each round</p>
+          </div>
+
+          {/* Bracket Mode Toggle */}
+          {allGroupsComplete ? (
+            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-full">
+              ✓ Fixtures
+            </span>
+          ) : (
+            <div className="flex items-center bg-slate-800/80 rounded-full p-0.5 border border-theme-border/60">
+              <button
+                onClick={() => onBracketModeChange('standings')}
+                className={`text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-full transition-all duration-300 ${
+                  bracketMode === 'standings'
+                    ? 'bg-amber-500/20 text-amber-400 shadow-sm border border-amber-500/30'
+                    : 'text-slate-500 hover:text-slate-300 border border-transparent'
+                }`}
+              >
+                As of Standings
+              </button>
+              <button
+                onClick={() => onBracketModeChange('fixtures')}
+                className={`text-[9px] font-bold uppercase tracking-wider px-3 py-1 rounded-full transition-all duration-300 ${
+                  bracketMode === 'fixtures'
+                    ? 'bg-emerald-500/20 text-emerald-400 shadow-sm border border-emerald-500/30'
+                    : 'text-slate-500 hover:text-slate-300 border border-transparent'
+                }`}
+              >
+                Fixtures
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Scrollable Bracket Area */}

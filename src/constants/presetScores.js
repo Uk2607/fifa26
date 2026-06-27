@@ -196,13 +196,13 @@ export const PRESET_SCORES = {
 
   // Group G
   "G-G-0": { // Belgium vs New Zealand
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    score1: 2, score2: 0,
+    yellow1: 0, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "G-G-1": { // Egypt vs Iran
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    score1: 1, score2: 1,
+    yellow1: 2, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "G-G-2": { // Iran vs New Zealand
@@ -314,12 +314,12 @@ export const PRESET_SCORES = {
   "G-J-4": { // Argentina vs Jordan
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-J-5": { // Algeria vs Austria
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
 
   // Group K
@@ -346,12 +346,12 @@ export const PRESET_SCORES = {
   "G-K-4": { // Portugal vs Colombia
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-K-5": { // DR Congo vs Uzbekistan
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
 
   // Group L
@@ -378,12 +378,12 @@ export const PRESET_SCORES = {
   "G-L-4": { // England vs Panama
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
   "G-L-5": { // Croatia vs Ghana
     score1: null, score2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "upcoming"
+    red1: 0, red2: 0, status: "open"
   },
 
   // Knockouts Matchday Presets (open, locked)

@@ -231,9 +231,15 @@ export function useStandings(groupMatches) {
         teams[0].isQ = true;
         teams[1].isQ = true;
         teams[3].isE = true;
+        // All positions confirmed — mark each team with its locked rank
+        teams.forEach((t, idx) => { t.confirmedRank = idx + 1; });
       } else {
         const qeStatus = {};
-        teams.forEach(t => { qeStatus[t.code] = { canFailQ: false, canFailE: false }; });
+        const possibleRanks = {};
+        teams.forEach(t => {
+          qeStatus[t.code] = { canFailQ: false, canFailE: false };
+          possibleRanks[t.code] = new Set();
+        });
 
         // Total future scenarios = 3 ^ (number of unplayed matches)
         // (Because each match has 3 outcomes: W, D, L)
@@ -294,6 +300,7 @@ export function useStandings(groupMatches) {
               const tCode = tiedTeams[0];
               if (currentRank > 2) qeStatus[tCode].canFailQ = true;
               if (currentRank < 4) qeStatus[tCode].canFailE = true;
+              possibleRanks[tCode].add(currentRank);
               currentRank++;
             } else {
               // CASE B: Multiple teams tied on total points!
@@ -330,6 +337,7 @@ export function useStandings(groupMatches) {
                   const tCode = subTied[0];
                   if (tieRank > 2) qeStatus[tCode].canFailQ = true;
                   if (tieRank < 4) qeStatus[tCode].canFailE = true;
+                  possibleRanks[tCode].add(tieRank);
                   tieRank++;
                 } else {
                   // CASE B2: Teams are STILL TIED on H2H Points!
@@ -391,6 +399,7 @@ export function useStandings(groupMatches) {
                       ig.forEach(tCode => {
                         if (worstRank > 2) qeStatus[tCode].canFailQ = true;
                         if (bestRank < 4) qeStatus[tCode].canFailE = true;
+                        for (let r = bestRank; r <= worstRank; r++) possibleRanks[tCode].add(r);
                       });
                       tieRank += ig.length;
                     });
@@ -404,6 +413,7 @@ export function useStandings(groupMatches) {
                     subTied.forEach(tCode => {
                       if (worstRank > 2) qeStatus[tCode].canFailQ = true;
                       if (bestRank < 4) qeStatus[tCode].canFailE = true;
+                      for (let r = bestRank; r <= worstRank; r++) possibleRanks[tCode].add(r);
                     });
                     tieRank += subTied.length;
                   }
@@ -418,6 +428,10 @@ export function useStandings(groupMatches) {
         teams.forEach(t => {
           if (!qeStatus[t.code].canFailQ) t.isQ = true;
           if (!qeStatus[t.code].canFailE) t.isE = true;
+          // If a team only ever appears at one rank, that position is confirmed
+          if (possibleRanks[t.code].size === 1) {
+            t.confirmedRank = [...possibleRanks[t.code]][0];
+          }
         });
       }
     });
@@ -522,5 +536,28 @@ export function useStandings(groupMatches) {
     return fb;
   }, [qualificationState]);
 
-  return { groupStandings, qualificationState, allocatedThirds };
+  // ── Confirmed positions per group (for Fixtures mode) ───────────────────────
+  const { confirmedPositions, allGroupsComplete } = useMemo(() => {
+    const confirmed = {};
+    let allComplete = true;
+
+    Object.entries(groupStandings).forEach(([gName, table]) => {
+      confirmed[gName] = [null, null, null, null]; // positions 1-4
+      let groupComplete = true;
+
+      table.forEach((team, idx) => {
+        if (team.confirmedRank === idx + 1) {
+          confirmed[gName][idx] = team.code;
+        } else {
+          groupComplete = false;
+        }
+      });
+
+      if (!groupComplete) allComplete = false;
+    });
+
+    return { confirmedPositions: confirmed, allGroupsComplete: allComplete };
+  }, [groupStandings]);
+
+  return { groupStandings, qualificationState, allocatedThirds, confirmedPositions, allGroupsComplete };
 }

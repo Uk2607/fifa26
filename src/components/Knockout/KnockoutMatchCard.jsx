@@ -76,7 +76,9 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
 
   const isGloballyLocked = PRESET_SCORES[`KO-${matchId}`]?.status === 'locked';
   const matchStatus = matchState?.status || 'upcoming';
-  const isLocked = isGloballyLocked || matchStatus === 'locked';
+  const bothTeamsResolved = typeof team1 === 'string' && team1.length === 3
+                         && typeof team2 === 'string' && team2.length === 3;
+  const isLocked = isGloballyLocked || matchStatus === 'locked' || !bothTeamsResolved;
   const isDraw = score1 !== '' && score2 !== '' && score1 === score2;
 
   let winner = null;
@@ -106,17 +108,19 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
           <span className="flex items-center gap-0.5 text-amber-500 font-bold scale-90">
             <Lock className="w-2.5 h-2.5" /> Locked
           </span>
+        ) : !bothTeamsResolved ? (
+          <span className="text-[6px] text-slate-500 italic">⏳ Awaiting</span>
         ) : (
           <button
             onClick={() => onScoreChange(matchId, 'status', isLocked ? 'open' : 'locked')}
             className={`relative inline-flex h-2.5 w-5 items-center rounded-full transition-colors focus:outline-none ${
-              isLocked ? 'bg-red-500/80' : 'bg-emerald-500/80'
+              matchStatus === 'locked' ? 'bg-red-500/80' : 'bg-emerald-500/80'
             }`}
-            title={isLocked ? "Unlock match" : "Lock match"}
+            title={matchStatus === 'locked' ? "Unlock match" : "Lock match"}
           >
             <span
               className={`inline-block h-1.5 w-1.5 transform rounded-full bg-white shadow-sm transition-transform ${
-                isLocked ? 'translate-x-0.5' : 'translate-x-3'
+                matchStatus === 'locked' ? 'translate-x-0.5' : 'translate-x-3'
               }`}
             />
           </button>
