@@ -3,7 +3,7 @@ DEVELOPER CONFIGURATION: PRESET & LOCKED SCORES (upcoming, open, locked)
 ================================================================================ */
 // Increment this version whenever official matches/fixtures are updated in the codebase.
 // This will trigger an automatic local storage reset for all users on page load.
-export const DATA_VERSION = "1.0.1";
+export const DATA_VERSION = "1.1.0";
 
 // Export the preset scores
 export const PRESET_SCORES = {
@@ -201,14 +201,14 @@ export const PRESET_SCORES = {
 
   // Group G
   "G-G-0": { // Belgium vs New Zealand
-    score1: 3, score2: 0,
+    score1: 5, score2: 1,
     yellow1: 0, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, status: "locked"
   },
   "G-G-1": { // Egypt vs Iran
     score1: 1, score2: 1,
-    yellow1: 2, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    yellow1: 3, yellow2: 4, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-G-2": { // Iran vs New Zealand
     score1: 2, score2: 2,
