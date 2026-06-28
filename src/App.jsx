@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
-import { Info, ZoomIn, ZoomOut } from 'lucide-react';
+import { Info, ZoomIn, ZoomOut, ChevronUp, ChevronDown } from 'lucide-react';
 import { GROUPS_CONFIG } from './constants/groups';
 import { TEAMS } from './constants/teams';
+import { PRESET_SCORES } from './constants/presetScores';
 import { useGroupMatches } from './hooks/useGroupMatches';
 import { useKnockoutMatches } from './hooks/useKnockoutMatches';
 import { useStandings } from './hooks/useStandings';
@@ -64,6 +65,16 @@ export default function App() {
   } = useBracketSeeding(qualificationState, allocatedThirds, koMatches, bracketMode, confirmedPositions);
 
   const [isResetting, setIsResetting] = useState(false);
+  
+  // To avoid any local storage interference, we strictly calculate if the group stage 
+  // is fully locked by checking the hardcoded PRESET_SCORES from the codebase.
+  // There are 72 total group matches. If fewer than 72 are locked, we remain expanded.
+  const lockedGroupMatchesInCodebase = Object.keys(PRESET_SCORES)
+    .filter(key => key.startsWith('G-'))
+    .filter(key => PRESET_SCORES[key].status === 'locked').length;
+    
+  const isGroupStageFullyLocked = lockedGroupMatchesInCodebase === 72;
+  const [isGroupStageExpanded, setIsGroupStageExpanded] = useState(!isGroupStageFullyLocked);
 
   // Combined handlers
   const handleResetAll = () => {
@@ -135,7 +146,14 @@ export default function App() {
         {/* SECTION 1: GROUP STAGES */}
         <section className="space-y-4">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-theme-border pb-3 gap-2">
-            <div>
+            <div className="flex items-center gap-3">
+              <button 
+                onClick={() => setIsGroupStageExpanded(!isGroupStageExpanded)}
+                className="w-6 h-6 shrink-0 flex items-center justify-center rounded-md bg-slate-800/80 hover:bg-slate-700 border border-theme-border/60 hover:border-slate-500 transition-colors text-slate-400"
+                title={isGroupStageExpanded ? "Collapse Group Stage" : "Expand Group Stage"}
+              >
+                {isGroupStageExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              </button>
               <h2 className="text-lg font-black tracking-wider uppercase text-emerald-400 flex items-center gap-2">
                 2026 World Cup Group Stages
               </h2>
@@ -197,39 +215,41 @@ export default function App() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* Groups Grid */}
-            <div 
-              className={`lg:col-span-3 grid gap-4 ${getGridClasses()} transition-all duration-200 ease-in-out ${isZooming ? 'opacity-0 scale-[0.98]' : 'opacity-100 scale-100'}`}
-              style={{ '--zoom-scale': getZoomScale() }}
-            >
-              {Object.keys(GROUPS_CONFIG).map(gName => (
-                <GroupWidget
-                  key={gName}
-                  groupName={gName}
-                  teamsList={GROUPS_CONFIG[gName]}
-                  standings={groupStandings[gName]}
-                  matches={groupMatches}
-                  onScoreChange={handleGroupScoreChange}
-                  onToggle={setModalGroup}
-                  bestThirdsQualified={qualificationState.thirds}
-                />
-              ))}
-            </div>
+          {isGroupStageExpanded && (
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              {/* Groups Grid */}
+              <div 
+                className={`lg:col-span-3 grid gap-4 ${getGridClasses()} transition-all duration-200 ease-in-out ${isZooming ? 'opacity-0 scale-[0.98]' : 'opacity-100 scale-100'}`}
+                style={{ '--zoom-scale': getZoomScale() }}
+              >
+                {Object.keys(GROUPS_CONFIG).map(gName => (
+                  <GroupWidget
+                    key={gName}
+                    groupName={gName}
+                    teamsList={GROUPS_CONFIG[gName]}
+                    standings={groupStandings[gName]}
+                    matches={groupMatches}
+                    onScoreChange={handleGroupScoreChange}
+                    onToggle={setModalGroup}
+                    bestThirdsQualified={qualificationState.thirds}
+                  />
+                ))}
+              </div>
 
-            {/* Right Sidebar: Best 3rd-Place Panel + Open Matches */}
-            <div className="lg:col-span-1 space-y-6">
-              <BestThirdsPanel 
-                bestThirdsRanking={qualificationState.bestThirdsRanking} 
-                gridColumns={gridColumns}
-              />
-              <OpenMatchesPanel
-                groupMatches={groupMatches}
-                onScoreChange={handleGroupScoreChange}
-                gridColumns={gridColumns}
-              />
+              {/* Right Sidebar: Best 3rd-Place Panel + Open Matches */}
+              <div className="lg:col-span-1 space-y-6">
+                <BestThirdsPanel 
+                  bestThirdsRanking={qualificationState.bestThirdsRanking} 
+                  gridColumns={gridColumns}
+                />
+                <OpenMatchesPanel
+                  groupMatches={groupMatches}
+                  onScoreChange={handleGroupScoreChange}
+                  gridColumns={gridColumns}
+                />
+              </div>
             </div>
-          </div>
+          )}
         </section>
 
         {/* SECTION 2: KNOCKOUT BRACKET */}
