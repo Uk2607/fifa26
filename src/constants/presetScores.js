@@ -349,14 +349,14 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-K-4": { // Portugal vs Colombia
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 0, score2: 0,
+    yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-K-5": { // DR Congo vs Uzbekistan
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 3, score2: 1,
+    yellow1: 3, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
 
   // Group L
@@ -381,14 +381,14 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-L-4": { // England vs Panama
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 2, score2: 0,
+    yellow1: 1, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "G-L-5": { // Croatia vs Ghana
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 2, score2: 1,
+    yellow1: 1, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
 
   // Knockouts Matchday Presets (open, locked)
