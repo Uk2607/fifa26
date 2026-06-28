@@ -317,13 +317,13 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "G-J-4": { // Argentina vs Jordan
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    score1: 2, score2: 0,
+    yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "G-J-5": { // Algeria vs Austria
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    score1: 1, score2: 1,
+    yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
 
