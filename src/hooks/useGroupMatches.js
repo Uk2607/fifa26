@@ -39,13 +39,29 @@ function initGroupMatches() {
 
 export function useGroupMatches() {
   const [groupMatches, setGroupMatches] = useState(() => {
+    let savedMatches = null;
     try {
       const saved = localStorage.getItem('fifa2026_groupMatches');
-      if (saved) return JSON.parse(saved);
+      if (saved) savedMatches = JSON.parse(saved);
     } catch (e) {
       console.error('Failed to load group matches from local storage', e);
     }
-    return initGroupMatches();
+    
+    const initial = initGroupMatches();
+    
+    // SMART MERGE: Start with the pristine codebase data (which has all the correct 'locked' matches).
+    // Then, overlay the user's saved predictions ONLY for matches that aren't locked by the codebase.
+    if (savedMatches) {
+      const merged = { ...initial };
+      for (const id in savedMatches) {
+        if (!PRESET_SCORES[id] || PRESET_SCORES[id].status !== 'locked') {
+          merged[id] = savedMatches[id];
+        }
+      }
+      return merged;
+    }
+    
+    return initial;
   });
 
   useEffect(() => {

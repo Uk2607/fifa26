@@ -7,8 +7,14 @@ import { useMemo } from 'react';
 function getWinner(t1, t2, mId, koMatches) {
   const match = koMatches[`KO-${mId}`];
   if (!match) return null;
-  const { score1, score2, penalty1, penalty2 } = match;
+  const { score1, score2, penalty1, penalty2, team1Code, team2Code } = match;
   if (score1 === '' || score2 === '') return null;
+  
+  // If the teams have changed since the user predicted the score, ignore the prediction.
+  if (team1Code && team2Code && (team1Code !== t1 || team2Code !== t2)) {
+    return null;
+  }
+  
   if (score1 > score2) return t1;
   if (score2 > score1) return t2;
   if (penalty1 !== '' && penalty2 !== '') {

@@ -69,15 +69,26 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
 }
 
 export default function KnockoutMatchCard({ matchId, team1, team2, matchState, onScoreChange, hoveredTeamCode, onTeamHover, isPathHighlighted }) {
-  const score1 = matchState?.score1 ?? '';
-  const score2 = matchState?.score2 ?? '';
-  const penalty1 = matchState?.penalty1 ?? '';
-  const penalty2 = matchState?.penalty2 ?? '';
+  const bothTeamsResolved = typeof team1 === 'string' && team1.length === 3
+                         && typeof team2 === 'string' && team2.length === 3;
+
+  const savedTeam1 = matchState?.team1Code;
+  const savedTeam2 = matchState?.team2Code;
+  // If the teams playing have changed since the user made a prediction, we hide the stale prediction.
+  const teamsChanged = savedTeam1 && savedTeam2 && bothTeamsResolved && 
+                       (savedTeam1 !== team1 || savedTeam2 !== team2);
+
+  const score1 = teamsChanged ? '' : (matchState?.score1 ?? '');
+  const score2 = teamsChanged ? '' : (matchState?.score2 ?? '');
+  const penalty1 = teamsChanged ? '' : (matchState?.penalty1 ?? '');
+  const penalty2 = teamsChanged ? '' : (matchState?.penalty2 ?? '');
+
+  const handleScoreChangeWithTeams = (mId, field, val) => {
+    onScoreChange(mId, field, val, bothTeamsResolved ? team1 : null, bothTeamsResolved ? team2 : null);
+  };
 
   const isGloballyLocked = PRESET_SCORES[`KO-${matchId}`]?.status === 'locked';
   const matchStatus = matchState?.status || 'upcoming';
-  const bothTeamsResolved = typeof team1 === 'string' && team1.length === 3
-                         && typeof team2 === 'string' && team2.length === 3;
   const isLocked = isGloballyLocked || matchStatus === 'locked' || !bothTeamsResolved;
   const isDraw = score1 !== '' && score2 !== '' && score1 === score2;
 
@@ -137,7 +148,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         isDraw={isDraw}
         isLocked={isLocked}
         matchId={matchId}
-        onScoreChange={onScoreChange}
+        onScoreChange={handleScoreChangeWithTeams}
         hoveredTeamCode={hoveredTeamCode}
         onTeamHover={onTeamHover}
       />
@@ -154,7 +165,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         isDraw={isDraw}
         isLocked={isLocked}
         matchId={matchId}
-        onScoreChange={onScoreChange}
+        onScoreChange={handleScoreChangeWithTeams}
         hoveredTeamCode={hoveredTeamCode}
         onTeamHover={onTeamHover}
       />

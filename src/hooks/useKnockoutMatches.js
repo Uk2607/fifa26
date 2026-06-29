@@ -24,27 +24,44 @@ function initKoMatches() {
 
 export function useKnockoutMatches() {
   const [koMatches, setKoMatches] = useState(() => {
+    let savedMatches = null;
     try {
       const saved = localStorage.getItem('fifa2026_koMatches');
-      if (saved) return JSON.parse(saved);
+      if (saved) savedMatches = JSON.parse(saved);
     } catch (e) {
       console.error('Failed to load knockout matches from local storage', e);
     }
-    return initKoMatches();
+    
+    const initial = initKoMatches();
+    
+    // SMART MERGE: Start with the pristine codebase data (which has all the correct 'locked' matches).
+    // Then, overlay the user's saved predictions ONLY for matches that aren't locked by the codebase.
+    if (savedMatches) {
+      const merged = { ...initial };
+      for (const id in savedMatches) {
+        if (!PRESET_SCORES[id] || PRESET_SCORES[id].status !== 'locked') {
+          merged[id] = savedMatches[id];
+        }
+      }
+      return merged;
+    }
+    
+    return initial;
   });
 
   useEffect(() => {
     localStorage.setItem('fifa2026_koMatches', JSON.stringify(koMatches));
   }, [koMatches]);
 
-  const handleKoScoreChange = (matchId, field, val) => {
+  const handleKoScoreChange = (matchId, field, val, team1Code, team2Code) => {
     const koId = `KO-${matchId}`;
     if (PRESET_SCORES[koId]?.status === 'locked') return;
     setKoMatches(prev => ({
       ...prev,
       [koId]: {
         ...prev[koId],
-        [field]: field === 'status' ? val : (val === '' ? '' : parseInt(val, 10) || 0)
+        [field]: field === 'status' ? val : (val === '' ? '' : parseInt(val, 10) || 0),
+        ...(team1Code && team2Code ? { team1Code, team2Code } : {})
       }
     }));
   };

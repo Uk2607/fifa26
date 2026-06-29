@@ -1,9 +1,6 @@
 /* ================================================================================
 DEVELOPER CONFIGURATION: PRESET & LOCKED SCORES (upcoming, open, locked)
 ================================================================================ */
-// Increment this version whenever official matches/fixtures are updated in the codebase.
-// This will trigger an automatic local storage reset for all users on page load.
-export const DATA_VERSION = "1.3.0";
 
 // Export the preset scores
 export const PRESET_SCORES = {
