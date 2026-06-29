@@ -405,9 +405,9 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "open"
   },
   "KO-76": {
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    score1: 2, score2: 1,
+    yellow1: 2, yellow2: 3, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "KO-77": {
     score1: null, score2: null,
