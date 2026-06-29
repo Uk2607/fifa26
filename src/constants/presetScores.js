@@ -389,163 +389,195 @@ export const PRESET_SCORES = {
   },
 
   // Knockouts Matchday Presets (open, locked)
-  "KO-73": {
+  "KO-73": { // South Africa vs Canada
     score1: 0, score2: 1,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "locked"
   },
-  "KO-74": {
+  "KO-74": { // Germany vs Paraguay
+    score1: 1, score2: 1,
+    penalty1: 3, penalty2: 4,
+    yellow1: 3, yellow2: 3, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
+  },
+  "KO-75": { // Netherlands vs Morocco
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-75": {
-    score1: null, score2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
-  },
-  "KO-76": {
+  "KO-76": { // Brazil vs Japan
     score1: 2, score2: 1,
+    penalty1: null, penalty2: null,
     yellow1: 2, yellow2: 3, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "locked"
   },
   "KO-77": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-78": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-79": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-80": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-81": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-82": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-83": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-84": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-85": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-86": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-87": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-88": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-89": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-90": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-91": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-92": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-93": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-94": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-95": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-96": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-97": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-98": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-99": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-100": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-101": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-102": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-103": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-104": {
     score1: null, score2: null,
+    penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   }
