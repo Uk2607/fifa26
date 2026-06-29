@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { GROUPS_CONFIG, GROUP_MATCH_PAIRINGS } from '../constants/groups';
 import { PRESET_SCORES } from '../constants/presetScores';
 
@@ -64,6 +64,48 @@ export function useGroupMatches() {
     return initial;
   });
 
+  const overwrittenGroupMatches = useMemo(() => {
+    let savedMatches = null;
+    try {
+      const saved = localStorage.getItem('fifa2026_groupMatches');
+      if (saved) savedMatches = JSON.parse(saved);
+    } catch (e) {}
+
+    if (!savedMatches) return [];
+
+    const initial = initGroupMatches();
+    const overwritten = [];
+
+    for (const id in savedMatches) {
+      if (PRESET_SCORES[id] && PRESET_SCORES[id].status === 'locked') {
+        const oldM = savedMatches[id];
+        const newM = initial[id];
+        // User had a prediction?
+        if (oldM.score1 !== '' && oldM.score2 !== '') {
+           // Was it different from the official locked score?
+           if (oldM.score1 !== newM.score1 || oldM.score2 !== newM.score2) {
+              const [, gName, idx] = id.split('-');
+              const pairing = GROUP_MATCH_PAIRINGS[parseInt(idx, 10)];
+              const t1Code = GROUPS_CONFIG[gName][pairing.t1];
+              const t2Code = GROUPS_CONFIG[gName][pairing.t2];
+              
+              overwritten.push({
+                 id,
+                 type: 'group',
+                 t1Code,
+                 t2Code,
+                 oldScore1: oldM.score1,
+                 oldScore2: oldM.score2,
+                 newScore1: newM.score1,
+                 newScore2: newM.score2
+              });
+           }
+        }
+      }
+    }
+    return overwritten;
+  }, []);
+
   useEffect(() => {
     localStorage.setItem('fifa2026_groupMatches', JSON.stringify(groupMatches));
   }, [groupMatches]);
@@ -84,5 +126,5 @@ export function useGroupMatches() {
     setGroupMatches(initGroupMatches());
   };
 
-  return { groupMatches, handleGroupScoreChange, resetGroupMatches };
+  return { groupMatches, handleGroupScoreChange, resetGroupMatches, overwrittenGroupMatches };
 }

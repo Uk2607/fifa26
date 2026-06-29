@@ -17,6 +17,7 @@ import BestThirdsPanel from './components/GroupStage/BestThirdsPanel';
 import OpenMatchesPanel from './components/GroupStage/OpenMatchesPanel';
 import KnockoutBracket from './components/Knockout/KnockoutBracket';
 import Footer from './components/Footer';
+import UpdateModal from './components/UpdateModal';
 
 export default function App() {
   const [modalGroup, setModalGroup] = useState(null);
@@ -53,9 +54,12 @@ export default function App() {
   };
 
   // State hooks
-  const { groupMatches, handleGroupScoreChange, resetGroupMatches } = useGroupMatches();
-  const { koMatches, handleKoScoreChange, resetKoMatches } = useKnockoutMatches();
+  const { groupMatches, handleGroupScoreChange, resetGroupMatches, overwrittenGroupMatches } = useGroupMatches();
+  const { koMatches, handleKoScoreChange, resetKoMatches, overwrittenKoMatches } = useKnockoutMatches();
   const [bracketMode, setBracketMode] = useState('standings');
+  
+  const allOverwrittenMatches = React.useMemo(() => [...overwrittenGroupMatches, ...overwrittenKoMatches], [overwrittenGroupMatches, overwrittenKoMatches]);
+  const [showUpdateModal, setShowUpdateModal] = useState(allOverwrittenMatches.length > 0);
 
   // Derived data hooks
   const { groupStandings, qualificationState, allocatedThirds, confirmedPositions, allGroupsComplete } = useStandings(groupMatches);
@@ -277,13 +281,22 @@ export default function App() {
 
       {/* GROUP MATCH MODAL (popup) */}
       {modalGroup && (
-        <GroupMatchModal
-          groupName={modalGroup}
-          matches={groupMatches}
-          standings={groupStandings[modalGroup]}
-          bestThirdsQualified={qualificationState.thirds}
-          onScoreChange={handleGroupScoreChange}
-          onClose={() => setModalGroup(null)}
+        <div className="relative z-50">
+          <GroupMatchModal
+            groupName={modalGroup}
+            matches={groupMatches}
+            standings={groupStandings[modalGroup]}
+            bestThirdsQualified={qualificationState.thirds}
+            onScoreChange={handleGroupScoreChange}
+            onClose={() => setModalGroup(null)}
+          />
+        </div>
+      )}
+
+      {showUpdateModal && (
+        <UpdateModal 
+          overwrittenMatches={allOverwrittenMatches} 
+          onClose={() => setShowUpdateModal(false)} 
         />
       )}
     </div>

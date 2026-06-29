@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { PRESET_SCORES } from '../constants/presetScores';
 
 function initKoMatches() {
@@ -49,6 +49,43 @@ export function useKnockoutMatches() {
     return initial;
   });
 
+  const overwrittenKoMatches = useMemo(() => {
+    let savedMatches = null;
+    try {
+      const saved = localStorage.getItem('fifa2026_koMatches');
+      if (saved) savedMatches = JSON.parse(saved);
+    } catch (e) {}
+
+    if (!savedMatches) return [];
+
+    const initial = initKoMatches();
+    const overwritten = [];
+
+    for (const id in savedMatches) {
+      if (PRESET_SCORES[id] && PRESET_SCORES[id].status === 'locked') {
+        const oldM = savedMatches[id];
+        const newM = initial[id];
+        // User had a prediction?
+        if (oldM.score1 !== '' && oldM.score2 !== '') {
+           // Was it different?
+           if (oldM.score1 !== newM.score1 || oldM.score2 !== newM.score2) {
+              overwritten.push({
+                 id,
+                 type: 'knockout',
+                 t1Code: oldM.team1Code || 'TBD',
+                 t2Code: oldM.team2Code || 'TBD',
+                 oldScore1: oldM.score1,
+                 oldScore2: oldM.score2,
+                 newScore1: newM.score1,
+                 newScore2: newM.score2
+              });
+           }
+        }
+      }
+    }
+    return overwritten;
+  }, []);
+
   useEffect(() => {
     localStorage.setItem('fifa2026_koMatches', JSON.stringify(koMatches));
   }, [koMatches]);
@@ -70,5 +107,5 @@ export function useKnockoutMatches() {
     setKoMatches(initKoMatches());
   };
 
-  return { koMatches, handleKoScoreChange, resetKoMatches };
+  return { koMatches, handleKoScoreChange, resetKoMatches, overwrittenKoMatches };
 }

@@ -122,19 +122,13 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         ) : !bothTeamsResolved ? (
           <span className="text-[6px] text-slate-500 italic">⏳ Awaiting</span>
         ) : (
-          <button
-            onClick={() => onScoreChange(matchId, 'status', isLocked ? 'open' : 'locked')}
-            className={`relative inline-flex h-2.5 w-5 items-center rounded-full transition-colors focus:outline-none ${
-              matchStatus === 'locked' ? 'bg-red-500/80' : 'bg-emerald-500/80'
-            }`}
-            title={matchStatus === 'locked' ? "Unlock match" : "Lock match"}
-          >
-            <span
-              className={`inline-block h-1.5 w-1.5 transform rounded-full bg-white shadow-sm transition-transform ${
-                matchStatus === 'locked' ? 'translate-x-0.5' : 'translate-x-3'
-              }`}
-            />
-          </button>
+          <span className="flex items-center gap-1 text-[7px] text-emerald-400 font-bold uppercase">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+            </span>
+            Open
+          </span>
         )}
       </div>
 

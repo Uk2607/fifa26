@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
+import { X, Lock } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 import { GROUPS_CONFIG, GROUP_MATCH_PAIRINGS, GROUP_MATCH_NUMBERS } from '../../constants/groups';
 import { PRESET_SCORES } from '../../constants/presetScores';
@@ -156,6 +156,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                       const t2Code = teamsList[match.t2];
                       const isLocked = state.status === 'locked';
                       const isOpen = state.status === 'open';
+                      const presetStatus = PRESET_SCORES[id]?.status || 'upcoming';
 
                       const s1 = state.score1 !== '' ? parseInt(state.score1, 10) : NaN;
                       const s2 = state.score2 !== '' ? parseInt(state.score2, 10) : NaN;
@@ -234,24 +235,31 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                           {/* Status Toggle Row */}
                           <div className={`flex items-center justify-center border-x ${borderColor} ${bgColor} pb-1`}>
                             <div className="flex items-center bg-card-bg/80 rounded-full border border-theme-border/80 p-0.5">
-                              {['upcoming', 'open', 'locked'].map(s => {
+                              {presetStatus === 'locked' && (
+                                <div className="px-3 py-0.5 text-[8px] font-bold rounded-full uppercase bg-amber-500/20 text-amber-400 flex items-center gap-1 cursor-default">
+                                  <Lock className="w-2.5 h-2.5" /> Locked
+                                </div>
+                              )}
+                              {presetStatus === 'open' && (
+                                <div className="px-3 py-0.5 text-[8px] font-bold rounded-full uppercase bg-emerald-500/20 text-emerald-400 flex items-center gap-1.5 cursor-default">
+                                  <span className="relative flex h-1.5 w-1.5">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+                                  </span>
+                                  Open
+                                </div>
+                              )}
+                              {presetStatus === 'upcoming' && ['upcoming', 'open'].map(s => {
                                 const isSelected = state.status === s;
-                                const presetStatus = PRESET_SCORES[id]?.status || 'upcoming';
-                                let isDisabled = false;
-                                if (presetStatus === 'locked') {
-                                  isDisabled = true;
-                                } else if (presetStatus === 'open') {
-                                  isDisabled = s === 'upcoming';
-                                }
                                 return (
                                   <button
                                     key={s}
-                                    disabled={isDisabled}
                                     onClick={() => onScoreChange(id, 'status', s)}
-                                    className={`px-2.5 py-0.5 text-[8px] font-bold rounded-full uppercase transition-all flex items-center justify-center gap-1.5 ${isSelected
-                                      ? (s === 'locked' ? 'bg-amber-500/20 text-amber-400' : s === 'open' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-300')
-                                      : 'text-slate-500 hover:text-slate-400'
-                                      } ${isDisabled ? (isSelected ? 'cursor-not-allowed' : 'opacity-50 cursor-not-allowed') : 'cursor-pointer'}`}
+                                    className={`px-2.5 py-0.5 text-[8px] font-bold rounded-full uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
+                                      isSelected
+                                        ? (s === 'open' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700 text-slate-300')
+                                        : 'text-slate-500 hover:text-slate-400'
+                                      }`}
                                   >
                                     {s === 'open' && isSelected && (
                                       <span className="relative flex h-1.5 w-1.5">
