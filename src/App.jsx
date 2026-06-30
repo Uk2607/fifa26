@@ -296,6 +296,13 @@ export default function App() {
       {showUpdateModal && (
         <UpdateModal 
           overwrittenMatches={allOverwrittenMatches} 
+          koSeedings={{
+            ...r32MatchesSeeding, 
+            ...roundOf16Seeding, 
+            ...quarterFinalsSeeding, 
+            ...semiFinalsSeeding, 
+            ...finalsSeeding
+          }}
           onClose={() => setShowUpdateModal(false)} 
         />
       )}

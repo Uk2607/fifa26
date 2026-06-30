@@ -2,7 +2,7 @@ import React from 'react';
 import { X, Info } from 'lucide-react';
 import { TEAMS } from '../constants/teams';
 
-export default function UpdateModal({ overwrittenMatches, onClose }) {
+export default function UpdateModal({ overwrittenMatches, koSeedings, onClose }) {
   if (!overwrittenMatches || overwrittenMatches.length === 0) return null;
 
   return (
@@ -31,8 +31,21 @@ export default function UpdateModal({ overwrittenMatches, onClose }) {
 
           <div className="space-y-3">
             {overwrittenMatches.map((m, idx) => {
-              const t1 = TEAMS[m.t1Code]?.name || m.t1Code;
-              const t2 = TEAMS[m.t2Code]?.name || m.t2Code;
+              let t1Code = m.t1Code;
+              let t2Code = m.t2Code;
+              
+              // Resolve TBD codes using the live bracket seedings (useful for old predictions)
+              if (m.type === 'knockout' && (t1Code === 'TBD' || t2Code === 'TBD') && koSeedings) {
+                const matchNum = parseInt(m.id.replace('KO-', ''), 10);
+                const seeding = koSeedings[matchNum];
+                if (seeding) {
+                  t1Code = seeding.t1;
+                  t2Code = seeding.t2;
+                }
+              }
+
+              const t1 = TEAMS[t1Code]?.name || t1Code;
+              const t2 = TEAMS[t2Code]?.name || t2Code;
               
               return (
                 <div key={idx} className="bg-slate-800/30 border border-slate-700/50 rounded-lg p-3">
