@@ -388,6 +388,8 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
 
+  // ==================================================================================================================
+
   // Knockouts Matchday Presets (open, locked)
   "KO-73": { // South Africa vs Canada
     score1: 0, score2: 1,
@@ -402,10 +404,10 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "KO-75": { // Netherlands vs Morocco
-    score1: 1, score2: 0,
-    penalty1: null, penalty2: null,
+    score1: 1, score2: 1,
+    penalty1: 2, penalty2: 3,
     yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, status: "locked"
   },
   "KO-76": { // Brazil vs Japan
     score1: 2, score2: 1,
