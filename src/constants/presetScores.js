@@ -402,9 +402,9 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "KO-75": { // Netherlands vs Morocco
-    score1: null, score2: null,
+    score1: 1, score2: 0,
     penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
   "KO-76": { // Brazil vs Japan
@@ -413,91 +413,91 @@ export const PRESET_SCORES = {
     yellow1: 2, yellow2: 3, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "locked"
   },
-  "KO-77": {
+  "KO-77": { // France vs Sweden
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-78": {
+  "KO-78": { // Ivory Coast vs Norway
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-79": {
+  "KO-79": { // Mexico vs Ecuador
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-80": {
+  "KO-80": { // England vs DR Congo
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-81": {
+  "KO-81": { // USA vs Bosnia & Herzegovina
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-82": {
+  "KO-82": { // Belgium vs Senegal
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-83": {
+  "KO-83": { // Portugal vs Croatia
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-84": {
+  "KO-84": { // Spain vs Austria
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-85": {
+  "KO-85": { // Switzerland vs Algeria
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-86": {
+  "KO-86": { // Argentina vs Cape Verde
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-87": {
+  "KO-87": { // Colombia vs Ghana
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-88": {
+  "KO-88": { // Australia vs Egypt
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-89": {
+  "KO-89": { // Paraguay vs 
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-90": {
+  "KO-90": { // Canada vs 
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0, status: "open"
   },
-  "KO-91": {
+  "KO-91": { // Brazil vs 
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
