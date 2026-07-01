@@ -428,10 +428,10 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "KO-79": { // Mexico vs Ecuador
-    score1: null, score2: null,
+    score1: 2, score2: 0,
     penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    yellow1: 0, yellow2: 3, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 1, status: "locked"
   },
   "KO-80": { // England vs DR Congo
     score1: null, score2: null,
