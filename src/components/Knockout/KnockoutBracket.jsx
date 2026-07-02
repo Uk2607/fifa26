@@ -28,7 +28,7 @@ const RIGHT_SF = [102];
 // ================================================================================
 // MATCH COLUMN — renders N matches evenly distributed vertically
 // ================================================================================
-function MatchColumn({ matches, getSeeding, koMatches, onScoreChange, hoveredTeamCode, onTeamHover, highlightedPath }) {
+function MatchColumn({ matches, getSeeding, koMatches, onScoreChange, hoveredTeamCode, onTeamHover, highlightedPath, viewMode }) {
   return (
     <div style={{ width: MATCH_COL_WIDTH, display: 'flex', flexDirection: 'column', flexShrink: 0 }}>
       {matches.map(matchId => {
@@ -47,6 +47,7 @@ function MatchColumn({ matches, getSeeding, koMatches, onScoreChange, hoveredTea
               hoveredTeamCode={hoveredTeamCode}
               onTeamHover={onTeamHover}
               isPathHighlighted={highlightedPath ? highlightedPath.has(matchId) : false}
+              viewMode={viewMode}
             />
           </div>
         );
@@ -155,7 +156,8 @@ export default function KnockoutBracket({
   tournamentChampion,
   bracketMode,
   onBracketModeChange,
-  allGroupsComplete
+  allGroupsComplete,
+  viewMode
 }) {
   const [hoveredTeamCode, setHoveredTeamCode] = useState(null);
   const scrollContainerRef = useRef(null);
@@ -344,16 +346,16 @@ export default function KnockoutBracket({
         }}>
 
           {/* ── LEFT HALF ── R32 → R16 → QF → SF */}
-          <MatchColumn matches={LEFT_R32} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
+          <MatchColumn matches={LEFT_R32} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} viewMode={viewMode} />
           <PairConnector pairCount={4} side="left" />
 
-          <MatchColumn matches={LEFT_R16} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
+          <MatchColumn matches={LEFT_R16} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} viewMode={viewMode} />
           <PairConnector pairCount={2} side="left" />
 
-          <MatchColumn matches={LEFT_QF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
+          <MatchColumn matches={LEFT_QF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} viewMode={viewMode} />
           <PairConnector pairCount={1} side="left" />
 
-          <MatchColumn matches={LEFT_SF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
+          <MatchColumn matches={LEFT_SF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} viewMode={viewMode} />
           <StraightConnector />
 
           {/* ── CENTER: FINALS + TROPHY ── */}
@@ -396,6 +398,7 @@ export default function KnockoutBracket({
                 hoveredTeamCode={hoveredTeamCode}
                 onTeamHover={setHoveredTeamCode}
                 isPathHighlighted={highlightedPath ? highlightedPath.has(104) : false}
+                viewMode={viewMode}
               />
             </div>
 
@@ -413,6 +416,7 @@ export default function KnockoutBracket({
                 hoveredTeamCode={hoveredTeamCode}
                 onTeamHover={setHoveredTeamCode}
                 isPathHighlighted={highlightedPath ? highlightedPath.has(103) : false}
+                viewMode={viewMode}
               />
             </div>
           </div>
@@ -420,16 +424,16 @@ export default function KnockoutBracket({
           <StraightConnector />
 
           {/* ── RIGHT HALF ── SF → QF → R16 → R32 */}
-          <MatchColumn matches={RIGHT_SF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
+          <MatchColumn matches={RIGHT_SF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} viewMode={viewMode} />
           <PairConnector pairCount={1} side="right" />
 
-          <MatchColumn matches={RIGHT_QF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
+          <MatchColumn matches={RIGHT_QF} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} viewMode={viewMode} />
           <PairConnector pairCount={2} side="right" />
 
-          <MatchColumn matches={RIGHT_R16} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
+          <MatchColumn matches={RIGHT_R16} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} viewMode={viewMode} />
           <PairConnector pairCount={4} side="right" />
 
-          <MatchColumn matches={RIGHT_R32} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} />
+          <MatchColumn matches={RIGHT_R32} getSeeding={getSeeding} koMatches={koMatches} onScoreChange={onScoreChange} hoveredTeamCode={hoveredTeamCode} onTeamHover={setHoveredTeamCode} highlightedPath={highlightedPath} viewMode={viewMode} />
 
         </div>
       </div>

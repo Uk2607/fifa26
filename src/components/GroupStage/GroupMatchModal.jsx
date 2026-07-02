@@ -41,7 +41,7 @@ function CardInput({ color, label, value, field, matchId, onScoreChange, disable
 // ================================================================================
 // 🏟️ GROUP MATCH MODAL — compact popup with all fixtures for a group
 // ================================================================================
-export default function GroupMatchModal({ groupName, matches, standings, bestThirdsQualified, onScoreChange, onClose }) {
+export default function GroupMatchModal({ groupName, matches, standings, bestThirdsQualified, onScoreChange, onClose, viewMode = 'compact' }) {
   const [activeTab, setActiveTab] = useState('fixtures');
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -190,7 +190,12 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                           <div className={`flex items-center justify-center px-3 pt-2 pb-1 rounded-t-lg border border-b-0 ${borderColor} ${bgColor}`}>
                             {/* Team 1 */}
                             <div className="flex items-center gap-1.5 justify-end w-[140px]">
-                              <span className={`text-[10px] truncate text-right font-medium transition-colors ${isT1Winner ? 'text-white font-bold' : isT2Winner ? 'text-slate-500' : 'text-slate-300'}`}>{TEAMS[t1Code]?.name}</span>
+                              <span 
+                                className={`truncate text-right font-medium transition-all ${isT1Winner ? 'text-white font-bold' : isT2Winner ? 'text-slate-500' : 'text-slate-300'} ${viewMode === 'readable' ? 'text-sm' : 'text-[10px]'}`}
+                                title={viewMode === 'readable' ? TEAMS[t1Code]?.name : undefined}
+                              >
+                                {viewMode === 'readable' ? t1Code : TEAMS[t1Code]?.name}
+                              </span>
                               <span className={`text-sm flex-shrink-0 transition-opacity ${isT2Winner ? 'opacity-40 grayscale' : ''}`}><img src={`https://flagcdn.com/${TEAMS[t1Code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                             </div>
 
@@ -204,7 +209,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                                 value={state.score1}
                                 disabled={isLocked}
                                 onChange={(e) => onScoreChange(id, 'score1', e.target.value)}
-                                className={`w-7 h-7 rounded-md text-center text-xs font-black outline-none transition-all ${isLocked
+                                className={`rounded-md text-center font-black outline-none transition-all ${viewMode === 'readable' ? 'w-9 h-9 text-sm' : 'w-7 h-7 text-xs'} ${isLocked
                                   ? `cursor-not-allowed border ${isT1Winner ? 'text-amber-400 bg-amber-950/30 border-amber-500/30' : isT2Winner ? 'text-slate-600 bg-slate-850 border-theme-border' : 'text-slate-400 bg-slate-850 border-theme-border'}`
                                   : 'bg-slate-800 text-white border border-theme-border focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400'
                                   }`}
@@ -218,7 +223,7 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                                 value={state.score2}
                                 disabled={isLocked}
                                 onChange={(e) => onScoreChange(id, 'score2', e.target.value)}
-                                className={`w-7 h-7 rounded-md text-center text-xs font-black outline-none transition-all ${isLocked
+                                className={`rounded-md text-center font-black outline-none transition-all ${viewMode === 'readable' ? 'w-9 h-9 text-sm' : 'w-7 h-7 text-xs'} ${isLocked
                                   ? `cursor-not-allowed border ${isT2Winner ? 'text-amber-400 bg-amber-950/30 border-amber-500/30' : isT1Winner ? 'text-slate-600 bg-slate-850 border-theme-border' : 'text-slate-400 bg-slate-850 border-theme-border'}`
                                   : 'bg-slate-800 text-white border border-theme-border focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400'
                                   }`}
@@ -228,7 +233,12 @@ export default function GroupMatchModal({ groupName, matches, standings, bestThi
                             {/* Team 2 */}
                             <div className="flex items-center gap-1.5 justify-start w-[140px]">
                               <span className={`text-sm flex-shrink-0 transition-opacity ${isT1Winner ? 'opacity-40 grayscale' : ''}`}><img src={`https://flagcdn.com/${TEAMS[t2Code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
-                              <span className={`text-[10px] truncate font-medium transition-colors ${isT2Winner ? 'text-white font-bold' : isT1Winner ? 'text-slate-500' : 'text-slate-300'}`}>{TEAMS[t2Code]?.name}</span>
+                              <span 
+                                className={`truncate font-medium transition-all ${isT2Winner ? 'text-white font-bold' : isT1Winner ? 'text-slate-500' : 'text-slate-300'} ${viewMode === 'readable' ? 'text-sm' : 'text-[10px]'}`}
+                                title={viewMode === 'readable' ? TEAMS[t2Code]?.name : undefined}
+                              >
+                                {viewMode === 'readable' ? t2Code : TEAMS[t2Code]?.name}
+                              </span>
                             </div>
                           </div>
 

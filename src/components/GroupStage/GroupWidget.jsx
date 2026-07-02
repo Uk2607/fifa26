@@ -9,11 +9,13 @@ const GroupWidget = React.memo(function GroupWidget({
   teamsList,
   standings,
   onToggle,
-  bestThirdsQualified
+  bestThirdsQualified,
+  viewMode = 'compact'
 }) {
   return (
     <div
-      style={{ fontSize: `calc(10px * var(--zoom-scale, 1))` }} className="max-md:!text-[8.5px] rounded-[1.6em] overflow-hidden p-[0.1em] bg-gradient-to-br from-theme-border/60 via-theme-border/20 to-theme-border/60 hover:from-emerald-500/50 hover:via-theme-border/50 hover:to-blue-500/50 cursor-pointer group shadow-lg"
+      style={{ fontSize: `calc(${viewMode === 'readable' ? '12px' : '10px'} * var(--zoom-scale, 1))` }} 
+      className={`${viewMode === 'readable' ? 'max-md:!text-[11px]' : 'max-md:!text-[8.5px]'} rounded-[1.6em] overflow-hidden p-[0.1em] bg-gradient-to-br from-theme-border/60 via-theme-border/20 to-theme-border/60 hover:from-emerald-500/50 hover:via-theme-border/50 hover:to-blue-500/50 cursor-pointer group shadow-lg`}
       onClick={() => onToggle(groupName)}
     >
       <div className="bg-card-bg/80 rounded-[1.5em] overflow-hidden h-full flex flex-col">
@@ -81,12 +83,15 @@ const GroupWidget = React.memo(function GroupWidget({
                         <span
                           className="px-[0.4em] py-[0.05em] rounded-[0.4em] text-[0.6em] font-black uppercase tracking-wider"
                           style={{ backgroundColor: TEAMS[team.code]?.color, color: TEAMS[team.code]?.textColor }}
+                          title={viewMode === 'readable' ? TEAMS[team.code]?.name : undefined}
                         >
                           {team.code}
                         </span>
-                        <span className={`font-bold truncate max-w-[12em] text-[0.9em] ${isFirstOrSecond ? 'text-emerald-50' : isBestThird ? 'text-blue-50' : 'text-slate-200'}`}>
-                          {TEAMS[team.code]?.name}
-                        </span>
+                        {viewMode !== 'readable' && (
+                          <span className={`font-bold truncate max-w-[12em] text-[0.9em] ${isFirstOrSecond ? 'text-emerald-50' : isBestThird ? 'text-blue-50' : 'text-slate-200'}`}>
+                            {TEAMS[team.code]?.name}
+                          </span>
+                        )}
                         {team.isQ && <span className="ml-[0.2em] text-[0.7em] font-black text-emerald-400" title="Guaranteed Top 2">(Q)</span>}
                         {team.isE && <span className="ml-[0.2em] text-[0.7em] font-black text-red-500" title="Mathematically Eliminated">(E)</span>}
                       </td>

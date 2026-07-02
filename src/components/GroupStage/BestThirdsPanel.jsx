@@ -2,7 +2,7 @@ import React from 'react';
 import { Award } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 
-export default function BestThirdsPanel({ bestThirdsRanking, gridColumns = 3 }) {
+export default function BestThirdsPanel({ bestThirdsRanking, gridColumns = 3, viewMode = 'compact' }) {
   const rowPadding = gridColumns === 1 ? 'py-2.5' : gridColumns === 2 ? 'py-2' : 'py-1';
   return (
     <div className="p-[1px] bg-gradient-to-br from-amber-500/30 via-slate-800/40 to-slate-800/40 rounded-xl shadow-lg">
@@ -27,16 +27,21 @@ export default function BestThirdsPanel({ bestThirdsRanking, gridColumns = 3 }) 
                   }`}
               >
                 <div className="flex items-center gap-1.5 truncate">
-                  <span className={`text-[7px] font-black w-3.5 h-3.5 rounded-full flex items-center justify-center ${isQualified ? 'bg-emerald-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+                  <span className={`font-black rounded-full flex items-center justify-center ${viewMode === 'readable' ? 'text-[9px] w-4 h-4' : 'text-[7px] w-3.5 h-3.5'} ${isQualified ? 'bg-emerald-500 text-slate-950' : 'bg-slate-800 text-slate-400'
                     }`}>
                     {idx + 1}
                   </span>
                   <span className="text-[10px] leading-none"><img src={`https://flagcdn.com/${TEAMS[t.code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
-                  <span className="font-bold text-[9px] text-slate-300">{TEAMS[t.code]?.name}</span>
-                  <span className="text-[8px] text-slate-400">({t.groupName})</span>
+                  <span 
+                    className={`font-bold text-slate-300 ${viewMode === 'readable' ? 'text-[11px]' : 'text-[9px]'}`}
+                    title={viewMode === 'readable' ? TEAMS[t.code]?.name : undefined}
+                  >
+                    {viewMode === 'readable' ? t.code : TEAMS[t.code]?.name}
+                  </span>
+                  <span className={`text-slate-400 ${viewMode === 'readable' ? 'text-[9px]' : 'text-[8px]'}`}>({t.groupName})</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[8px] font-bold text-slate-400">
+                  <span className={`font-bold text-slate-400 ${viewMode === 'readable' ? 'text-[10px]' : 'text-[8px]'}`}>
                     {t.pts}pts · GD{t.gd >= 0 ? '+' : ''}{t.gd}
                     {t.fairPlay !== 0 && (
                       <span className="text-amber-400/80"> · FP{t.fairPlay}</span>

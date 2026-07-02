@@ -41,7 +41,7 @@ function CardInput({ color, label, value, field, matchId, onScoreChange, disable
 // ⚡ OPEN MATCHES QUICK ACCESS PANEL
 // Shows all matches with status "open" for quick predictions
 // ================================================================================
-export default function OpenMatchesPanel({ groupMatches, onScoreChange, gridColumns = 3 }) {
+export default function OpenMatchesPanel({ groupMatches, onScoreChange, gridColumns = 3, viewMode = 'compact' }) {
   // Collect all open matches across all groups
   const openMatches = [];
 
@@ -123,7 +123,12 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange, gridColu
               >
                 {/* Team 1 — right aligned, fixed width */}
                 <div className="flex items-center gap-0.5 justify-end flex-1 min-w-0">
-                  <span className="text-[8px] truncate text-slate-300 text-right font-medium">{TEAMS[t1Code]?.name}</span>
+                  <span 
+                    className={`truncate text-right font-medium ${viewMode === 'readable' ? 'text-[10px] text-slate-200' : 'text-[8px] text-slate-300'}`}
+                    title={viewMode === 'readable' ? TEAMS[t1Code]?.name : undefined}
+                  >
+                    {viewMode === 'readable' ? t1Code : TEAMS[t1Code]?.name}
+                  </span>
                   <span className="text-[9px] flex-shrink-0"><img src={`https://flagcdn.com/${TEAMS[t1Code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
                 </div>
 
@@ -136,7 +141,7 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange, gridColu
                     placeholder="-"
                     value={state.score1}
                     onChange={(e) => onScoreChange(id, 'score1', e.target.value)}
-                    className="w-5 h-5 rounded text-center text-[10px] font-black outline-none transition-all bg-slate-800 text-white border border-theme-border focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400"
+                    className={`rounded text-center font-black outline-none transition-all bg-slate-800 text-white border border-theme-border focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 ${viewMode === 'readable' ? 'w-6 h-6 text-xs' : 'w-5 h-5 text-[10px]'}`}
                   />
                   <span className="text-slate-600 font-black text-[8px]">:</span>
                   <input
@@ -146,14 +151,19 @@ export default function OpenMatchesPanel({ groupMatches, onScoreChange, gridColu
                     placeholder="-"
                     value={state.score2}
                     onChange={(e) => onScoreChange(id, 'score2', e.target.value)}
-                    className="w-5 h-5 rounded text-center text-[10px] font-black outline-none transition-all bg-slate-800 text-white border border-theme-border focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400"
+                    className={`rounded text-center font-black outline-none transition-all bg-slate-800 text-white border border-theme-border focus:border-emerald-400 focus:ring-1 focus:ring-emerald-400 ${viewMode === 'readable' ? 'w-6 h-6 text-xs' : 'w-5 h-5 text-[10px]'}`}
                   />
                 </div>
 
                 {/* Team 2 — left aligned, fixed width */}
                 <div className="flex items-center gap-0.5 justify-start flex-1 min-w-0">
                   <span className="text-[9px] flex-shrink-0"><img src={`https://flagcdn.com/${TEAMS[t2Code]?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
-                  <span className="text-[8px] truncate text-slate-300 font-medium">{TEAMS[t2Code]?.name}</span>
+                  <span 
+                    className={`truncate font-medium ${viewMode === 'readable' ? 'text-[10px] text-slate-200' : 'text-[8px] text-slate-300'}`}
+                    title={viewMode === 'readable' ? TEAMS[t2Code]?.name : undefined}
+                  >
+                    {viewMode === 'readable' ? t2Code : TEAMS[t2Code]?.name}
+                  </span>
                 </div>
               </div>
 

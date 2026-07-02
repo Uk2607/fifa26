@@ -6,7 +6,7 @@ import { PRESET_SCORES } from '../../constants/presetScores';
 // ================================================================================
 // KNOCKOUT BRACKET MATCH CARD SUB-COMPONENT
 // ================================================================================
-function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, isDraw, isLocked, matchId, onScoreChange, hoveredTeamCode, onTeamHover }) {
+function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, isDraw, isLocked, matchId, onScoreChange, hoveredTeamCode, onTeamHover, viewMode }) {
   const isResolved = typeof code === 'string' && code.length === 3;
   const country = TEAMS[code];
 
@@ -23,12 +23,14 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
     >
       <div className="flex items-center gap-1.5 truncate flex-grow">
         {isResolved ? (
-          <div className="flex items-center gap-1 truncate">
+          <div className="flex items-center gap-1.5 truncate">
             <span className="text-xs leading-none"><img src={`https://flagcdn.com/${country?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
-            <span className={`text-[10px] truncate max-w-[85px] transition-all ${isWinner ? 'text-white font-extrabold drop-shadow-sm' : 'text-slate-300 font-medium'}`}
+            <span 
+              className={`truncate max-w-[85px] transition-all ${isWinner ? 'text-white font-extrabold drop-shadow-sm' : 'text-slate-300 font-medium'} ${viewMode === 'readable' ? 'text-xs' : 'text-[10px]'}`}
               style={{ color: isWinner ? (country?.textColor==='#000000' ? '#ffffff' : country?.color) : undefined }}
-              >
-              {country?.name}
+              title={viewMode === 'readable' ? country?.name : undefined}
+            >
+              {viewMode === 'readable' ? code : country?.name}
             </span>
           </div>
         ) : (
@@ -58,7 +60,7 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
           value={scoreVal}
           disabled={isLocked}
           onChange={(e) => onScoreChange(matchId, side === 't1' ? 'score1' : 'score2', e.target.value)}
-          className={`w-5 h-5 rounded text-center text-[10px] font-black outline-none transition-all ${isLocked
+          className={`rounded text-center font-black outline-none transition-all ${viewMode === 'readable' ? 'w-7 h-7 text-xs' : 'w-5 h-5 text-[10px]'} ${isLocked
             ? 'bg-slate-850 text-slate-500 cursor-not-allowed border border-theme-border'
             : 'bg-slate-800 text-white border border-theme-border focus:border-emerald-400'
             }`}
@@ -68,7 +70,7 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
   );
 }
 
-export default function KnockoutMatchCard({ matchId, team1, team2, matchState, onScoreChange, hoveredTeamCode, onTeamHover, isPathHighlighted }) {
+export default function KnockoutMatchCard({ matchId, team1, team2, matchState, onScoreChange, hoveredTeamCode, onTeamHover, isPathHighlighted, viewMode }) {
   const bothTeamsResolved = typeof team1 === 'string' && team1.length === 3
                          && typeof team2 === 'string' && team2.length === 3;
 
@@ -155,6 +157,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         onScoreChange={handleScoreChangeWithTeams}
         hoveredTeamCode={hoveredTeamCode}
         onTeamHover={onTeamHover}
+        viewMode={viewMode}
       />
 
       <div className="h-px bg-card-bg"></div>
@@ -172,6 +175,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         onScoreChange={handleScoreChangeWithTeams}
         hoveredTeamCode={hoveredTeamCode}
         onTeamHover={onTeamHover}
+        viewMode={viewMode}
       />
     </div>
   );

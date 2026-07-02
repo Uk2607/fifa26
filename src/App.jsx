@@ -57,6 +57,20 @@ export default function App() {
   const { groupMatches, handleGroupScoreChange, resetGroupMatches, overwrittenGroupMatches } = useGroupMatches();
   const { koMatches, handleKoScoreChange, resetKoMatches, overwrittenKoMatches } = useKnockoutMatches();
   const [bracketMode, setBracketMode] = useState('standings');
+  const [viewMode, setViewMode] = useState(() => {
+    try {
+      const saved = localStorage.getItem('fifa2026_viewMode');
+      if (saved) return saved;
+    } catch (e) {}
+    // Default to readable on mobile, compact otherwise
+    return window.innerWidth < 768 ? 'readable' : 'compact';
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('fifa2026_viewMode', viewMode);
+    } catch (e) {}
+  }, [viewMode]);
   
   const allOverwrittenMatches = React.useMemo(() => [...overwrittenGroupMatches, ...overwrittenKoMatches], [overwrittenGroupMatches, overwrittenKoMatches]);
   const [showUpdateModal, setShowUpdateModal] = useState(allOverwrittenMatches.length > 0);
@@ -140,7 +154,7 @@ export default function App() {
       {/* Content wrapper with transition */}
       <div className={`flex-1 flex flex-col transition-all duration-500 origin-top ${isResetting ? 'opacity-50 blur-sm scale-[0.98]' : ''}`}>
         
-        <Header onReset={handleResetAll} />
+        <Header onReset={handleResetAll} viewMode={viewMode} onViewModeChange={setViewMode} />
 
         <ChampionBanner tournamentChampion={tournamentChampion} />
 
@@ -236,6 +250,7 @@ export default function App() {
                     onScoreChange={handleGroupScoreChange}
                     onToggle={setModalGroup}
                     bestThirdsQualified={qualificationState.thirds}
+                    viewMode={viewMode}
                   />
                 ))}
               </div>
@@ -245,18 +260,20 @@ export default function App() {
                 <BestThirdsPanel 
                   bestThirdsRanking={qualificationState.bestThirdsRanking} 
                   gridColumns={gridColumns}
+                  viewMode={viewMode}
                 />
                 <OpenMatchesPanel
                   groupMatches={groupMatches}
                   onScoreChange={handleGroupScoreChange}
                   gridColumns={gridColumns}
+                  viewMode={viewMode}
                 />
               </div>
             </div>
           )}
         </section>
 
-        {/* SECTION 2: KNOCKOUT BRACKET */}
+        {/* KNOCKOUT BRACKET SECTION */}
         <KnockoutBracket
           r32MatchesSeeding={r32MatchesSeeding}
           roundOf16Seeding={roundOf16Seeding}
@@ -269,6 +286,7 @@ export default function App() {
           bracketMode={bracketMode}
           onBracketModeChange={setBracketMode}
           allGroupsComplete={allGroupsComplete}
+          viewMode={viewMode}
         />
 
       </main>
@@ -289,6 +307,7 @@ export default function App() {
             bestThirdsQualified={qualificationState.thirds}
             onScoreChange={handleGroupScoreChange}
             onClose={() => setModalGroup(null)}
+            viewMode={viewMode}
           />
         </div>
       )}
