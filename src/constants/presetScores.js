@@ -440,16 +440,16 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, status: "locked"
   },
   "KO-81": { // USA vs Bosnia & Herzegovina
-    score1: null, score2: null,
+    score1: 2, score2: 0,
     penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    yellow1: 0, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
+    red1: 1, red2: 0, status: "locked"
   },
   "KO-82": { // Belgium vs Senegal
-    score1: null, score2: null,
+    score1: 3, score2: 2,
     penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    yellow1: 2, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, status: "locked"
   },
   "KO-83": { // Portugal vs Croatia
     score1: null, score2: null,
