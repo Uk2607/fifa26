@@ -93,6 +93,24 @@ export function useKnockoutMatches() {
   const handleKoScoreChange = (matchId, field, val, team1Code, team2Code) => {
     const koId = `KO-${matchId}`;
     if (PRESET_SCORES[koId]?.status === 'locked') return;
+
+    if (field === 'clear') {
+      setKoMatches(prev => ({
+        ...prev,
+        [koId]: {
+          ...prev[koId],
+          score1: '',
+          score2: '',
+          penalty1: '',
+          penalty2: '',
+          team1Code: null,
+          team2Code: null,
+          status: 'upcoming'
+        }
+      }));
+      return;
+    }
+
     setKoMatches(prev => ({
       ...prev,
       [koId]: {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Lock } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 import { PRESET_SCORES } from '../../constants/presetScores';
@@ -74,9 +74,19 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
 
   const savedTeam1 = matchState?.team1Code;
   const savedTeam2 = matchState?.team2Code;
-  // If the teams playing have changed since the user made a prediction, we hide the stale prediction.
-  const teamsChanged = savedTeam1 && savedTeam2 && bothTeamsResolved && 
-                       (savedTeam1 !== team1 || savedTeam2 !== team2);
+  
+  const currentT1Code = typeof team1 === 'string' && team1.length === 3 ? team1 : null;
+  const currentT2Code = typeof team2 === 'string' && team2.length === 3 ? team2 : null;
+
+  // If the teams playing have changed (or become unresolved) since the user made a prediction, we hide the stale prediction.
+  const teamsChanged = savedTeam1 && savedTeam2 && 
+                       (savedTeam1 !== currentT1Code || savedTeam2 !== currentT2Code);
+
+  useEffect(() => {
+    if (teamsChanged && (matchState?.score1 !== '' || matchState?.score2 !== '')) {
+      onScoreChange(matchId, 'clear');
+    }
+  }, [teamsChanged, matchState?.score1, matchState?.score2, matchId, onScoreChange]);
 
   const score1 = teamsChanged ? '' : (matchState?.score1 ?? '');
   const score2 = teamsChanged ? '' : (matchState?.score2 ?? '');

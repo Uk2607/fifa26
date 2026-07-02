@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Trophy } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 import KnockoutMatchCard from './KnockoutMatchCard';
@@ -158,6 +158,15 @@ export default function KnockoutBracket({
   allGroupsComplete
 }) {
   const [hoveredTeamCode, setHoveredTeamCode] = useState(null);
+  const scrollContainerRef = useRef(null);
+
+  // Auto-scroll to the middle on initial mount
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      const el = scrollContainerRef.current;
+      el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
+    }
+  }, []);
 
   // Unified seeding lookup across all rounds
   const getSeeding = (matchId) => {
@@ -297,7 +306,11 @@ export default function KnockoutBracket({
       </div>
 
       {/* Scrollable Bracket Area */}
-      <div style={{ overflowX: 'auto', overflowY: 'hidden', paddingBottom: 16 }} className="bracket-scroll">
+      <div 
+        ref={scrollContainerRef}
+        style={{ overflowX: 'auto', overflowY: 'hidden', paddingBottom: 16 }} 
+        className="bracket-scroll"
+      >
 
         {/* Round Headers Row */}
         <div style={{ display: 'flex', minWidth: 'fit-content', marginBottom: 10, gap: 0 }}>
