@@ -465,10 +465,10 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0, timestamp: "2026-07-03T00:30:00+05:30", status: "locked"
   },
   "KO-85": { // Switzerland vs Algeria
-    score1: null, score2: null,
+    score1: 2, score2: 0,
     penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, timestamp: "2026-07-03T08:30:00+05:30", status: "open"
+    yellow1: 0, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
+    red1: 0, red2: 0, timestamp: "2026-07-03T08:30:00+05:30", status: "locked"
   },
   "KO-86": { // Argentina vs Cape Verde
     score1: null, score2: null,
