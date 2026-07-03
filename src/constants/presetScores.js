@@ -540,48 +540,48 @@ export const PRESET_SCORES = {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, timestamp: "", status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-10T01:30:00+05:30", status: "open"
   },
   "KO-98": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, timestamp: "", status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-11T00:30:00+05:30", status: "open"
   },
   "KO-99": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, timestamp: "", status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-12T02:30:00+05:30", status: "open"
   },
   "KO-100": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, timestamp: "", status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-12T06:30:00+05:30", status: "open"
   },
   "KO-101": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, timestamp: "", status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-15T00:30:00+05:30", status: "open"
   },
   "KO-102": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, timestamp: "", status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-16T00:30:00+05:30", status: "open"
   },
   "KO-103": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, timestamp: "", status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-19T02:30:00+05:30", status: "open"
   },
   "KO-104": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, timestamp: "", status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-20T00:30:00+05:30", status: "open"
   }
 };
