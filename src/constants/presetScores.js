@@ -391,196 +391,197 @@ export const PRESET_SCORES = {
   // ==================================================================================================================
 
   // Knockouts Matchday Presets (open, locked)
+  // NOTE: Add timestamp in IST format, e.g. "2026-06-28T20:30:00+05:30"
   "KO-73": { // South Africa vs Canada
     score1: 0, score2: 1,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "locked"
+    red1: 0, red2: 0, timestamp: "2026-06-29T00:30:00+05:30", status: "locked"
   },
   "KO-74": { // Germany vs Paraguay
     score1: 1, score2: 1,
     penalty1: 3, penalty2: 4,
     yellow1: 3, yellow2: 3, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "locked"
+    red1: 0, red2: 0, timestamp: "2026-06-30T02:00:00+05:30", status: "locked"
   },
   "KO-75": { // Netherlands vs Morocco
     score1: 1, score2: 1,
     penalty1: 2, penalty2: 3,
     yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "locked"
+    red1: 0, red2: 0, timestamp: "2026-06-30T06:30:00+05:30", status: "locked"
   },
   "KO-76": { // Brazil vs Japan
     score1: 2, score2: 1,
     penalty1: null, penalty2: null,
     yellow1: 2, yellow2: 3, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "locked"
+    red1: 0, red2: 0, timestamp: "2026-06-29T22:30:00+05:30", status: "locked"
   },
   "KO-77": { // France vs Sweden
     score1: 3, score2: 0,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "locked"
+    red1: 0, red2: 0, timestamp: "2026-07-01T02:30:00+05:30", status: "locked"
   },
   "KO-78": { // Ivory Coast vs Norway
     score1: 1, score2: 2,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "locked"
+    red1: 0, red2: 0, timestamp: "2026-06-30T22:30:00+05:30", status: "locked"
   },
   "KO-79": { // Mexico vs Ecuador
     score1: 2, score2: 0,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 3, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 1, status: "locked"
+    red1: 0, red2: 1, timestamp: "2026-07-01T07:30:00+05:30", status: "locked"
   },
   "KO-80": { // England vs DR Congo
     score1: 2, score2: 1,
     penalty1: null, penalty2: null,
     yellow1: 1, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "locked"
+    red1: 0, red2: 0, timestamp: "2026-07-01T21:30:00+05:30", status: "locked"
   },
   "KO-81": { // USA vs Bosnia & Herzegovina
     score1: 2, score2: 0,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
-    red1: 1, red2: 0, status: "locked"
+    red1: 1, red2: 0, timestamp: "2026-07-02T05:30:00+05:30", status: "locked"
   },
   "KO-82": { // Belgium vs Senegal
     score1: 3, score2: 2,
     penalty1: null, penalty2: null,
     yellow1: 2, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "locked"
+    red1: 0, red2: 0, timestamp: "2026-07-02T01:30:00+05:30", status: "locked"
   },
   "KO-83": { // Portugal vs Croatia
     score1: 2, score2: 1,
     penalty1: null, penalty2: null,
     yellow1: 1, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "locked"
+    red1: 0, red2: 0, timestamp: "2026-07-03T04:30:00+05:30", status: "locked"
   },
   "KO-84": { // Spain vs Austria
     score1: 3, score2: 0,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "locked"
+    red1: 0, red2: 0, timestamp: "2026-07-03T00:30:00+05:30", status: "locked"
   },
   "KO-85": { // Switzerland vs Algeria
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-03T08:30:00+05:30", status: "open"
   },
   "KO-86": { // Argentina vs Cape Verde
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-04T03:30:00+05:30", status: "open"
   },
   "KO-87": { // Colombia vs Ghana
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-04T07:00:00+05:30", status: "open"
   },
   "KO-88": { // Australia vs Egypt
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-03T23:30:00+05:30", status: "open"
   },
-  "KO-89": { // Paraguay vs 
+  "KO-89": { // Paraguay vs France
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-05T02:30:00+05:30", status: "open"
   },
-  "KO-90": { // Canada vs 
+  "KO-90": { // Canada vs Morocco
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-04T22:30:00+05:30", status: "open"
   },
-  "KO-91": { // Brazil vs 
+  "KO-91": { // Brazil vs Norway
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-06T01:30:00+05:30", status: "open"
   },
-  "KO-92": {
+  "KO-92": { // Mexico vs England
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-06T05:30:00+05:30", status: "open"
   },
-  "KO-93": {
+  "KO-93": { // Portugal vs Spain
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-07T00:30:00+05:30", status: "open"
   },
-  "KO-94": {
+  "KO-94": { // USA vs Belgium
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-07T05:30:00+05:30", status: "open"
   },
   "KO-95": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-07T21:30:00+05:30", status: "open"
   },
   "KO-96": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "2026-07-08T01:30:00+05:30", status: "open"
   },
   "KO-97": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "", status: "open"
   },
   "KO-98": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "", status: "open"
   },
   "KO-99": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "", status: "open"
   },
   "KO-100": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "", status: "open"
   },
   "KO-101": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "", status: "open"
   },
   "KO-102": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "", status: "open"
   },
   "KO-103": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "", status: "open"
   },
   "KO-104": {
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
-    red1: 0, red2: 0, status: "open"
+    red1: 0, red2: 0, timestamp: "", status: "open"
   }
 };

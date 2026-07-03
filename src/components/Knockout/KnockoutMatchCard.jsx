@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Lock } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 import { PRESET_SCORES } from '../../constants/presetScores';
+import { useCountdown } from '../../hooks/useCountdown';
 
 // ================================================================================
 // KNOCKOUT BRACKET MATCH CARD SUB-COMPONENT
@@ -102,7 +103,20 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
   const isGloballyLocked = PRESET_SCORES[`KO-${matchId}`]?.status === 'locked';
   const matchStatus = matchState?.status || 'upcoming';
   const isLocked = isGloballyLocked || matchStatus === 'locked' || !bothTeamsResolved;
+  
+  const matchTimestamp = PRESET_SCORES[`KO-${matchId}`]?.timestamp;
+  const { days, hours, minutes, hasStarted, within24h, isConfigured } = useCountdown(matchTimestamp);
   const isDraw = score1 !== '' && score2 !== '' && score1 === score2;
+
+  const formattedDate = React.useMemo(() => {
+    if (!matchTimestamp) return '';
+    return new Date(matchTimestamp).toLocaleString(undefined, {
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }, [matchTimestamp]);
 
   let winner = null;
   if (score1 !== '' && score2 !== '') {
@@ -126,21 +140,33 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
 
       {/* Top micro match tracker indicator */}
       <div className="bg-app-bg px-2 py-0.5 flex items-center justify-between text-[7px] font-extrabold text-slate-500 tracking-wider uppercase border-b border-theme-border">
-        <span>MATCH {matchId}</span>
+        <span className="text-[9px] font-black">#{matchId}</span>
         {isGloballyLocked ? (
           <span className="flex items-center gap-0.5 text-amber-500 font-bold scale-90">
             <Lock className="w-2.5 h-2.5" /> Locked
           </span>
-        ) : !bothTeamsResolved ? (
-          <span className="text-[6px] text-slate-500 italic">⏳ Awaiting</span>
-        ) : (
-          <span className="flex items-center gap-1 text-[7px] text-emerald-400 font-bold uppercase">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+        ) : isConfigured ? (
+          hasStarted ? (
+            <span className="flex items-center gap-1 text-[7px] text-emerald-400 font-bold uppercase" title="Match has started!">
+              <span className="relative flex h-1.5 w-1.5">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+              </span>
+              Open
             </span>
-            Open
-          </span>
+          ) : within24h ? (
+            <span className="text-[7px] font-bold uppercase flex items-center gap-1 text-amber-400 drop-shadow-[0_0_4px_rgba(251,191,36,0.6)]">
+              <span className="opacity-80">Starts in:</span>
+              <span>{hours}h {minutes}m</span>
+            </span>
+          ) : (
+            <span className="text-[7px] font-bold uppercase flex items-center gap-0.5 text-slate-400">
+              <span className="opacity-80">Starts:</span>
+              <span className="tracking-tighter whitespace-nowrap">{formattedDate}</span>
+            </span>
+          )
+        ) : (
+          <span className="text-[10px] text-slate-500 font-black">-</span>
         )}
       </div>
 

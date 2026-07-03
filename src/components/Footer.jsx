@@ -13,6 +13,9 @@ export default function Footer() {
       <p className="text-slate-600 font-medium max-w-xl mx-auto px-4">
         Visual simulator representing official match schedules dynamically calculated in real-time according to tournament parameters.
       </p>
+      <p className="text-slate-500 font-bold max-w-xl mx-auto px-4 pt-1 text-[10px]">
+        * All match countdowns and times are displayed in your local timezone.
+      </p>
     </footer>
   );
 }
