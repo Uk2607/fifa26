@@ -484,11 +484,11 @@ export const PRESET_SCORES = {
     timestamp: "2026-07-03T08:30:00+05:30", status: "locked"
   },
   "KO-86": { // Argentina vs Cape Verde
-    score1: null, score2: null,
+    score1: 3, score2: 2,
     penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    yellow1: 1, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
-    timestamp: "2026-07-04T03:30:00+05:30", status: "open"
+    timestamp: "2026-07-04T03:30:00+05:30", status: "locked"
   },
   "KO-87": { // Colombia vs Ghana
     score1: null, score2: null,
@@ -498,11 +498,11 @@ export const PRESET_SCORES = {
     timestamp: "2026-07-04T07:00:00+05:30", status: "open"
   },
   "KO-88": { // Australia vs Egypt
-    score1: null, score2: null,
-    penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    score1: 1, score2: 1,
+    penalty1: 2, penalty2: 4,
+    yellow1: 0, yellow2: 2, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
-    timestamp: "2026-07-03T23:30:00+05:30", status: "open"
+    timestamp: "2026-07-03T23:30:00+05:30", status: "locked"
   },
   "KO-89": { // Paraguay vs France
     score1: null, score2: null,
