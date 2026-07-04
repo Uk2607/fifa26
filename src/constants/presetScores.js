@@ -512,7 +512,7 @@ export const PRESET_SCORES = {
     timestamp: "2026-07-05T02:30:00+05:30", status: "open"
   },
   "KO-90": { // Canada vs Morocco
-    score1: 0, score2: 2,
+    score1: 0, score2: 3,
     penalty1: null, penalty2: null,
     yellow1: 4, yellow2: 4, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
