@@ -12,7 +12,7 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
   const country = TEAMS[code];
 
   return (
-    <div 
+    <div
       className={`flex items-center justify-between px-2 py-1.5 transition-all duration-200 cursor-default border-l-[4px] border-transparent ${isWinner && isResolved ? 'shadow-sm' : ''}`}
       style={{
         borderLeftColor: isResolved ? country?.color : 'transparent',
@@ -26,9 +26,9 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
         {isResolved ? (
           <div className="flex items-center gap-1.5 truncate">
             <span className="text-xs leading-none"><img src={`https://flagcdn.com/${country?.iso2}.svg`} alt="flag" className="inline-block w-4 h-[11px] object-cover rounded-[2px]" /></span>
-            <span 
+            <span
               className={`truncate max-w-[85px] transition-all ${isWinner ? 'text-white font-extrabold drop-shadow-sm' : 'text-slate-300 font-medium'} ${viewMode === 'readable' ? 'text-xs' : 'text-[10px]'}`}
-              style={{ color: isWinner ? (country?.textColor==='#000000' ? '#ffffff' : country?.color) : undefined }}
+              style={{ color: isWinner ? (country?.textColor === '#000000' ? '#ffffff' : country?.color) : undefined }}
               title={viewMode === 'readable' ? country?.name : undefined}
             >
               {viewMode === 'readable' ? code : country?.name}
@@ -73,17 +73,17 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
 
 export default function KnockoutMatchCard({ matchId, team1, team2, matchState, onScoreChange, hoveredTeamCode, onTeamHover, isPathHighlighted, viewMode }) {
   const bothTeamsResolved = typeof team1 === 'string' && team1.length === 3
-                         && typeof team2 === 'string' && team2.length === 3;
+    && typeof team2 === 'string' && team2.length === 3;
 
   const savedTeam1 = matchState?.team1Code;
   const savedTeam2 = matchState?.team2Code;
-  
+
   const currentT1Code = typeof team1 === 'string' && team1.length === 3 ? team1 : null;
   const currentT2Code = typeof team2 === 'string' && team2.length === 3 ? team2 : null;
 
   // If the teams playing have changed (or become unresolved) since the user made a prediction, we hide the stale prediction.
-  const teamsChanged = savedTeam1 && savedTeam2 && 
-                       (savedTeam1 !== currentT1Code || savedTeam2 !== currentT2Code);
+  const teamsChanged = savedTeam1 && savedTeam2 &&
+    (savedTeam1 !== currentT1Code || savedTeam2 !== currentT2Code);
 
   useEffect(() => {
     if (teamsChanged && (matchState?.score1 !== '' || matchState?.score2 !== '')) {
@@ -103,7 +103,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
   const isGloballyLocked = PRESET_SCORES[`KO-${matchId}`]?.status === 'locked';
   const matchStatus = matchState?.status || 'upcoming';
   const isLocked = isGloballyLocked || matchStatus === 'locked' || !bothTeamsResolved;
-  
+
   const matchTimestamp = PRESET_SCORES[`KO-${matchId}`]?.timestamp;
   const { days, hours, minutes, seconds, hasStarted, within24h, isConfigured } = useCountdown(matchTimestamp);
   const isDraw = score1 !== '' && score2 !== '' && score1 === score2;
@@ -160,7 +160,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
               <span>{hours}h {minutes}m {seconds}s</span>
             </span>
           ) : (
-            <span className="text-[8px] font-bold uppercase flex items-center gap-1 text-slate-400" title="Starts">
+            <span className="text-[9px] font-bold uppercase flex items-center gap-1 text-slate-400" title="Starts">
               <Clock className="w-2.5 h-2.5 opacity-80" />
               <span className="tracking-tighter whitespace-nowrap">{formattedDate}</span>
             </span>
