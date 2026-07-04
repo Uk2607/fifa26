@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Lock } from 'lucide-react';
+import { Lock, Clock } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 import { PRESET_SCORES } from '../../constants/presetScores';
 import { useCountdown } from '../../hooks/useCountdown';
@@ -105,7 +105,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
   const isLocked = isGloballyLocked || matchStatus === 'locked' || !bothTeamsResolved;
   
   const matchTimestamp = PRESET_SCORES[`KO-${matchId}`]?.timestamp;
-  const { days, hours, minutes, hasStarted, within24h, isConfigured } = useCountdown(matchTimestamp);
+  const { days, hours, minutes, seconds, hasStarted, within24h, isConfigured } = useCountdown(matchTimestamp);
   const isDraw = score1 !== '' && score2 !== '' && score1 === score2;
 
   const formattedDate = React.useMemo(() => {
@@ -155,13 +155,13 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
               Open
             </span>
           ) : within24h ? (
-            <span className="text-[7px] font-bold uppercase flex items-center gap-1 text-amber-400 drop-shadow-[0_0_4px_rgba(251,191,36,0.6)]">
-              <span className="opacity-80">Starts in:</span>
-              <span>{hours}h {minutes}m</span>
+            <span className="text-[9px] font-bold uppercase flex items-center gap-1 text-amber-400 drop-shadow-[0_0_4px_rgba(251,191,36,0.6)]" title="Starts in">
+              <Clock className="w-2.5 h-2.5 opacity-80" />
+              <span>{hours}h {minutes}m {seconds}s</span>
             </span>
           ) : (
-            <span className="text-[7px] font-bold uppercase flex items-center gap-0.5 text-slate-400">
-              <span className="opacity-80">Starts:</span>
+            <span className="text-[8px] font-bold uppercase flex items-center gap-1 text-slate-400" title="Starts">
+              <Clock className="w-2.5 h-2.5 opacity-80" />
               <span className="tracking-tighter whitespace-nowrap">{formattedDate}</span>
             </span>
           )

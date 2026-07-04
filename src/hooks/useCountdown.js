@@ -61,7 +61,7 @@ export function useCountdown(targetTimestamp) {
 
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
-    }, 60000); // update every minute
+    }, 1000); // update every second
 
     return () => clearInterval(timer);
   }, [targetTimestamp]);
