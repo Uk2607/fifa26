@@ -7,7 +7,7 @@ import { useCountdown } from '../../hooks/useCountdown';
 // ================================================================================
 // KNOCKOUT BRACKET MATCH CARD SUB-COMPONENT
 // ================================================================================
-function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, isDraw, isLocked, matchId, onScoreChange, hoveredTeamCode, onTeamHover, viewMode }) {
+function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, redCards, isDraw, isLocked, matchId, onScoreChange, hoveredTeamCode, onTeamHover, viewMode }) {
   const isResolved = typeof code === 'string' && code.length === 3;
   const country = TEAMS[code];
 
@@ -41,6 +41,11 @@ function TeamRow({ code, placeholderText, isWinner, side, scoreVal, penaltyVal, 
 
       {/* Dynamic score block */}
       <div className="flex items-center gap-0.5 flex-shrink-0 ml-1">
+        {redCards > 0 && (
+          <div className="w-3 h-[14px] bg-red-600 rounded-[2px] border border-red-800 flex items-center justify-center mr-0.5 shadow-sm" title={`${redCards} Red Card${redCards > 1 ? 's' : ''}`}>
+            {redCards > 1 && <span className="text-[8px] font-bold text-white leading-none">{redCards}</span>}
+          </div>
+        )}
         {isDraw && (
           <input
             type="text"
@@ -107,6 +112,9 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
   const matchTimestamp = PRESET_SCORES[`KO-${matchId}`]?.timestamp;
   const { days, hours, minutes, seconds, hasStarted, within24h, isConfigured } = useCountdown(matchTimestamp);
   const isDraw = score1 !== '' && score2 !== '' && score1 === score2;
+
+  const red1 = PRESET_SCORES[`KO-${matchId}`]?.red1 || 0;
+  const red2 = PRESET_SCORES[`KO-${matchId}`]?.red2 || 0;
 
   const formattedDate = React.useMemo(() => {
     if (!matchTimestamp) return '';
@@ -177,6 +185,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         side="t1"
         scoreVal={score1}
         penaltyVal={penalty1}
+        redCards={red1}
         isDraw={isDraw}
         isLocked={isLocked}
         matchId={matchId}
@@ -195,6 +204,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         side="t2"
         scoreVal={score2}
         penaltyVal={penalty2}
+        redCards={red2}
         isDraw={isDraw}
         isLocked={isLocked}
         matchId={matchId}
