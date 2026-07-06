@@ -519,11 +519,11 @@ export const PRESET_SCORES = {
     timestamp: "2026-07-04T22:30:00+05:30", status: "locked"
   },
   "KO-91": { // Brazil vs Norway
-    score1: null, score2: null,
+    score1: 1, score2: 2,
     penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    yellow1: 1, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
-    timestamp: "2026-07-06T01:30:00+05:30", status: "open"
+    timestamp: "2026-07-06T01:30:00+05:30", status: "locked"
   },
   "KO-92": { // Mexico vs England
     score1: null, score2: null,
