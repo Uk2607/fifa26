@@ -21,7 +21,7 @@ The application is built using React (Vite) and styled exclusively with Tailwind
 - `src/hooks/`
   - `useStandings.js`: The core mathematical engine. Contains the FIFA tiebreaker sorting algorithm and the highly advanced Brute-Force Q/E Simulator.
 - `src/constants/`
-  - `teams.js`: Contains all the official team data, color hex codes (for dynamic gradients), and emojis.
+  - `teams.js`: Contains all the official team data, color hex codes (for dynamic gradients).
   - `groups.js`: Contains the static groupings and match pairings (which team plays which team).
   - `presetScores.js`: Crucial configuration file used to lock specific match scores. If a match is marked as "locked" here, the score is mathematically cemented and the UI inputs for that match are disabled.
   - `FIFA_RANKINGS.js`: Contains the official FIFA World Rankings used as the ultimate tiebreaker in the Simulator if teams are deadlocked on all other metrics.
