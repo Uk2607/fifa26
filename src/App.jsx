@@ -108,7 +108,7 @@ export default function App() {
   // Confetti effect when champion is crowned
   useEffect(() => {
     if (tournamentChampion && tournamentChampion.length === 3) {
-      const duration = 3000;
+      const duration = 5000;
       const end = Date.now() + duration;
       const team = TEAMS[tournamentChampion];
       
@@ -120,22 +120,22 @@ export default function App() {
         colors = [
           '#34d399', '#fbbf24', // Lower proportion of tournament colors
           team.color, team.color, team.color, team.color, // High proportion of primary team color
-          team.textColor, team.textColor // Secondary team color
+          team.textColor // Secondary team color
         ];
       }
 
       const frame = () => {
         confetti({
-          particleCount: 5,
-          angle: 60,
-          spread: 55,
+          particleCount: colors.length,
+          angle: 45,
+          spread: 90,
           origin: { x: 0 },
           colors: colors
         });
         confetti({
-          particleCount: 5,
-          angle: 120,
-          spread: 55,
+          particleCount: colors.length,
+          angle: 135,
+          spread: 90,
           origin: { x: 1 },
           colors: colors
         });
