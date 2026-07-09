@@ -561,11 +561,11 @@ export const PRESET_SCORES = {
     timestamp: "2026-07-08T01:30:00+05:30", status: "locked"
   },
   "KO-97": { // France vs Morocco
-    score1: null, score2: null,
+    score1: 2, score2: 0,
     penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    yellow1: 0, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
-    timestamp: "2026-07-10T01:30:00+05:30", status: "open"
+    timestamp: "2026-07-10T01:30:00+05:30", status: "locked"
   },
   "KO-98": { // Spain vs Belgium
     score1: null, score2: null,
@@ -581,35 +581,35 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0,
     timestamp: "2026-07-12T02:30:00+05:30", status: "open"
   },
-  "KO-100": { // Argentina/Egypt vs Switzerland/Colombia
+  "KO-100": { // Argentina vs Switzerland
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
     timestamp: "2026-07-12T06:30:00+05:30", status: "open"
   },
-  "KO-101": { // France/Morocco vs Spain/Belgium
+  "KO-101": { // France vs Spain/Belgium
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
     timestamp: "2026-07-15T00:30:00+05:30", status: "open"
   },
-  "KO-102": { // Norway/England vs Argentina/Egypt/Switzerland/Colombia₹
+  "KO-102": { // Norway/England vs Argentina/Switzerland
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
     timestamp: "2026-07-16T00:30:00+05:30", status: "open"
   },
-  "KO-103": { // France/Morocco/Spain/Belgium vs Norway/England/Argentina/Egypt/Switzerland/Colombia
+  "KO-103": { // France/Spain/Belgium vs Norway/England/Argentina/Switzerland
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
     timestamp: "2026-07-19T02:30:00+05:30", status: "open"
   },
-  "KO-104": { // France/Morocco/Spain/Belgium vs Norway/England/Argentina/Egypt/Switzerland/Colombia
+  "KO-104": { // France/Spain/Belgium vs Norway/England/Argentina/Switzerland
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
