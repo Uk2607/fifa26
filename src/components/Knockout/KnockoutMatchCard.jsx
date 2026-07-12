@@ -113,8 +113,13 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
   const { days, hours, minutes, seconds, hasStarted, within24h, isConfigured } = useCountdown(matchTimestamp);
   const isDraw = score1 !== '' && score2 !== '' && score1 === score2;
 
-  const red1 = PRESET_SCORES[`KO-${matchId}`]?.red1 || 0;
-  const red2 = PRESET_SCORES[`KO-${matchId}`]?.red2 || 0;
+  const baseRed1 = PRESET_SCORES[`KO-${matchId}`]?.red1 || 0;
+  const secondYellow1 = PRESET_SCORES[`KO-${matchId}`]?.secondYellow1 || 0;
+  const totalRed1 = baseRed1 + secondYellow1;
+
+  const baseRed2 = PRESET_SCORES[`KO-${matchId}`]?.red2 || 0;
+  const secondYellow2 = PRESET_SCORES[`KO-${matchId}`]?.secondYellow2 || 0;
+  const totalRed2 = baseRed2 + secondYellow2;
 
   const formattedDate = React.useMemo(() => {
     if (!matchTimestamp) return '';
@@ -185,7 +190,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         side="t1"
         scoreVal={score1}
         penaltyVal={penalty1}
-        redCards={red1}
+        redCards={totalRed1}
         isDraw={isDraw}
         isLocked={isLocked}
         matchId={matchId}
@@ -204,7 +209,7 @@ export default function KnockoutMatchCard({ matchId, team1, team2, matchState, o
         side="t2"
         scoreVal={score2}
         penaltyVal={penalty2}
-        redCards={red2}
+        redCards={totalRed2}
         isDraw={isDraw}
         isLocked={isLocked}
         matchId={matchId}
