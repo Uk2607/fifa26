@@ -589,11 +589,11 @@ export const PRESET_SCORES = {
     timestamp: "2026-07-12T06:30:00+05:30", status: "locked"
   },
   "KO-101": { // France vs Spain
-    score1: null, score2: null,
+    score1: 0, score2: 2,
     penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    yellow1: 2, yellow2: 1, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
-    timestamp: "2026-07-15T00:30:00+05:30", status: "open"
+    timestamp: "2026-07-15T00:30:00+05:30", status: "locked"
   },
   "KO-102": { // England vs Argentina
     score1: null, score2: null,
@@ -602,14 +602,14 @@ export const PRESET_SCORES = {
     red1: 0, red2: 0,
     timestamp: "2026-07-16T00:30:00+05:30", status: "open"
   },
-  "KO-103": { // France/Spain vs England/Argentina
+  "KO-103": { // France vs England/Argentina
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
     timestamp: "2026-07-19T02:30:00+05:30", status: "open"
   },
-  "KO-104": { // France/Spain vs England/Argentina
+  "KO-104": { // Spain vs England/Argentina
     score1: null, score2: null,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
