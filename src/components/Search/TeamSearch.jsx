@@ -24,8 +24,8 @@ export default function TeamSearch({ onSelectTeam }) {
     }
 
     const lowerQuery = query.toLowerCase();
-    const matches = teamArray.filter(team => 
-      team.name.toLowerCase().includes(lowerQuery) || 
+    const matches = teamArray.filter(team =>
+      team.name.toLowerCase().includes(lowerQuery) ||
       team.code.toLowerCase().includes(lowerQuery)
     );
 
@@ -64,10 +64,10 @@ export default function TeamSearch({ onSelectTeam }) {
           }}
           onFocus={() => setIsOpen(true)}
           placeholder="Search team..."
-          className="bg-slate-800/80 border border-theme-border/60 rounded-lg pl-8 pr-8 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 focus:bg-slate-800 w-48 transition-all shadow-inner"
+          className="bg-slate-800/80 border border-theme-border/60 rounded-lg pl-8 pr-8 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500/50 focus:bg-slate-800 w-[170px] sm:w-[150px] md:w-48 transition-all shadow-inner"
         />
         {query && (
-          <button 
+          <button
             onClick={() => { setQuery(''); setIsOpen(false); }}
             className="absolute right-2 text-slate-400 hover:text-slate-200"
           >
