@@ -46,6 +46,7 @@ export default function Header({ onReset, viewMode, onViewModeChange, onSelectTe
             className="bg-card-bg hover:bg-red-950/40 text-red-400 px-3 py-1.5 rounded-lg text-xs font-bold border border-red-900/20 transition active:scale-95 flex items-center gap-1.5"
           >
             <RefreshCw className="w-3 h-3" />
+            {/* Reset button */}
           </button>
         </div>
       </div>
