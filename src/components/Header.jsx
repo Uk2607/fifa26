@@ -27,7 +27,7 @@ export default function Header({ onReset, viewMode, onViewModeChange, onSelectTe
           <div className="flex items-center bg-slate-800/80 rounded-lg p-0.5 border border-theme-border/60 ml-2 mr-2">
             <button
               onClick={() => onViewModeChange('compact')}
-              className={`px-3 py-1 text-xs font-bold rounded-md transition-all ${viewMode === 'compact' ? 'bg-emerald-500/20 text-emerald-400 shadow-sm border border-emerald-500/30' : 'text-slate-500 hover:text-slate-300 border border-transparent'
+              className={`px-2 py-1 text-xs font-bold rounded-md transition-all ${viewMode === 'compact' ? 'bg-emerald-500/20 text-emerald-400 shadow-sm border border-emerald-500/30' : 'text-slate-500 hover:text-slate-300 border border-transparent'
                 }`}
             >
               Compact
@@ -45,7 +45,7 @@ export default function Header({ onReset, viewMode, onViewModeChange, onSelectTe
             onClick={onReset}
             className="bg-card-bg hover:bg-red-950/40 text-red-400 px-3 py-1.5 rounded-lg text-xs font-bold border border-red-900/20 transition active:scale-95 flex items-center gap-1.5"
           >
-            <RefreshCw className="w-3 h-3" /> Reset
+            <RefreshCw className="w-3 h-3" />
           </button>
         </div>
       </div>
