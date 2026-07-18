@@ -2,6 +2,7 @@ import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Trophy } from 'lucide-react';
 import { TEAMS } from '../../constants/teams';
 import KnockoutMatchCard from './KnockoutMatchCard';
+import Podium from './Podium';
 
 // ================================================================================
 // 🏆 TOURNAMENT BRACKET LAYOUT CONFIGURATION
@@ -154,6 +155,8 @@ export default function KnockoutBracket({
   koMatches,
   onScoreChange,
   tournamentChampion,
+  secondPlace,
+  thirdPlace,
   bracketMode,
   onBracketModeChange,
   allGroupsComplete,
@@ -403,7 +406,7 @@ export default function KnockoutBracket({
             </div>
 
             {/* 3rd Place Playoff — Match 103 */}
-            <div className="w-full space-y-1">
+            <div className="w-full space-y-1 relative">
               <span className="text-[8px] font-black uppercase text-slate-400 block text-center bg-slate-800/20 py-0.5 rounded border border-theme-border">
                 MATCH 103 • 3RD PLACE
               </span>
@@ -418,6 +421,13 @@ export default function KnockoutBracket({
                 isPathHighlighted={highlightedPath ? highlightedPath.has(103) : false}
                 viewMode={viewMode}
               />
+
+              {/* Podium */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 w-[300px] pt-8 z-10 pointer-events-none">
+                <div className="pointer-events-auto">
+                  <Podium firstPlace={tournamentChampion} secondPlace={secondPlace} thirdPlace={thirdPlace} />
+                </div>
+              </div>
             </div>
           </div>
 

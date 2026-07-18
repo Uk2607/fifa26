@@ -80,7 +80,7 @@ export default function App() {
   const { groupStandings, qualificationState, allocatedThirds, confirmedPositions, allGroupsComplete } = useStandings(groupMatches);
   const {
     r32MatchesSeeding, roundOf16Seeding, quarterFinalsSeeding,
-    semiFinalsSeeding, finalsSeeding, tournamentChampion
+    semiFinalsSeeding, finalsSeeding, tournamentChampion, secondPlace, thirdPlace
   } = useBracketSeeding(qualificationState, allocatedThirds, koMatches, bracketMode, confirmedPositions);
 
   const getSeeding = React.useCallback((matchId) => {
@@ -299,6 +299,8 @@ export default function App() {
           koMatches={koMatches}
           onScoreChange={handleKoScoreChange}
           tournamentChampion={tournamentChampion}
+          secondPlace={secondPlace}
+          thirdPlace={thirdPlace}
           bracketMode={bracketMode}
           onBracketModeChange={setBracketMode}
           allGroupsComplete={allGroupsComplete}

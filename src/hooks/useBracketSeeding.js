@@ -130,12 +130,26 @@ export function useBracketSeeding(qualificationState, allocatedThirds, koMatches
     return getWinner(f.t1, f.t2, 104, koMatches);
   }, [finalsSeeding, koMatches]);
 
+  const secondPlace = useMemo(() => {
+    const f = finalsSeeding[104];
+    const winner = getWinner(f.t1, f.t2, 104, koMatches);
+    if (!winner) return null;
+    return winner === f.t1 ? f.t2 : f.t1;
+  }, [finalsSeeding, koMatches]);
+
+  const thirdPlace = useMemo(() => {
+    const f = finalsSeeding[103];
+    return getWinner(f.t1, f.t2, 103, koMatches);
+  }, [finalsSeeding, koMatches]);
+
   return {
     r32MatchesSeeding,
     roundOf16Seeding,
     quarterFinalsSeeding,
     semiFinalsSeeding,
     finalsSeeding,
-    tournamentChampion
+    tournamentChampion,
+    secondPlace,
+    thirdPlace
   };
 }
