@@ -603,11 +603,11 @@ export const PRESET_SCORES = {
     timestamp: "2026-07-16T00:30:00+05:30", status: "locked"
   },
   "KO-103": { // France vs England
-    score1: 0, score2: 4,
+    score1: 4, score2: 6,
     penalty1: null, penalty2: null,
     yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
     red1: 0, red2: 0,
-    timestamp: "2026-07-19T02:30:00+05:30", status: "open"
+    timestamp: "2026-07-19T02:30:00+05:30", status: "locked"
   },
   "KO-104": { // Spain vs Argentina
     score1: null, score2: null,
