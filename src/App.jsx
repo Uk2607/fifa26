@@ -18,11 +18,20 @@ import OpenMatchesPanel from './components/GroupStage/OpenMatchesPanel';
 import KnockoutBracket from './components/Knockout/KnockoutBracket';
 import Footer from './components/Footer';
 import UpdateModal from './components/UpdateModal';
+import TeamJourneyModal from './components/Search/TeamJourneyModal';
 
 export default function App() {
   const [modalGroup, setModalGroup] = useState(null);
   const [showDeveloperGuide, setShowDeveloperGuide] = useState(false);
   const [showTiebreaker, setShowTiebreaker] = useState(false);
+  const [viewMode, setViewMode] = useState(() => {
+    try {
+      const saved = localStorage.getItem('fifa2026_viewMode');
+      if (saved) return saved;
+    } catch (e) {}
+    return window.innerWidth < 768 ? 'readable' : 'compact';
+  });
+  const [selectedTeamForJourney, setSelectedTeamForJourney] = useState(null);
   const [gridColumns, setGridColumns] = useState(2);
   const [isZooming, setIsZooming] = useState(false);
 
@@ -57,14 +66,6 @@ export default function App() {
   const { groupMatches, handleGroupScoreChange, resetGroupMatches, overwrittenGroupMatches } = useGroupMatches();
   const { koMatches, handleKoScoreChange, resetKoMatches, overwrittenKoMatches } = useKnockoutMatches();
   const [bracketMode, setBracketMode] = useState('standings');
-  const [viewMode, setViewMode] = useState(() => {
-    try {
-      const saved = localStorage.getItem('fifa2026_viewMode');
-      if (saved) return saved;
-    } catch (e) {}
-    // Default to readable on mobile, compact otherwise
-    return window.innerWidth < 768 ? 'readable' : 'compact';
-  });
 
   useEffect(() => {
     try {
@@ -81,6 +82,16 @@ export default function App() {
     r32MatchesSeeding, roundOf16Seeding, quarterFinalsSeeding,
     semiFinalsSeeding, finalsSeeding, tournamentChampion
   } = useBracketSeeding(qualificationState, allocatedThirds, koMatches, bracketMode, confirmedPositions);
+
+  const getSeeding = React.useCallback((matchId) => {
+    const id = Number(matchId);
+    if (id >= 73 && id <= 88) return r32MatchesSeeding[id];
+    if (id >= 89 && id <= 96) return roundOf16Seeding[id];
+    if (id >= 97 && id <= 100) return quarterFinalsSeeding[id];
+    if (id >= 101 && id <= 102) return semiFinalsSeeding[id];
+    if (id >= 103 && id <= 104) return finalsSeeding[id];
+    return null;
+  }, [r32MatchesSeeding, roundOf16Seeding, quarterFinalsSeeding, semiFinalsSeeding, finalsSeeding]);
 
   const [isResetting, setIsResetting] = useState(false);
   
@@ -154,7 +165,12 @@ export default function App() {
       {/* Content wrapper with transition */}
       <div className={`flex-1 flex flex-col transition-all duration-500 origin-top ${isResetting ? 'opacity-50 blur-sm scale-[0.98]' : ''}`}>
         
-        <Header onReset={handleResetAll} viewMode={viewMode} onViewModeChange={setViewMode} />
+        <Header 
+          onReset={handleResetAll} 
+          viewMode={viewMode} 
+          onViewModeChange={setViewMode} 
+          onSelectTeam={setSelectedTeamForJourney} 
+        />
 
         <ChampionBanner tournamentChampion={tournamentChampion} />
 
@@ -299,7 +315,7 @@ export default function App() {
 
       {/* GROUP MATCH MODAL (popup) */}
       {modalGroup && (
-        <div className="relative z-50">
+        <div className="relative z-[200]">
           <GroupMatchModal
             groupName={modalGroup}
             matches={groupMatches}
@@ -323,6 +339,17 @@ export default function App() {
             ...finalsSeeding
           }}
           onClose={() => setShowUpdateModal(false)} 
+        />
+      )}
+
+      {selectedTeamForJourney && (
+        <TeamJourneyModal 
+          teamCode={selectedTeamForJourney}
+          onClose={() => setSelectedTeamForJourney(null)}
+          groupStandings={groupStandings}
+          groupMatches={groupMatches}
+          getSeeding={getSeeding}
+          koMatches={koMatches}
         />
       )}
     </div>
