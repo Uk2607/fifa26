@@ -59,11 +59,23 @@ export default function TeamJourneyModal({
         const isTeam1 = t1Code === teamCode;
         const opponent = isTeam1 ? t2Code : t1Code;
         
+        const teamScore = isTeam1 ? matchState?.score1 : matchState?.score2;
+        const oppScore = isTeam1 ? matchState?.score2 : matchState?.score1;
+        let resultStr = null;
+        if (teamScore !== undefined && oppScore !== undefined && teamScore !== '' && oppScore !== '') {
+           const ts = Number(teamScore);
+           const os = Number(oppScore);
+           if (ts > os) resultStr = 'W';
+           else if (ts < os) resultStr = 'L';
+           else resultStr = 'D';
+        }
+
         teamGroupMatches.push({
           matchId,
           opponent,
-          teamScore: isTeam1 ? matchState?.score1 : matchState?.score2,
-          oppScore: isTeam1 ? matchState?.score2 : matchState?.score1,
+          teamScore,
+          oppScore,
+          resultStr,
           status: matchState?.score1 !== undefined && matchState?.score1 !== '' ? 'completed' : 'upcoming',
           matchNum: p.matchNum
         });
@@ -83,6 +95,27 @@ export default function TeamJourneyModal({
       const opponent = isTeam1 ? seeding.t2 : seeding.t1;
       const teamScore = isTeam1 ? matchState?.score1 : matchState?.score2;
       const oppScore = isTeam1 ? matchState?.score2 : matchState?.score1;
+      const teamPen = isTeam1 ? matchState?.penalty1 : matchState?.penalty2;
+      const oppPen = isTeam1 ? matchState?.penalty2 : matchState?.penalty1;
+      
+      let resultStr = null;
+      if (teamScore !== undefined && oppScore !== undefined && teamScore !== '' && oppScore !== '') {
+        const ts = Number(teamScore);
+        const os = Number(oppScore);
+        if (ts > os) resultStr = 'W';
+        else if (ts < os) resultStr = 'L';
+        else {
+          if (teamPen !== undefined && oppPen !== undefined && teamPen !== '' && oppPen !== '') {
+             const tp = Number(teamPen);
+             const op = Number(oppPen);
+             if (tp > op) resultStr = 'W';
+             else if (tp < op) resultStr = 'L';
+             else resultStr = 'D';
+          } else {
+             resultStr = 'D';
+          }
+        }
+      }
       
       // Calculate red cards for this specific team in this specific match
       const baseRed = isTeam1 ? (preset.red1 || 0) : (preset.red2 || 0);
@@ -94,6 +127,9 @@ export default function TeamJourneyModal({
         opponent,
         teamScore,
         oppScore,
+        teamPen,
+        oppPen,
+        resultStr,
         redCards,
         status: teamScore !== undefined && teamScore !== '' ? 'completed' : 'upcoming'
       });
@@ -160,7 +196,16 @@ export default function TeamJourneyModal({
                     <span className="font-bold text-white text-sm">{teamCode}</span>
                   </div>
                   
-                  <div className="flex items-center gap-2 flex-1 justify-center">
+                  <div className="flex items-center gap-2 flex-1 justify-center relative">
+                    {m.resultStr && (
+                      <div className={`absolute left-0 lg:-left-2 w-4 h-4 flex items-center justify-center rounded-sm text-[9px] font-black ${
+                        m.resultStr === 'W' ? 'bg-emerald-500/20 text-emerald-500 border border-emerald-500/30' :
+                        m.resultStr === 'L' ? 'bg-red-500/20 text-red-500 border border-red-500/30' :
+                        'bg-slate-500/20 text-slate-400 border border-slate-500/30'
+                      }`}>
+                        {m.resultStr}
+                      </div>
+                    )}
                     {m.status === 'completed' ? (
                       <div className="flex items-center gap-2 bg-slate-900 rounded border border-theme-border px-3 py-1 text-sm font-black text-white shadow-inner">
                         <span>{m.teamScore}</span>
@@ -203,17 +248,38 @@ export default function TeamJourneyModal({
                       )}
                     </div>
                     
-                    <div className="flex flex-col items-center gap-1 flex-1 justify-center z-10">
+                    <div className="flex flex-col items-center gap-1 flex-1 justify-center z-10 relative">
                       <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Match {m.matchId}</span>
-                      {m.status === 'completed' ? (
-                        <div className="flex items-center gap-2 bg-slate-900 rounded border border-theme-border px-3 py-1 text-sm font-black text-white shadow-inner">
-                          <span>{m.teamScore}</span>
-                          <span className="text-slate-500 font-normal">-</span>
-                          <span>{m.oppScore}</span>
-                        </div>
-                      ) : (
-                        <span className="text-xs font-bold text-slate-500 uppercase mt-1">vs</span>
-                      )}
+                      
+                      <div className="flex items-center justify-center w-full relative">
+                        {m.resultStr && (
+                          <div className={`absolute -left-6 lg:-left-8 w-4 h-4 flex items-center justify-center rounded-sm text-[9px] font-black ${
+                            m.resultStr === 'W' ? 'bg-emerald-500/20 text-emerald-500 border border-emerald-500/30' :
+                            m.resultStr === 'L' ? 'bg-red-500/20 text-red-500 border border-red-500/30' :
+                            'bg-slate-500/20 text-slate-400 border border-slate-500/30'
+                          }`}>
+                            {m.resultStr}
+                          </div>
+                        )}
+                        
+                        {m.status === 'completed' ? (
+                          <div className="flex items-center gap-1.5">
+                            {m.teamPen !== undefined && m.teamPen !== '' && (
+                              <span className="text-[10px] text-amber-500 font-bold bg-amber-500/10 px-1 rounded border border-amber-500/20">({m.teamPen})</span>
+                            )}
+                            <div className="flex items-center gap-2 bg-slate-900 rounded border border-theme-border px-3 py-1 text-sm font-black text-white shadow-inner">
+                              <span>{m.teamScore}</span>
+                              <span className="text-slate-500 font-normal">-</span>
+                              <span>{m.oppScore}</span>
+                            </div>
+                            {m.oppPen !== undefined && m.oppPen !== '' && (
+                              <span className="text-[10px] text-amber-500 font-bold bg-amber-500/10 px-1 rounded border border-amber-500/20">({m.oppPen})</span>
+                            )}
+                          </div>
+                        ) : (
+                          <span className="text-xs font-bold text-slate-500 uppercase mt-1">vs</span>
+                        )}
+                      </div>
                     </div>
 
                     <div className="flex items-center gap-3 w-1/3 justify-end">
