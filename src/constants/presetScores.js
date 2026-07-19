@@ -610,10 +610,10 @@ export const PRESET_SCORES = {
     timestamp: "2026-07-19T02:30:00+05:30", status: "locked"
   },
   "KO-104": { // Spain vs Argentina
-    score1: null, score2: null,
+    score1: 1, score2: 0,
     penalty1: null, penalty2: null,
-    yellow1: 0, yellow2: 0, secondYellow1: 0, secondYellow2: 0,
+    yellow1: 0, yellow2: 6, secondYellow1: 0, secondYellow2: 1,
     red1: 0, red2: 0,
-    timestamp: "2026-07-20T00:30:00+05:30", status: "open"
+    timestamp: "2026-07-20T00:30:00+05:30", status: "locked"
   }
 };
